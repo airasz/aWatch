@@ -743,6 +743,8 @@ void loop()
   {
     if (!is_sleeping)
     {
+
+      tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
       is_sleeping = true;
       Serial.print("sleepy-bye ");
       Serial_timestamp();
