@@ -102,6 +102,8 @@ void low_energy(void)
   {
     Serial.println("Entering light sleep mode.");
     xEventGroupSetBits(isr_group, WATCH_FLAG_SLEEP_MODE);
+
+    tft->fillScreen(TFT_BLACK);
     ttgo->closeBL();
     // ttgo->stopLvglTick();
     if (!home)

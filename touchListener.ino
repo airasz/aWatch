@@ -212,7 +212,7 @@ void handleTouch()
                         toastShow = 0;
                 }
         }
-        if (tmptouchreg > 0)
+        if (tmptouchreg > 0 && swipeID == 0)
         {
                 shiftX = 0;
                 shiftY = 0;
