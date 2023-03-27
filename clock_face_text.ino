@@ -57,17 +57,11 @@ void javaneseClock(int h, int m)
         int totalLength = word.length() + word1.length() + word2.length();
         Serial.printf("clock face text, total length =  %d\n ", totalLength);
         if (totalLength > 35 && totalLength < 45)
-        {
                 tft->setCursor(random(0, 3), random(60, 65));
-        }
         else if (totalLength > 15 && totalLength < 36)
-        {
                 tft->setCursor(random(0, 3), random(80, 110));
-        }
         else
-        {
                 tft->setCursor(random(0, 3), random(90, 110));
-        }
 
         // tft->setCursor(random(3, 12), random(50, 110));
         (word.length() > 7) ? setupFont18() : setupFont24();
@@ -237,7 +231,7 @@ void mathFace2(int h, int m)
                 tft->print(word2);
         }
 
-        displaySysInfo(3); //appInfo.ino
+        displaySysInfo(3); // appInfo.ino
 }
 void mathFace(int h, int m)
 {
@@ -339,7 +333,7 @@ void mathFace(int h, int m)
                 tft->print(word2);
         }
 
-        displaySysInfo(3); //appInfo.ino
+        displaySysInfo(3); // appInfo.ino
 }
 String drawFormula(int clock, int value)
 {
@@ -348,7 +342,7 @@ String drawFormula(int clock, int value)
         if (clock == 0) // mode 0 , without square root and multiply
         {
                 int rnd1 = random(0, 2);
-                if (rnd1 == 0) //multiply formula
+                if (rnd1 == 0) // multiply formula
                 {
                         for (int i = 11; i > 0; i--)
                         {
@@ -359,7 +353,7 @@ String drawFormula(int clock, int value)
                                         sprintf(rslt, "%dx%d", rndp < 1 ? rr : value / rr, rndp < 1 ? value / rr : rr);
                                         // break;
                                 }
-                        } //end for
+                        } // end for
                 }
                 if (rnd1 == 1) // +/- formula
                 {
@@ -437,8 +431,8 @@ String formulaize(int value)
         char rslt[6];
         int rnd1 = random(0, 2);
         // int rnd1 = 1;
-        if (rnd1 == 0) //multiply formula
-        {              //suspect heap crash
+        if (rnd1 == 0) // multiply formula
+        {              // suspect heap crash
                 for (int i = 0; i < 10; i++)
                 {
                         int ii = 9 - i;
@@ -449,7 +443,7 @@ String formulaize(int value)
                                 sprintf(rslt, "%dx%d", rndp < 1 ? rr : value / rr, rndp < 1 ? value / rr : rr);
                                 break;
                         }
-                } //end for
+                } // end for
                 return String(rslt);
         }
         if (rnd1 == 1) // +/- formula

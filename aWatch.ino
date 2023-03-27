@@ -12,7 +12,7 @@
 #include <FS.h>
 #include <WiFi.h>
 #include <WiFiUdp.h>
-#include <AceTime.h>
+// #include <AceTime.h>
 
 #define __MAIN__
 #include "config.h"
@@ -49,7 +49,7 @@ int prevpage_ID, page_ID;
 auto inApp = false;
 // uint32_t targetTime = 0; // for next 1 second display update
 
-using namespace ace_time;
+// using namespace ace_time;
 auto tomorow = false;
 // CONFI config;
 
@@ -92,7 +92,7 @@ void bright_check(void)
 
 void my_idle(void)
 {
-  last_activity = millis(); //extens  screen timeout
+  last_activity = millis(); // extens  screen timeout
   bright_check();
 }
 
@@ -333,10 +333,10 @@ void setup()
   pinMode(4, OUTPUT); // vibrator motor pin
   EEPROM.begin(EEPROM_SIZE);
   EEPROM_readAnything(0, config); // get saved settings
-  init_holiday();                 //appcal.ino
+  init_holiday();                 // appcal.ino
   startScreen(true, "read EEPROM");
   if (config.magic_number != CONFIG_REVISION)
-  { //this will set it up for very first use
+  { // this will set it up for very first use
     Serial.printf("magic wrong, was %ld, should be %ld\n", config.magic_number, CONFIG_REVISION);
     config.magic_number = CONFIG_REVISION;
     config.clock_face = 0;
@@ -364,7 +364,7 @@ void setup()
   // config.screensaver_timeout = 20;
   // EEPROM_writeAnything(0, config);
   // EEPROM.commit();
-  CF = config.clock_face; //max 9
+  CF = config.clock_face; // max 9
   clock_face_now = config.clock_face;
   screenTimeOut = config.screensaver_timeout;
   g_event_queue_handle = xQueueCreate(20, sizeof(uint8_t));
@@ -386,20 +386,21 @@ void setup()
   power->setPowerOutPut(AXP202_LDO3, AXP202_OFF); // audio device
   power->setPowerOutPut(AXP202_LDO4, AXP202_OFF);
 
-  //Initialize lvgl
-  // ttgo->lvgl_begin();
+  // Initialize lvgl
+  //  ttgo->lvgl_begin();
 
   // Enable BMA423 interrupt ，
   // The default interrupt configuration,
   // you need to set the acceleration parameters, please refer to the BMA423_Accel example
   ttgo->bma->attachInterrupt();
 
-  //Connection interrupted to the specified pin
+  // Connection interrupted to the specified pin
   pinMode(BMA423_INT1, INPUT);
 
   startScreen(true, "setup BMA");
   attachInterrupt(
-      BMA423_INT1, [] {
+      BMA423_INT1, []
+      {
         BaseType_t xHigherPriorityTaskWoken = pdFALSE;
         EventBits_t bits = xEventGroupGetBitsFromISR(isr_group);
         if (bits & WATCH_FLAG_SLEEP_MODE)
@@ -416,8 +417,7 @@ void setup()
         if (xHigherPriorityTaskWoken)
         {
           portYIELD_FROM_ISR();
-        }
-      },
+        } },
       RISING);
 
   bool is_sleeping;
@@ -426,7 +426,8 @@ void setup()
   // Connection interrupted to the specified pin
   pinMode(AXP202_INT, INPUT);
   attachInterrupt(
-      AXP202_INT, [] {
+      AXP202_INT, []
+      {
         BaseType_t xHigherPriorityTaskWoken = pdFALSE;
         EventBits_t bits = xEventGroupGetBitsFromISR(isr_group);
         if (bits & WATCH_FLAG_SLEEP_MODE)
@@ -443,14 +444,14 @@ void setup()
         if (xHigherPriorityTaskWoken)
         {
           portYIELD_FROM_ISR();
-        }
-      },
+        } },
       FALLING);
 
   startScreen(true, "setup RTC");
   pinMode(RTC_INT, INPUT_PULLUP);
   attachInterrupt(
-      RTC_INT, [] {
+      RTC_INT, []
+      {
         rtcIrq = 1;
         BaseType_t xHigherPriorityTaskWoken = pdFALSE;
         EventBits_t bits = xEventGroupGetBitsFromISR(isr_group);
@@ -467,8 +468,7 @@ void setup()
         if (xHigherPriorityTaskWoken)
         {
           portYIELD_FROM_ISR();
-        }
-      },
+        } },
       FALLING);
 
   // Check if the RTC clock matches, if not, use compile time
@@ -539,7 +539,7 @@ void setup()
   }
   delay(1000);
   // displayTime(2);
-} //end setup
+} // end setup
 //==============linux boot text log look a like===
 void startScreen(bool respon, String txt)
 {
@@ -608,7 +608,7 @@ void loop()
     {
       power->readIRQ();
       power->clearIRQ();
-      //TODO: Only accept axp power pek key short press
+      // TODO: Only accept axp power pek key short press
       xEventGroupClearBits(isr_group, WATCH_FLAG_AXP_IRQ);
     }
     xEventGroupClearBits(isr_group, WATCH_FLAG_SLEEP_EXIT);
@@ -743,7 +743,7 @@ void loop()
     }
     low_energy();
   }
-} //end void loop
+} // end void loop
 
 void getPower()
 {
@@ -776,7 +776,7 @@ void beep(int8_t w)
   // WiFi.mode(WIFI_OFF);
   // delay(500);
 
-  //!Turn on the audio power
+  //! Turn on the audio power
   ttgo->enableLDO3();
 
   file = new AudioFileSourcePROGMEM(beep__279_mp3, sizeof(beep__279_mp3));
@@ -795,7 +795,7 @@ void beep(int8_t w)
   Serial.println(F("after AudioOutputI2S"));
 #endif
 
-  //External DAC decoding
+  // External DAC decoding
   out->SetPinout(TWATCH_DAC_IIS_BCK, TWATCH_DAC_IIS_WS, TWATCH_DAC_IIS_DOUT);
 #if MP3_DEBUG
   Serial.printf("after SetPinout(%d, %d, %d)\n", TWATCH_DAC_IIS_BCK, TWATCH_DAC_IIS_WS, TWATCH_DAC_IIS_DOUT);
