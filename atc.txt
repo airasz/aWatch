@@ -1,0 +1,76 @@
+if (mm - mmh < 10 && mm - mmh >= 0)
+                {
+                        tft->setTextColor(COLOR_ATC[random(3)]);
+                        if (mmh >= 10 && mmh <= 40)
+                        {
+                                // ✔
+                                tft->setCursor(x0 - 45, yy0 - 15 + 20);
+                                tft->printf("M-%d\n", mm);
+                                tft->setCursor(x0 - 45, yy0 - 3 + 20);
+                                tft->print(dw[dow]);
+                                tft->setCursor(x0 - 45, yy0 + 9 + 20);
+                                tft->printf("%d-%d", tnow.day, tnow.month);
+                                // tft->printf("X%1d = Y%2d\n", x0, yy0);
+                                tft->drawLine(x0 - 3, yy0 + 5, x0 - 12, yy0 + 14, TFT_WHITE); // 🡗
+                        }
+                        else
+                        {
+
+                                tft->setCursor(x0 - 45, yy0 - 72 + 20);
+                                tft->printf("M-%d\n", mm);
+                                tft->setCursor(x0 - 45, yy0 - 60 + 20);
+                                tft->print(dw[dow]);
+                                tft->setCursor(x0 - 45, yy0 - 48 + 20);
+                                tft->printf("%d-%d", tnow.day, tnow.month);
+                                // tft->printf("X%1d = Y%2d\n", x0, yy0);
+                                tft->drawLine(x0 - 3, yy0 - 4, x0 - 12, yy0 - 12, TFT_WHITE); // 🡔
+                        }
+                        // tft->drawCircle(x0, yy0, 9, TFT_RED);
+                        tft->drawRect(x0 - 2, yy0 - 2, 5, 5, TFT_GREEN); // draw minute rect
+                }
+                else if (mmh - mm < 10 && mmh - mm >= 0)
+                {
+                        tft->setTextColor(COLOR_ATC[random(3)]);
+                        if (mmh >= 10 && mmh <= 40)
+                        {
+                                tft->setCursor(x0 + 15, yy0 - 72 + 20);
+                                tft->printf("M-%d\n", mm);
+                                tft->setCursor(x0 + 15, yy0 - 60 + 20);
+                                tft->print(dw[dow]);
+                                tft->setCursor(x0 + 15, yy0 - 48 + 20);
+                                tft->printf("%d-%d", tnow.day, tnow.month);
+                                // tft->printf("X%1d = Y%2d\n", x0, yy0);
+                                tft->drawLine(x0 + 4, yy0 - 4, x0 + 11, yy0 - 12, TFT_WHITE); // 🡥
+                        }
+                        else
+                        {
+                                tft->setCursor(x0 - 45, yy0 - 72 + 20);
+                                tft->printf("M-%d\n", mm);
+                                tft->setCursor(x0 - 45, yy0 - 60 + 20);
+                                tft->print(dw[dow]);
+                                tft->setCursor(x0 - 45, yy0 - 48 + 20);
+                                tft->printf("%d-%d", tnow.day, tnow.month);
+                                // tft->printf("X%1d = Y%2d\n", x0, yy0);
+                                tft->drawLine(x0 - 3, yy0 - 4, x0 - 12, yy0 - 13, TFT_WHITE); // 🡤
+                        }
+                        // tft->drawCircle(x0, yy0, 9, TFT_RED);
+                        tft->drawRect(x0 - 2, yy0 - 2, 5, 5, TFT_GREEN); // draw minute rect
+                }
+                else
+                {
+                        tft->setTextColor(COLOR_ATC[random(3)]);
+                        tft->setCursor(x0 + 15, yy0 - 15 + 20);
+
+                        // tft->setWindow(x0 + 15, x0 + 45, yy0 - 15 + 20, yy0 - 15 + 50);
+                        // tft->setCursor(0, 0);
+
+                        tft->printf("M-%d\n", mm);
+                        tft->setCursor(x0 + 15, yy0 - 3 + 20);
+                        tft->print(dw[dow]);
+                        tft->setCursor(x0 + 15, yy0 + 9 + 20);
+                        tft->printf("%d-%d", tnow.day, tnow.month);
+                        // tft->printf("X%1d = Y%2d\n", x0, yy0);
+                        tft->drawLine(x0 + 3, yy0 + 5, x0 + 10, yy0 + 14, TFT_WHITE);
+                        // tft->drawCircle(x0, yy0, 9, TFT_RED);
+                        tft->drawRect(x0 - 2, yy0 - 2, 5, 5, TFT_GREEN); // draw minute rect
+                }
