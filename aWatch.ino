@@ -303,6 +303,8 @@ void setup()
 {
   // put your setup code here, to run once:
   // CF = 9; //max 9
+
+  setCpuFrequencyMhz(80);
   ttgo = TTGOClass::getWatch();
   ttgo->begin();
   ttgo->openBL();      // Turn on the backlight
@@ -591,7 +593,8 @@ void loop()
     {
       lenergy = false;
       // rtc_clk_cpu_freq_set(RTC_CPU_FREQ_160M);
-      setCpuFrequencyMhz(160);
+      // setCpuFrequencyMhz(160);
+      setCpuFrequencyMhz(80);
     }
 
     low_energy();

@@ -8,7 +8,7 @@ void sysinfo()
         // vbus_c = power->getVbusCurrent();
         // batt_v = power->getBattVoltage() / 1000;
         // per = power->getBattPercentage();
-        getPower(); //update power info
+        getPower(); // update power info
         tft->setCursor(0, 0);
         tft->print("twatch@ESP32:--info\n");
         // tft->setCursor(0, 160);
@@ -112,12 +112,17 @@ void sysinfo()
         // tft->print("kb/");
         // tft->print(ESP.getFreePsram() / 1000000);
         // tft->print("mb");
+
+        // uint32_t getXtalFrequencyMhz(); // In MHz
+        // uint32_t getCpuFrequencyMhz(); // In MHz
+        // uint32_t getApbFrequency(); // In Hz
 }
 //==================calculate system uptime by compare with datetime at power up
 
 int nowMonth = 0;
 
-//0=short, 1=long
+// calculating system uptime by use date time at  powerup as reference
+// 0=short, 1=long
 String sysUpTime(int mode)
 {
         nowMonth = tnow.month;
@@ -228,7 +233,7 @@ String sysUpTime(int mode)
                                 u_day += MaxDate[startMonth - 1 + i];
                         }
                 }
-                if (nowMonth - startMonth < 0) //passing new year
+                if (nowMonth - startMonth < 0) // passing new year
                 {
                         Serial.println("passing new year");
                         int month_range = (12 - (startMonth - nowMonth));
@@ -332,9 +337,10 @@ String sysUpTime(int mode)
         return uptimes;
 }
 
-//1. up & bottom Screen
-//2. side screen
-//3. bottom (step&coverage)
+// display additional info on clock face
+// 1. up & bottom Screen
+// 2. side screen
+// 3. bottom (step&coverage)
 void displaySysInfo(int mode)
 {
         tft->setFreeFont(NULL);
@@ -445,4 +451,4 @@ void displaySysInfo(int mode)
                 break;
         }
 }
-//100langkah=4kalori
+// 100langkah=4kalori

@@ -8,6 +8,7 @@
 
 void updateScreen(int dis_ID)
 {
+        // call every screen touched
         resetTO(); // recount timeout
         switch (dis_ID)
         {
@@ -15,7 +16,7 @@ void updateScreen(int dis_ID)
                 if (config.pedometer_enable)
                 {
                         // clock_face_digit(11);
-                        face(1); //clock_face_digit.ino
+                        face(1); // clock_face_digit.ino
                 }
                 else
                 {
@@ -37,7 +38,7 @@ void updateScreen(int dis_ID)
 
                         // Serial.printf("Screentimeout gui  : %d \n", screenTimeOut);
                         // clock_face_digit(cface);
-                        face(cface); //clock_face_digit.ino
+                        face(cface); // clock_face_digit.ino
                 }
                 if (alarm_active)
                 {
@@ -122,7 +123,7 @@ void drawOutlineButton(int x, int y, int w, int h, int bc, int tc, String txt)
 }
 void drawSwitch(int x, int y, int strokeColor, int activeColor, bool enabled)
 {
-        //size is fixed
+        // size is fixed
         int w = 60;
         int h = 30;
         int r = h / 2;
