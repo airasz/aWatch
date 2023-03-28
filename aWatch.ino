@@ -715,6 +715,7 @@ void loop()
   {
     if (is_sleeping)
     {
+      displayTime(2); // Full redraw
       ttgo->bma->enableAccel();
       is_sleeping = false;
       Serial.print("wakey-wakey ");
@@ -724,7 +725,6 @@ void loop()
       initialAnalog = true;
       checkday();
       beep2();
-      displayTime(2); // Full redraw
     }
     else if (targetTime < millis())
     {

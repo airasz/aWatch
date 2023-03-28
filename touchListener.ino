@@ -58,7 +58,7 @@ void touchListener()
                 // Serial.printf("acc X %d\n ", flippos);
         }
 
-        if (touched)
+        if (touched && !swipeMe)
         {
                 // Serial.print("X: ");
                 // Serial.print(tx);
@@ -116,9 +116,8 @@ void touchListener()
                         {
                                 if (tx > oldTouchX)
                                 {
-                                        shiftX++;
                                         // Serial.printf("shiftX : %d\n", shiftX);
-                                        if (shiftX > maxShifting)
+                                        if (shiftX++ > maxShifting)
                                         {
                                                 swipeID = 2;
                                                 swipeMe = 0;
@@ -127,8 +126,7 @@ void touchListener()
                                 }
                                 if (tx < oldTouchX)
                                 {
-                                        shiftX++;
-                                        if (shiftX > maxShifting)
+                                        if (shiftX++ > maxShifting)
                                         {
                                                 swipeID = 1;
                                                 swipeMe = 0;
@@ -141,9 +139,8 @@ void touchListener()
                         {
                                 if (tx > oldTouchX)
                                 {
-                                        shiftX++;
                                         // Serial.printf("shiftX : %d\n", shiftX);
-                                        if (shiftX > maxShifting)
+                                        if (shiftX++ > maxShifting)
                                         {
                                                 swipeID = 6;
                                                 swipeMe = 0;
@@ -152,8 +149,7 @@ void touchListener()
                                 }
                                 if (tx < oldTouchX)
                                 {
-                                        shiftX++;
-                                        if (shiftX > maxShifting)
+                                        if (shiftX++ > maxShifting)
                                         {
                                                 swipeID = 5;
                                                 swipeMe = 0;
@@ -165,8 +161,7 @@ void touchListener()
 
                         if (ty > oldTouchY)
                         {
-                                shiftY++;
-                                if (shiftY > maxShifting)
+                                if (shiftY++ > maxShifting)
                                 {
                                         swipeID = 10;
                                         swipeMe = 0;
@@ -176,8 +171,7 @@ void touchListener()
                         }
                         if (ty < oldTouchY)
                         {
-                                shiftY++;
-                                if (shiftY > 20)
+                                if (shiftY++ > 20)
                                 {
                                         swipeID = 9;
                                         swipeMe = 0;
