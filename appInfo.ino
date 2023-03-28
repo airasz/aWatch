@@ -109,6 +109,12 @@ void sysinfo()
         tft->print("\n  Psram used : ");
         tft->setTextColor(TFT_WHITE);
         tft->printf("%dkb/%dmb", (ESP.getPsramSize() - ESP.getFreePsram()) / 1000, ESP.getFreePsram() / 1000000);
+
+        tft->setTextColor(TFT_GREEN);
+        tft->print("\n  CPU freq : ");
+        tft->setTextColor(TFT_WHITE);
+        tft->printf("%dMHz/", getCpuFrequencyMhz());
+
         // tft->print("kb/");
         // tft->print(ESP.getFreePsram() / 1000000);
         // tft->print("mb");
