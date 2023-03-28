@@ -58,7 +58,7 @@ void touchListener()
                 // Serial.printf("acc X %d\n ", flippos);
         }
 
-        if (touched && !swipeMe)
+        if (touched)
         {
                 // Serial.print("X: ");
                 // Serial.print(tx);
@@ -745,18 +745,13 @@ void handleTouch()
         switch (swipeID)
         {
         case 1:
-
                 break;
         case 2:
                 // swip down
                 page_ID = 2;
                 updateScreen(page_ID); // gui.ino
-                // prevpage_ID = page_ID;
-                shiftX = 0;
-                shiftY = 0;
-                swipeMe = 1;
-                swipeID = 0;
-                tmptouchreg = 0;
+                                       // prevpage_ID = page_ID;
+                clearSwipeCache();
                 delay(50);
                 break;
         case 5:
@@ -767,18 +762,13 @@ void handleTouch()
                 //         CF = 10;
                 // }
                 (CF < 2) && (CF = 12);
-
                 config.clock_face = CF;
                 EEPROM_writeAnything(0, config);
                 EEPROM.commit();
                 // clock_face_digit(CF);
                 face(CF);
                 my_idle();
-                shiftX = 0;
-                shiftY = 0;
-                swipeMe = 1;
-                swipeID = 0;
-                tmptouchreg = 0;
+                clearSwipeCache();
                 break;
         case 6:
                 CF++;
@@ -795,21 +785,13 @@ void handleTouch()
 
                 face(CF);
                 my_idle();
-                shiftX = 0;
-                shiftY = 0;
-                swipeMe = 1;
-                swipeID = 0;
-                tmptouchreg = 0;
+                clearSwipeCache();
                 break;
         case 10:
                 page_ID = 2;
                 updateScreen(page_ID); // gui.ino
-                // prevpage_ID = page_ID;
-                shiftX = 0;
-                shiftY = 0;
-                swipeMe = 1;
-                swipeID = 0;
-                tmptouchreg = 0;
+                                       // prevpage_ID = page_ID;
+                clearSwipeCache();
 
                 break;
         case 9:
@@ -830,15 +812,21 @@ void handleTouch()
                 updateScreen(page_ID); // gui.ino
                 // clock_face_digit(CF);
                 my_idle();
-                shiftX = 0;
-                shiftY = 0;
-                swipeMe = 1;
-                swipeID = 0;
-                tmptouchreg = 0;
+                clearSwipeCache();
 
                 break;
 
         default:
                 break;
         }
+}
+void clearSwipeCache()
+{
+        shiftX = 0;
+        shiftY = 0;
+        swipeMe = 1;
+        swipeID = 0;
+        tmptouchreg = 0;
+        htouchInterval = 120;
+        prevmi = millis();
 }

@@ -61,7 +61,7 @@ void handleTouch();
 
 String getDailyJWS(int);
 void formating(void);
-//return string
+// return string
 String getDailyJWS(int id);
 
 void drawAlarmsetting();
@@ -79,7 +79,7 @@ void adjusting(int, int);
 void drawStepSetting();
 
 // 0=home<
-//10.   info
+// 10.   info
 // 30.  setting
 void updateScreen();
 void toast(String);
@@ -121,7 +121,7 @@ typedef struct config_t
     uint8_t vib;
 } CONFIGGEN;
 CONFIGGEN config;
-//http://www.barth-dev.de/online/rgb565-color-picker/
+// http://www.barth-dev.de/online/rgb565-color-picker/
 const uint32_t COLORS_LIGHT[10] = {
     0xDB5B, 0x97E9, 0x8C7F, 0xFACC, 0xFFED,
     0x4F1F, 0x9ADF, 0xFD0B, 0x5DDF, 0xF9B1};
@@ -170,16 +170,17 @@ uint8_t chosen_skin;
 bool home, rrrr = false, alarmset = false;
 int step_counter, last_step_counter, tmpaph, tmpapm;
 int touchCount, cday, daily_step, minfactor, buzz_count;
+int htouchInterval = 10;
 // int *hd_data= (int *) ps_malloc()
 int hddata[][4] = {
-    {0, 0, 0, 0}, //jan , holyday in date 0
+    {0, 0, 0, 0}, // jan , holyday in date 0
     {0, 0, 0, 0}, // feb , holyday in date 0 & 0
     {0, 0, 0, 0},
     {0, 0, 0, 0},
     {0, 0, 0, 0},
     {0, 0, 0, 0},
     {0, 0, 0, 0},
-    {0, 0, 0, 0}, //augst
+    {0, 0, 0, 0}, // augst
     {0, 0, 0, 0}, // no holyday in sept
     {0, 0, 0, 0},
     {0, 0, 0, 0},

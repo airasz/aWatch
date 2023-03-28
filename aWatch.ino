@@ -570,7 +570,7 @@ void loop()
 {
 
   // put your main code here, to run repeatedly:
-  if (millis() > prevmi + 10)
+  if (millis() > prevmi + htouchInterval)
   {
     // angka++;
     // if (angka > 59)
@@ -579,6 +579,7 @@ void loop()
     //   angka = 0;
     // }
     handleTouch();
+    (htouchInterval > 10) && (htouchInterval = 10);
     prevmi = millis();
   }
 
