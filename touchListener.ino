@@ -106,6 +106,8 @@ void touchListener()
                 }
                 swipeMe = 1;
                 touched = 0;
+                if (swipeID > 0)
+                        tmptouchreg = 0;
         }
         while (ttgo->getTouch(tx, ty))
         {
@@ -134,6 +136,7 @@ void touchListener()
                                         // (shiftX > 50) && (swipeBLeft = 1);
                                 }
                                 oldTouchX = tx;
+                                // tmptouchreg = 0;
                         }
                         if (ty > 180)
                         {
@@ -157,10 +160,11 @@ void touchListener()
                                         // (shiftX > 50) && (swipeBLeft = 1);
                                 }
                                 oldTouchX = tx;
+                                // tmptouchreg = 0;
                         }
 
                         if (ty > oldTouchY)
-                        {
+                        { // swipe down
                                 if (shiftY++ > maxShifting)
                                 {
                                         swipeID = 10;
@@ -168,6 +172,7 @@ void touchListener()
                                 }
                                 // (shiftY > 50) && (swipeDown = 1);
                                 oldTouchY = ty;
+                                // tmptouchreg = 0;
                         }
                         if (ty < oldTouchY)
                         {
@@ -178,10 +183,17 @@ void touchListener()
                                 }
                                 // (shiftY > 50) && (swipeUp = 1);
                                 oldTouchY = ty;
+                                // tmptouchreg = 0;
                         }
                 }
+
                 touched = 1;
+                touchStage = 1;
         } // Wait for release to exit
+        (touchStage == 1) && (touchStage = 2);
+        // touched = (swipeID > 0) ? false : true;
+        // Serial.printf("swipeID: %d | ", swipeID);
+        // Serial.printf(" tmptouchreg : %d\n", tmptouchreg);
 }
 void drawToast(String msg)
 {
@@ -191,633 +203,639 @@ void drawToast(String msg)
 }
 void handleTouch()
 {
-        // Serial.printf(" swipeMe =  %s\n ", (swipeMe) ? "true" : "false");
-        // Serial.printf(" tmptouchreg =  %d\n ", tmptouchreg);
-
-        if (toastShow)
+        if (touchStage == 2)
         {
-                count2++;
-                // Serial.println("toast count");
-                if (count2 > 20)
-                {
-                        updateScreen(prevpage_ID);
-                        count2 = 0;
-                        touchCount = 0;
-                        toastShow = 0;
-                }
-        }
-        if (tmptouchreg > 0 && swipeID == 0)
-        {
-                shiftX = 0;
-                shiftY = 0;
-                if (tmptouchreg == 1) //============================  1
-                {
-                        if (page_ID == 0 || page_ID == 1 || page_ID == 3)
-                        {
-                                page_ID = 11;
-                                updateScreen(page_ID); // gui.ino
-                                // prevpage_ID = page_ID;
-                                tmptouchreg = 0;
-                        }
-                        else if (page_ID == 11)
-                        {
-                                page_ID = 0;
-                                updateScreen(page_ID); // gui.ino
-                                // prevpage_ID = page_ID;
-                                tmptouchreg = 0;
-                        }
-                        else if (page_ID == 2)
-                        {
-                                page_ID = 0;
-                                updateScreen(page_ID); // gui.ino
-                                // prevpage_ID = page_ID;
-                                tmptouchreg = 0;
-                        }
-                        else if (page_ID > 20 && page_ID < 30 || page_ID > 200 && page_ID < 299)
-                        {
-                                page_ID = 2;
-                                updateScreen(page_ID); // gui.ino
-                                // prevpage_ID = page_ID;
-                                tmptouchreg = 0;
-                        }
-                }
+                Serial.printf("swipeID: %d | ", swipeID);
+                Serial.printf(" tmptouchreg : %d\n", tmptouchreg);
+                // Serial.printf(" swipeMe =  %s\n ", (swipeMe) ? "true" : "false");
+                // Serial.printf(" tmptouchreg =  %d\n ", tmptouchreg);
 
-                if (tmptouchreg == 2) //============================  2
+                if (toastShow)
                 {
-                        if (page_ID == 0 || page_ID == 11 || page_ID == 1) // calender
+                        count2++;
+                        // Serial.println("toast count");
+                        if (count2 > 20)
                         {
-                                page_ID = 3;
-                                updateScreen(page_ID); // gui.ino
-                                tmptouchreg = 0;
-                        }
-                        else if (page_ID == 3) // calender
-                        {
-                                page_ID = 0;
-                                updateScreen(page_ID); // gui.ino
-                                tmptouchreg = 0;
-                        }
-                }
-
-                if (tmptouchreg == 3) //============================  3
-                {
-                        if (page_ID == 0 || page_ID == 11 || page_ID == 3) // pray schedule
-                        {
-                                imnt = tnow.month;
-                                iday = tnow.day;
-                                // showDayPray();
-                                // prevpage_ID = 0;
-                                page_ID = 1;
-                                updateScreen(page_ID); // gui.ino
-                                prevpage_ID = page_ID;
+                                updateScreen(prevpage_ID);
+                                count2 = 0;
                                 touchCount = 0;
-                                // home = 0;
-                        }
-                        else if (page_ID == 1) // sys info
-                        {
-                                page_ID = 0;
-                                updateScreen(page_ID); // gui.ino
-                                prevpage_ID = page_ID;
-                                // clock_face_digit(CF);
-                                // home = 1;
-                        }
-                        else if (page_ID == 2 || (page_ID > 20 && page_ID < 30)) // back
-                        {
-
-                                page_ID = 0;
-                                updateScreen(page_ID); // gui.ino
-                                prevpage_ID = page_ID;
-                        }
-                        else if (page_ID > 230 && page_ID < 234) // back
-                        {
-
-                                page_ID = 0;
-                                updateScreen(page_ID); // gui.ino
-                                prevpage_ID = page_ID;
-                        }
-
-                        tmptouchreg = 0;
-                        my_idle();
-                }
-                if (tmptouchreg == 4) //============================  4
-                {
-                        if (page_ID == 2) // go to step setting
-                        {
-                                page_ID = 21;
-                                tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
-                                updateScreen(page_ID);                     // gui.ino
-                                prevpage_ID = page_ID;
-                        }
-                        else if (page_ID == 24)
-                        {
-                                tmpha--;
-                                (tmpha < 0) && (tmpha = 23);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 26) // PRAY
-                        {
-                                tmpmwarn--;
-                                (tmpmwarn < 0) && (tmpmwarn = 15);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 27) // IR
-                        {
-                                imode--;
-                                // imode++;
-                                (imode == 1) && (imode = 2);
-                                (imode < 0) && (imode = 3);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 231)
-                        {
-                                hh--;
-                                (hh < 0) && (hh = 23);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 232)
-                        {
-                                dday--;
-                                (dday < 0) && (hh = 31);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 233)
-                        {
-                                yyear--;
-                                (yyear < 2020) && (yyear = 2020);
-                                updateScreen(page_ID); // gui.ino
+                                toastShow = 0;
                         }
                 }
-                if (tmptouchreg == 5) //============================  5
+                if (tmptouchreg > 0 && swipeID == 0)
                 {
-                        if (page_ID == 2) // go to dysplay
+                        shiftX = 0;
+                        shiftY = 0;
+                        if (tmptouchreg == 1) //============================  1
                         {
-
-                                page_ID = 22;
-                                tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
-                                updateScreen(page_ID);                     // gui.ino
-                                prevpage_ID = page_ID;
-                        }
-                }
-                if (tmptouchreg == 6) //============================  6
-                {
-                        if (page_ID == 21)
-                        {
-                                if (config.stepcounter_filter > 0)
+                                if (page_ID == 0 || page_ID == 1 || page_ID == 3)
                                 {
-                                        config.stepcounter_filter = 0;
-                                        EEPROM_writeAnything(0, config);
-                                        EEPROM.commit();
-                                        updateScreen(page_ID); // appSetting.ino
+                                        page_ID = 11;
+                                        updateScreen(page_ID); // gui.ino
+                                        // prevpage_ID = page_ID;
+                                        tmptouchreg = 0;
                                 }
-                                else
+                                else if (page_ID == 11)
                                 {
-
-                                        config.stepcounter_filter = 1;
-                                        EEPROM_writeAnything(0, config);
-                                        EEPROM.commit();
-                                        updateScreen(page_ID); // appSetting.ino
+                                        page_ID = 0;
+                                        updateScreen(page_ID); // gui.ino
+                                        // prevpage_ID = page_ID;
+                                        tmptouchreg = 0;
                                 }
-                        }
-                        if (page_ID == 25)
-                        {
-                                if (config.rnd_face)
+                                else if (page_ID == 2)
                                 {
-                                        config.rnd_face = 0;
-                                        EEPROM_writeAnything(0, config);
-                                        EEPROM.commit();
-                                        updateScreen(page_ID); // appSetting.ino
+                                        page_ID = 0;
+                                        updateScreen(page_ID); // gui.ino
+                                        // prevpage_ID = page_ID;
+                                        tmptouchreg = 0;
                                 }
-                                else
+                                else if (page_ID > 20 && page_ID < 30 || page_ID > 200 && page_ID < 299)
                                 {
-                                        config.rnd_face = 1;
-                                        EEPROM_writeAnything(0, config);
-                                        EEPROM.commit();
-                                        updateScreen(page_ID); // appSetting.ino
+                                        page_ID = 2;
+                                        updateScreen(page_ID); // gui.ino
+                                        // prevpage_ID = page_ID;
+                                        tmptouchreg = 0;
                                 }
                         }
 
-                        else if (page_ID == 2)
+                        if (tmptouchreg == 2) //============================  2
                         {
-                                page_ID = 231;
-                                tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
-                                updateScreen(page_ID);                     // gui.ino
-                                prevpage_ID = page_ID;
-                        }
-                        else if (page_ID == 24)
-                        {
-                                tmpha++;
-                                (tmpha > 23) && (tmpha = 0);
-                                updateScreen(page_ID); // gui.ino
-                        }
-
-                        else if (page_ID == 26)
-                        {
-                                tmpmwarn++;
-                                (tmpmwarn > 15) && (tmpmwarn = 0);
-                                updateScreen(page_ID); // gui.ino
+                                if (page_ID == 0 || page_ID == 11 || page_ID == 1) // calender
+                                {
+                                        page_ID = 3;
+                                        updateScreen(page_ID); // gui.ino
+                                        tmptouchreg = 0;
+                                }
+                                else if (page_ID == 3) // calender
+                                {
+                                        page_ID = 0;
+                                        updateScreen(page_ID); // gui.ino
+                                        tmptouchreg = 0;
+                                }
                         }
 
-                        else if (page_ID == 27) // IR
+                        if (tmptouchreg == 3) //============================  3
                         {
-                                imode++;
-                                (imode == 1) && (imode = 2);
-                                (imode > 3) && (imode = 0);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 231)
-                        {
-                                hh++;
-                                (hh > 23) && (hh = 0);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 232)
-                        {
-                                dday++;
-                                (dday > 31) && (dday = 1);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 233)
-                        {
-                                yyear++;
-                                (yyear > 9999) && (yyear = 2020);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                }
-                if (tmptouchreg == 7) //============================  7
-                {
-                        if (page_ID == 2) // setting
-                        {
-                                page_ID = 24;
-                                tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
-                                updateScreen(page_ID);                     // gui.ino
-                        }
-                        else if (page_ID == 21)
-                        {
-                                stepLenght--;
-                                updateScreen(page_ID); // gui.ino
-                                config.step_length = stepLenght;
-                                EEPROM_writeAnything(0, config);
-                                EEPROM.commit();
-                        }
-                        else if (page_ID == 24)
-                        {
-                                tmpma--;
-                                (tmpma < 0) && (tmpma = 59);
-                                updateScreen(page_ID); // gui.ino
-                        }
+                                if (page_ID == 0 || page_ID == 11 || page_ID == 3) // pray schedule
+                                {
+                                        imnt = tnow.month;
+                                        iday = tnow.day;
+                                        // showDayPray();
+                                        // prevpage_ID = 0;
+                                        page_ID = 1;
+                                        updateScreen(page_ID); // gui.ino
+                                        prevpage_ID = page_ID;
+                                        touchCount = 0;
+                                        // home = 0;
+                                }
+                                else if (page_ID == 1) // sys info
+                                {
+                                        page_ID = 0;
+                                        updateScreen(page_ID); // gui.ino
+                                        prevpage_ID = page_ID;
+                                        // clock_face_digit(CF);
+                                        // home = 1;
+                                }
+                                else if (page_ID == 2 || (page_ID > 20 && page_ID < 30)) // back
+                                {
 
-                        else if (page_ID == 26)
-                        {
-                                tmpvib--;
-                                (tmpvib < 0) && (tmpvib = 15);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 27)
-                        {
-                                itemp--;
-                                (itemp < 19) && (itemp = 24);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 231)
-                        {
-                                mm--;
-                                (mm < 0) && (mm = 59);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 232) // date setting
-                        {
-                                mmonth--;
-                                (mmonth < 0) && (mmonth = 12);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                }
-                if (tmptouchreg == 8) //============================  7
-                {
-                        if (page_ID == 2) // setting
-                        {
-                                page_ID = 25;
-                                tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
-                                updateScreen(page_ID);                     // gui.ino
-                        }
-                }
-                if (tmptouchreg == 9) //============================  9
-                {
+                                        page_ID = 0;
+                                        updateScreen(page_ID); // gui.ino
+                                        prevpage_ID = page_ID;
+                                }
+                                else if (page_ID > 230 && page_ID < 234) // back
+                                {
 
-                        if (page_ID == 24)
-                        {
-                                tmpma++;
-                                (tmpma > 59) && (tmpma = 0);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 26)
-                        {
-                                tmpvib++;
-                                (tmpvib > 15) && (tmpvib = 0);
-                                updateScreen(page_ID); // gui.ino
-                                // Serial.println("page 26");
-                        }
-                        else if (page_ID == 27)
-                        {
-                                itemp++;
-                                (itemp > 24) && (itemp = 0);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 2) // setting
-                        {
-                                page_ID = 26;
-                                tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
-                                updateScreen(page_ID);                     // gui.ino
-                                // Serial.println("page 26");
+                                        page_ID = 0;
+                                        updateScreen(page_ID); // gui.ino
+                                        prevpage_ID = page_ID;
+                                }
+
                                 tmptouchreg = 0;
+                                my_idle();
                         }
-                        if (page_ID == 21)
+                        if (tmptouchreg == 4) //============================  4
                         {
-                                stepLenght++;
-                                updateScreen(page_ID); // gui.ino
-                                config.step_length = stepLenght;
-                                EEPROM_writeAnything(0, config);
-                                EEPROM.commit();
-                        }
-                        else if (page_ID == 231)
-                        {
-                                mm++;
-                                (mm > 59) && (mm = 0);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 232)
-                        {
-                                mmonth++;
-                                (mmonth > 12) && (mmonth = 1);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                }
-                if (tmptouchreg == 10) //============================  10
-                {
-
-                        if (page_ID == 0)
-                        {
-                        }
-
-                        else if (page_ID == 21)
-                        {
-                                // ttgo->bma->resetStepCounter();
-                                // daily_step = 0;
-                                minfactor = step_counter;
-                                stepMonth = tnow.month;
-                                stepDay = tnow.day;
-                                stepHour = tnow.hour;
-                                stepMinute = tnow.minute;
-                                // step_counter = 0;
-                                toast("step counter resetted");
-                                prevpage_ID = page_ID;
-                        }
-                        else if (page_ID == 22)
-                        {
-                                EEPROM_writeAnything(0, config);
-                                EEPROM.commit();
-                                page_ID = 2;
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 24)
-                        {
-                                writeAlarm();
-                                page_ID = 2;
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        else if (page_ID == 27)
-                        {
-                                PanasonicOn();
-                        }
-                        else if (page_ID == 26)
-                        {
-                                // setupPrayAlarm();
-                                if (tmpmwarn != config.alarmpraywarning)
+                                if (page_ID == 2) // go to step setting
                                 {
-                                        config.alarmpraywarning = tmpmwarn;
-                                        EEPROM_writeAnything(0, config);
-                                        EEPROM.commit();
-                                        setprayalarm(false); // datajadwal.ino
+                                        page_ID = 21;
+                                        tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
+                                        updateScreen(page_ID);                     // gui.ino
+                                        prevpage_ID = page_ID;
                                 }
-
-                                if (tmpvib != config.vib)
+                                else if (page_ID == 24)
                                 {
-                                        config.vib = tmpvib;
-                                        EEPROM_writeAnything(0, config);
-                                        EEPROM.commit();
-                                        setprayalarm(false); // datajadwal.ino
+                                        tmpha--;
+                                        (tmpha < 0) && (tmpha = 23);
+                                        updateScreen(page_ID); // gui.ino
                                 }
-                                config.alarm_pray = 1;
-                                alarmset = 0;
-
-                                page_ID = 2;
-                                updateScreen(page_ID); // gui.ino
-                        }
-
-                        else if (page_ID == 2) // setting
-                        {
-                                page_ID = 27;
-                                tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
-                                updateScreen(page_ID);                     // gui.ino
-                                // Serial.println("page 26");
-                                tmptouchreg = 0;
-                        }
-                        else if (page_ID > 230 && page_ID < 234)
-                        {
-
-                                tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
-                                writeRTC();                                // appSettime.ino
-                                page_ID++;
-                                (page_ID > 233) && (page_ID = 0);
-                                updateScreen(page_ID); // gui.ino
-                        }
-
-                        tmptouchreg = 0;
-                }
-                if (tmptouchreg == 11) //============================  11
-                {
-                        if (page_ID == 0)
-                        {
-                                // page_ID = 2;
-                                // updateScreen(page_ID); //gui.ino
-                                // // startSetting();
-                                // home = 0;
-                                if (alarm_active)
+                                else if (page_ID == 26) // PRAY
                                 {
-                                        alarm_active = false;
-                                        ttgo->rtc->disableAlarm();
-                                        ttgo->rtc->resetAlarm();
-                                        if (config.alarm_pray)
-                                                setprayalarm(true);
-                                        digitalWrite(4, LOW);
+                                        tmpmwarn--;
+                                        (tmpmwarn < 0) && (tmpmwarn = 15);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 27) // IR
+                                {
+                                        imode--;
+                                        // imode++;
+                                        (imode == 1) && (imode = 2);
+                                        (imode < 0) && (imode = 3);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 231)
+                                {
+                                        hh--;
+                                        (hh < 0) && (hh = 23);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 232)
+                                {
+                                        dday--;
+                                        (dday < 0) && (hh = 31);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 233)
+                                {
+                                        yyear--;
+                                        (yyear < 2020) && (yyear = 2020);
                                         updateScreen(page_ID); // gui.ino
                                 }
                         }
-                        else if (page_ID == 21)
+                        if (tmptouchreg == 5) //============================  5
                         {
-
-                                // ttgo->bma->resetStepCounter();
-                                // daily_step = 0;
-                                minfactor = step_counter;
-                                stepMonth = tnow.month;
-                                stepDay = tnow.day;
-                                stepHour = tnow.hour;
-                                stepMinute = tnow.minute;
-                                // step_counter = 0;
-                                toast("step counter resetted");
-                                prevpage_ID = page_ID;
-                        }
-                        else if (page_ID == 27)
-                        {
-                                PanasonicOff();
-                        }
-                        else if (page_ID > 230 && page_ID < 234)
-                        {
-
-                                tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
-                                writeRTC();                                // appSettime.ino
-                                page_ID++;
-                                (page_ID > 233) && (page_ID = 0);
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        prevpage_ID = page_ID;
-                }
-
-                if (tmptouchreg == 12) //============================  12
-                {
-                        if (page_ID == 0)
-                        {
-                        }
-                        else if (page_ID == 21)
-                        {
-
-                                // ttgo->bma->resetStepCounter();
-                                // daily_step = 0;
-                                minfactor = step_counter;
-                                stepMonth = tnow.month;
-                                stepDay = tnow.day;
-                                stepHour = tnow.hour;
-                                stepMinute = tnow.minute;
-                                // step_counter = 0;
-                                drawToast("step counter resetted");
-                                prevpage_ID = page_ID;
-                        }
-                        else if (page_ID == 24)
-                        {
-                                tmpalarmenable = !tmpalarmenable;
-                                updateScreen(page_ID); // gui.ino
-                        }
-                        if (page_ID == 26)
-                        {
-                                if (config.alarm_pray)
+                                if (page_ID == 2) // go to dysplay
                                 {
-                                        config.alarm_pray = 0;
+
+                                        page_ID = 22;
+                                        tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
+                                        updateScreen(page_ID);                     // gui.ino
+                                        prevpage_ID = page_ID;
                                 }
-                                else
+                        }
+                        if (tmptouchreg == 6) //============================  6
+                        {
+                                if (page_ID == 21)
                                 {
-                                        setprayalarm(false);
+                                        if (config.stepcounter_filter > 0)
+                                        {
+                                                config.stepcounter_filter = 0;
+                                                EEPROM_writeAnything(0, config);
+                                                EEPROM.commit();
+                                                updateScreen(page_ID); // appSetting.ino
+                                        }
+                                        else
+                                        {
+
+                                                config.stepcounter_filter = 1;
+                                                EEPROM_writeAnything(0, config);
+                                                EEPROM.commit();
+                                                updateScreen(page_ID); // appSetting.ino
+                                        }
+                                }
+                                if (page_ID == 25)
+                                {
+                                        if (config.rnd_face)
+                                        {
+                                                config.rnd_face = 0;
+                                                EEPROM_writeAnything(0, config);
+                                                EEPROM.commit();
+                                                updateScreen(page_ID); // appSetting.ino
+                                        }
+                                        else
+                                        {
+                                                config.rnd_face = 1;
+                                                EEPROM_writeAnything(0, config);
+                                                EEPROM.commit();
+                                                updateScreen(page_ID); // appSetting.ino
+                                        }
+                                }
+
+                                else if (page_ID == 2)
+                                {
+                                        page_ID = 231;
+                                        tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
+                                        updateScreen(page_ID);                     // gui.ino
+                                        prevpage_ID = page_ID;
+                                }
+                                else if (page_ID == 24)
+                                {
+                                        tmpha++;
+                                        (tmpha > 23) && (tmpha = 0);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+
+                                else if (page_ID == 26)
+                                {
+                                        tmpmwarn++;
+                                        (tmpmwarn > 15) && (tmpmwarn = 0);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+
+                                else if (page_ID == 27) // IR
+                                {
+                                        imode++;
+                                        (imode == 1) && (imode = 2);
+                                        (imode > 3) && (imode = 0);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 231)
+                                {
+                                        hh++;
+                                        (hh > 23) && (hh = 0);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 232)
+                                {
+                                        dday++;
+                                        (dday > 31) && (dday = 1);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 233)
+                                {
+                                        yyear++;
+                                        (yyear > 9999) && (yyear = 2020);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                        }
+                        if (tmptouchreg == 7) //============================  7
+                        {
+                                if (page_ID == 2) // setting
+                                {
+                                        page_ID = 24;
+                                        tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
+                                        updateScreen(page_ID);                     // gui.ino
+                                }
+                                else if (page_ID == 21)
+                                {
+                                        stepLenght--;
+                                        updateScreen(page_ID); // gui.ino
+                                        config.step_length = stepLenght;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                }
+                                else if (page_ID == 24)
+                                {
+                                        tmpma--;
+                                        (tmpma < 0) && (tmpma = 59);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+
+                                else if (page_ID == 26)
+                                {
+                                        tmpvib--;
+                                        (tmpvib < 0) && (tmpvib = 15);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 27)
+                                {
+                                        itemp--;
+                                        (itemp < 19) && (itemp = 24);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 231)
+                                {
+                                        mm--;
+                                        (mm < 0) && (mm = 59);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 232) // date setting
+                                {
+                                        mmonth--;
+                                        (mmonth < 0) && (mmonth = 12);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                        }
+                        if (tmptouchreg == 8) //============================  7
+                        {
+                                if (page_ID == 2) // setting
+                                {
+                                        page_ID = 25;
+                                        tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
+                                        updateScreen(page_ID);                     // gui.ino
+                                }
+                        }
+                        if (tmptouchreg == 9) //============================  9
+                        {
+
+                                if (page_ID == 24)
+                                {
+                                        tmpma++;
+                                        (tmpma > 59) && (tmpma = 0);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 26)
+                                {
+                                        tmpvib++;
+                                        (tmpvib > 15) && (tmpvib = 0);
+                                        updateScreen(page_ID); // gui.ino
+                                        // Serial.println("page 26");
+                                }
+                                else if (page_ID == 27)
+                                {
+                                        itemp++;
+                                        (itemp > 24) && (itemp = 0);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 2) // setting
+                                {
+                                        page_ID = 26;
+                                        tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
+                                        updateScreen(page_ID);                     // gui.ino
+                                        // Serial.println("page 26");
+                                        tmptouchreg = 0;
+                                }
+                                if (page_ID == 21)
+                                {
+                                        stepLenght++;
+                                        updateScreen(page_ID); // gui.ino
+                                        config.step_length = stepLenght;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                }
+                                else if (page_ID == 231)
+                                {
+                                        mm++;
+                                        (mm > 59) && (mm = 0);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 232)
+                                {
+                                        mmonth++;
+                                        (mmonth > 12) && (mmonth = 1);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                        }
+                        if (tmptouchreg == 10) //============================  10
+                        {
+
+                                if (page_ID == 0)
+                                {
+                                }
+
+                                else if (page_ID == 21)
+                                {
+                                        // ttgo->bma->resetStepCounter();
+                                        // daily_step = 0;
+                                        minfactor = step_counter;
+                                        stepMonth = tnow.month;
+                                        stepDay = tnow.day;
+                                        stepHour = tnow.hour;
+                                        stepMinute = tnow.minute;
+                                        // step_counter = 0;
+                                        toast("step counter resetted");
+                                        prevpage_ID = page_ID;
+                                }
+                                else if (page_ID == 22)
+                                {
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                        page_ID = 2;
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 24)
+                                {
+                                        writeAlarm();
+                                        page_ID = 2;
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 27)
+                                {
+                                        PanasonicOn();
+                                }
+                                else if (page_ID == 26)
+                                {
+                                        // setupPrayAlarm();
+                                        if (tmpmwarn != config.alarmpraywarning)
+                                        {
+                                                config.alarmpraywarning = tmpmwarn;
+                                                EEPROM_writeAnything(0, config);
+                                                EEPROM.commit();
+                                                setprayalarm(false); // datajadwal.ino
+                                        }
+
+                                        if (tmpvib != config.vib)
+                                        {
+                                                config.vib = tmpvib;
+                                                EEPROM_writeAnything(0, config);
+                                                EEPROM.commit();
+                                                setprayalarm(false); // datajadwal.ino
+                                        }
                                         config.alarm_pray = 1;
                                         alarmset = 0;
-                                        // setprayalarm(false);
+
+                                        page_ID = 2;
+                                        updateScreen(page_ID); // gui.ino
                                 }
 
-                                EEPROM_writeAnything(0, config);
-                                EEPROM.commit();
-                                updateScreen(page_ID); // appSetting.ino
-                        }
-                        else if (page_ID == 27)
-                        {
-                                PanasonicOn(); // appIR.ino
-                        }
-                        else if (page_ID > 230 && page_ID < 234)
-                        {
+                                else if (page_ID == 2) // setting
+                                {
+                                        page_ID = 27;
+                                        tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
+                                        updateScreen(page_ID);                     // gui.ino
+                                        // Serial.println("page 26");
+                                        tmptouchreg = 0;
+                                }
+                                else if (page_ID > 230 && page_ID < 234)
+                                {
 
-                                tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
-                                writeRTC();                                // appSettime.ino
-                                page_ID++;
-                                (page_ID > 233) && (page_ID = 0);
-                                updateScreen(page_ID); // gui.ino
+                                        tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
+                                        writeRTC();                                // appSettime.ino
+                                        page_ID++;
+                                        (page_ID > 233) && (page_ID = 0);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+
+                                tmptouchreg = 0;
+                        }
+                        if (tmptouchreg == 11) //============================  11
+                        {
+                                if (page_ID == 0)
+                                {
+                                        // page_ID = 2;
+                                        // updateScreen(page_ID); //gui.ino
+                                        // // startSetting();
+                                        // home = 0;
+                                        if (alarm_active)
+                                        {
+                                                alarm_active = false;
+                                                ttgo->rtc->disableAlarm();
+                                                ttgo->rtc->resetAlarm();
+                                                if (config.alarm_pray)
+                                                        setprayalarm(true);
+                                                digitalWrite(4, LOW);
+                                                updateScreen(page_ID); // gui.ino
+                                        }
+                                }
+                                else if (page_ID == 21)
+                                {
+
+                                        // ttgo->bma->resetStepCounter();
+                                        // daily_step = 0;
+                                        minfactor = step_counter;
+                                        stepMonth = tnow.month;
+                                        stepDay = tnow.day;
+                                        stepHour = tnow.hour;
+                                        stepMinute = tnow.minute;
+                                        // step_counter = 0;
+                                        toast("step counter resetted");
+                                        prevpage_ID = page_ID;
+                                }
+                                else if (page_ID == 27)
+                                {
+                                        PanasonicOff();
+                                }
+                                else if (page_ID > 230 && page_ID < 234)
+                                {
+
+                                        tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
+                                        writeRTC();                                // appSettime.ino
+                                        page_ID++;
+                                        (page_ID > 233) && (page_ID = 0);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                prevpage_ID = page_ID;
                         }
 
+                        if (tmptouchreg == 12) //============================  12
+                        {
+                                if (page_ID == 0)
+                                {
+                                }
+                                else if (page_ID == 21)
+                                {
+
+                                        // ttgo->bma->resetStepCounter();
+                                        // daily_step = 0;
+                                        minfactor = step_counter;
+                                        stepMonth = tnow.month;
+                                        stepDay = tnow.day;
+                                        stepHour = tnow.hour;
+                                        stepMinute = tnow.minute;
+                                        // step_counter = 0;
+                                        drawToast("step counter resetted");
+                                        prevpage_ID = page_ID;
+                                }
+                                else if (page_ID == 24)
+                                {
+                                        tmpalarmenable = !tmpalarmenable;
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                if (page_ID == 26)
+                                {
+                                        if (config.alarm_pray)
+                                        {
+                                                config.alarm_pray = 0;
+                                        }
+                                        else
+                                        {
+                                                setprayalarm(false);
+                                                config.alarm_pray = 1;
+                                                alarmset = 0;
+                                                // setprayalarm(false);
+                                        }
+
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                        updateScreen(page_ID); // appSetting.ino
+                                }
+                                else if (page_ID == 27)
+                                {
+                                        PanasonicOn(); // appIR.ino
+                                }
+                                else if (page_ID > 230 && page_ID < 234)
+                                {
+
+                                        tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
+                                        writeRTC();                                // appSettime.ino
+                                        page_ID++;
+                                        (page_ID > 233) && (page_ID = 0);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+
+                                tmptouchreg = 0;
+                        }
+                        my_idle();
                         tmptouchreg = 0;
                 }
-                my_idle();
-                tmptouchreg = 0;
-        }
-        switch (swipeID)
-        {
-        case 1:
-                break;
-        case 2:
-                // swip down
-                page_ID = 2;
-                updateScreen(page_ID); // gui.ino
-                                       // prevpage_ID = page_ID;
-                clearSwipeCache();
-                delay(50);
-                break;
-        case 5:
-                CF--;
-                // if (CF < 0)
-                // {
-                //         Serial.printf("clock face change to : %d\n", CF);
-                //         CF = 10;
-                // }
-                (CF < 2) && (CF = 12);
-                config.clock_face = CF;
-                EEPROM_writeAnything(0, config);
-                EEPROM.commit();
-                // clock_face_digit(CF);
-                face(CF);
-                my_idle();
-                clearSwipeCache();
-                break;
-        case 6:
-                CF++;
-                // if (CF > 10)
-                // {
-                //         Serial.printf("clock face change to : %d\n", CF);
-                //         CF = 0;
-                // }
-                (CF > 12) && (CF = 2);
-                config.clock_face = CF;
-                EEPROM_writeAnything(0, config);
-                EEPROM.commit();
-                // clock_face_digit(CF);
+                switch (swipeID)
+                {
+                case 1:
+                        break;
+                case 2:
+                        // swip down
+                        page_ID = 2;
+                        updateScreen(page_ID); // gui.ino
+                                               // prevpage_ID = page_ID;
+                        clearSwipeCache();
+                        delay(50);
+                        break;
+                case 5:
+                        CF--;
+                        // if (CF < 0)
+                        // {
+                        //         Serial.printf("clock face change to : %d\n", CF);
+                        //         CF = 10;
+                        // }
+                        (CF < 2) && (CF = 12);
+                        config.clock_face = CF;
+                        EEPROM_writeAnything(0, config);
+                        EEPROM.commit();
+                        // clock_face_digit(CF);
+                        face(CF);
+                        my_idle();
+                        clearSwipeCache();
+                        break;
+                case 6:
+                        CF++;
+                        // if (CF > 10)
+                        // {
+                        //         Serial.printf("clock face change to : %d\n", CF);
+                        //         CF = 0;
+                        // }
+                        (CF > 12) && (CF = 2);
+                        config.clock_face = CF;
+                        EEPROM_writeAnything(0, config);
+                        EEPROM.commit();
+                        // clock_face_digit(CF);
 
-                face(CF);
-                my_idle();
-                clearSwipeCache();
-                break;
-        case 10:
-                page_ID = 2;
-                updateScreen(page_ID); // gui.ino
-                                       // prevpage_ID = page_ID;
-                clearSwipeCache();
+                        face(CF);
+                        my_idle();
+                        clearSwipeCache();
+                        break;
+                case 10:
+                        page_ID = 2;
+                        updateScreen(page_ID); // gui.ino
+                                               // prevpage_ID = page_ID;
+                        clearSwipeCache();
 
-                break;
-        case 9:
-                // CF = 10;
-                // (config.pedometer_enable) && (config.pedometer_enable = false) || (config.pedometer_enable = true);
-                // if (config.pedometer_enable)
-                // {
-                //         config.pedometer_enable = false;
-                // }
-                // else
-                // {
-                //         config.pedometer_enable = true;
-                // }
-                config.pedometer_enable = !config.pedometer_enable;
+                        break;
+                case 9:
+                        // CF = 10;
+                        // (config.pedometer_enable) && (config.pedometer_enable = false) || (config.pedometer_enable = true);
+                        // if (config.pedometer_enable)
+                        // {
+                        //         config.pedometer_enable = false;
+                        // }
+                        // else
+                        // {
+                        //         config.pedometer_enable = true;
+                        // }
+                        config.pedometer_enable = !config.pedometer_enable;
 
-                EEPROM_writeAnything(0, config);
-                EEPROM.commit();
-                updateScreen(page_ID); // gui.ino
-                // clock_face_digit(CF);
-                my_idle();
-                clearSwipeCache();
+                        EEPROM_writeAnything(0, config);
+                        EEPROM.commit();
+                        updateScreen(page_ID); // gui.ino
+                        // clock_face_digit(CF);
+                        my_idle();
+                        clearSwipeCache();
 
-                break;
+                        break;
 
-        default:
-                break;
+                default:
+                        break;
+                }
+                touchStage = 0;
         }
 }
 void clearSwipeCache()
@@ -827,6 +845,7 @@ void clearSwipeCache()
         swipeMe = 1;
         swipeID = 0;
         tmptouchreg = 0;
-        htouchInterval = 120;
+        htouchInterval = 700;
         prevmi = millis();
+        // touched = 1;
 }

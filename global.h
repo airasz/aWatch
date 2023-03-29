@@ -11,15 +11,15 @@ int rndHandMinuteShadow;
 float sx = 0,
       sy = 1, mx = 1, my = 0, hx = -1, hy = 0;
 float sdeg = 0, mdeg = 0, hdeg = 0;
-int cr = 80; //circle radius
+int cr = 80; // circle radius
 uint16_t osx = cr, osy = cr, omx = cr, omy = cr, ohx = cr, ohy = cr;
 
 uint16_t x0 = 0, x1 = 0, yy0 = 0, yy1 = 0;
 uint32_t targetTime = 0;
 int xx, yy, xxx, yyy;
 bool touched = false;
-int CF;
-int16_t tx, ty; //touch coordinate
+int CF, touchStage = 0;
+int16_t tx, ty; // touch coordinate
 //  1   2   3
 //  4   5   6
 //  7   8   9
