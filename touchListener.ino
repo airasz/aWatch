@@ -58,61 +58,10 @@ void touchListener()
                 // Serial.printf("acc X %d\n ", flippos);
         }
 
-        if (touched)
-        {
-                // Serial.print("X: ");
-                // Serial.print(tx);
-                // Serial.print("  |  Y: ");
-                // Serial.println(ty);
-                if (ty < 60) // 1-2-3
-                {
-                        if (tx > 0 && tx < 80)
-                                tmptouchreg = 1;
-                        if (tx > 80 && tx < 160)
-                                tmptouchreg = 2;
-                        if (tx > 160 && tx < 240)
-                                tmptouchreg = 3;
-                }
-                if (ty > 60 && ty < 120) // 4-5-6
-                {
-                        if (tx > 0 && tx < 80)
-                                tmptouchreg = 4;
-                        if (tx > 80 && tx < 160)
-                                tmptouchreg = 5;
-                        if (tx > 160 && tx < 240)
-                                tmptouchreg = 6;
-                }
-                if (ty > 120 && ty < 180) // 7-8-9
-                {
-                        if (tx > 0 && tx < 80)
-                                tmptouchreg = 7;
-                        if (tx > 80 && tx < 160)
-                                tmptouchreg = 8;
-                        if (tx > 160 && tx < 240)
-                                tmptouchreg = 9;
-                }
-                if (ty > 180) // 10-11-12
-                {
-                        if (tx > 0 && tx < 80)
-                                tmptouchreg = 10;
-                        if (tx > 80 && tx < 160)
-                                tmptouchreg = 11;
-                        if (tx > 160 && tx < 240)
-                                tmptouchreg = 12;
-                }
-                if (page_ID == 22)
-                {
-                        adjusting(tx, ty);
-                }
-                swipeMe = 1;
-                touched = 0;
-                if (swipeID > 0)
-                        tmptouchreg = 0;
-        }
         while (ttgo->getTouch(tx, ty))
         {
 
-                if (page_ID == 0 && swipeMe)
+                if (page_ID == 0)
                 {
                         if (ty < 60)
                         {
@@ -187,10 +136,69 @@ void touchListener()
                         }
                 }
 
-                touched = 1;
+                // touched = 1;
                 touchStage = 1;
         } // Wait for release to exit
-        (touchStage == 1) && (touchStage = 2);
+        // (touchStage == 1) && (touchStage = 2);
+        if (touchStage == 1)
+        {
+                if (swipeID == 0)
+                {
+                        touched = 1;
+                }
+                touchStage = 2;
+        }
+        if (touched)
+        {
+                // Serial.print("X: ");
+                // Serial.print(tx);
+                // Serial.print("  |  Y: ");
+                // Serial.println(ty);
+                if (ty < 60) // 1-2-3
+                {
+                        if (tx > 0 && tx < 80)
+                                tmptouchreg = 1;
+                        if (tx > 80 && tx < 160)
+                                tmptouchreg = 2;
+                        if (tx > 160 && tx < 240)
+                                tmptouchreg = 3;
+                }
+                if (ty > 60 && ty < 120) // 4-5-6
+                {
+                        if (tx > 0 && tx < 80)
+                                tmptouchreg = 4;
+                        if (tx > 80 && tx < 160)
+                                tmptouchreg = 5;
+                        if (tx > 160 && tx < 240)
+                                tmptouchreg = 6;
+                }
+                if (ty > 120 && ty < 180) // 7-8-9
+                {
+                        if (tx > 0 && tx < 80)
+                                tmptouchreg = 7;
+                        if (tx > 80 && tx < 160)
+                                tmptouchreg = 8;
+                        if (tx > 160 && tx < 240)
+                                tmptouchreg = 9;
+                }
+                if (ty > 180) // 10-11-12
+                {
+                        if (tx > 0 && tx < 80)
+                                tmptouchreg = 10;
+                        if (tx > 80 && tx < 160)
+                                tmptouchreg = 11;
+                        if (tx > 160 && tx < 240)
+                                tmptouchreg = 12;
+                }
+                if (page_ID == 22)
+                {
+                        adjusting(tx, ty);
+                }
+                swipeMe = 1;
+                touched = 0;
+                if (swipeID > 0)
+                        tmptouchreg = 0;
+        }
         // touched = (swipeID > 0) ? false : true;
         // Serial.printf("swipeID: %d | ", swipeID);
         // Serial.printf(" tmptouchreg : %d\n", tmptouchreg);
@@ -835,6 +843,7 @@ void handleTouch()
                 default:
                         break;
                 }
+                tmptouchreg = 0;
                 touchStage = 0;
         }
 }
