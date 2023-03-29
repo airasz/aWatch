@@ -7,7 +7,7 @@ void init_holiday()
                 Serial.println("ERROR: DB file not found");
                 // return false;
         }
-        DynamicJsonDocument doc(1024);
+        DynamicJsonDocument doc(214);
         DeserializationError err = deserializeJson(doc, dbFile);
         if (err)
         {
@@ -32,7 +32,7 @@ void showCal()
         int nday = tnow.day,
             nmonth = tnow.month,
             nyear = tnow.year;
-        String const dw[] = {"M", "S", "S", "R", "K", "J", "S"}; //indonesian day name start sunday
+        String const dw[] = {"M", "S", "S", "R", "K", "J", "S"}; // indonesian day name start sunday
         int fday, nmon, bwidth, dwidth, dheight, row;
 
         const int _do = 8; // display  X position offset
@@ -45,7 +45,7 @@ void showCal()
         int dow = ttgo->rtc->getDayOfWeek(1, nmonth, nyear);
         dow -= 1;
         int maxday = MaxDate[nmonth - 1]; // get maximun day in current month
-        //month name
+        // month name
         tft->setTextColor(TFT_WHITE);
         tft->setCursor(2, row * dheight);
         tft->print(bulan[nmonth - 1]);
@@ -75,7 +75,7 @@ void showCal()
                         // if (holyday(i - dow, nmonth))       // check if date is holyday?
                         //         tft->setTextColor(TFT_RED); // coloring holyday
                         tft->setTextColor((holyday(i - dow, nmonth - 1)) || (i % 7 == 0) ? TFT_RED : TFT_GREEN);
-                        if (i - dow == nday) //highlight present day
+                        if (i - dow == nday) // highlight present day
                         {
                                 tft->fillRoundRect(((i % 7) * dwidth) + _do, (row * dheight) - 2, 18, 20, 2, rgbToHex(20, 20, 20));
                                 tft->setTextColor(TFT_WHITE);
@@ -83,7 +83,7 @@ void showCal()
                         tft->print(i - dow);
                 }
         }
-        dbFile.close();
+        // dbFile.close();
 }
 bool holyday(int d, int m)
 {

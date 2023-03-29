@@ -22,7 +22,7 @@
 
 #include <WiFi.h>
 #include <HTTPClient.h> //Remove Audio Lib error
-#include "AudioFileSourcePROGMEM.h"
+/* #include "AudioFileSourcePROGMEM.h"
 #include "AudioFileSourceID3.h"
 #include "AudioGeneratorMP3.h"
 #include "AudioOutputI2S.h"
@@ -33,7 +33,7 @@ Audio audio;
 AudioGeneratorMP3 *mp3;
 AudioFileSourcePROGMEM *file;
 AudioOutputI2S *out;
-AudioFileSourceID3 *id3;
+AudioFileSourceID3 *id3; */
 #define EEPROM_SIZE 512
 QueueHandle_t g_event_queue_handle = NULL;
 EventGroupHandle_t g_event_group = NULL;
@@ -762,24 +762,24 @@ void getPower()
 }
 void beep2()
 {
-  ttgo->enableLDO3();
+  /*  ttgo->enableLDO3();
 
-  // pinMode(pinName, OUTPUT);
-  if (!SPIFFS.begin(true))
-  {
-    Serial.println("An Error has occurred while mounting SPIFFS");
-  }
-  else
-  {
-    Serial.println("beeping using audio");
-    audio.setPinout(TWATCH_DAC_IIS_BCK, TWATCH_DAC_IIS_WS, TWATCH_DAC_IIS_DOUT);
-    audio.setVolume(18); // 0...21
-    audio.connecttoFS(SPIFFS, "sonar2.mp3");
-  }
+   // pinMode(pinName, OUTPUT);
+   if (!SPIFFS.begin(true))
+   {
+     Serial.println("An Error has occurred while mounting SPIFFS");
+   }
+   else
+   {
+     Serial.println("beeping using audio");
+     audio.setPinout(TWATCH_DAC_IIS_BCK, TWATCH_DAC_IIS_WS, TWATCH_DAC_IIS_DOUT);
+     audio.setVolume(18); // 0...21
+     audio.connecttoFS(SPIFFS, "sonar2.mp3");
+   } */
 }
 void beep(int8_t w)
 {
-  // WiFi.mode(WIFI_OFF);
+  /* // WiFi.mode(WIFI_OFF);
   // delay(500);
 
   //! Turn on the audio power
@@ -822,7 +822,7 @@ void beep(int8_t w)
     Serial.println("playing mp3 done");
   }
   delay(400);
-  // power->setPowerOutPut(AXP202_LDO3, AXP202_OFF);
+  // power->setPowerOutPut(AXP202_LDO3, AXP202_OFF); */
 }
 // restart daily step counting
 void checkday()
