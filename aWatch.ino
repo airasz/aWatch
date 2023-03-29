@@ -725,7 +725,7 @@ void loop()
       Serial_timestamp();
       initialAnalog = true;
       checkday();
-      beep2();
+      // beep2();
     }
     else if (targetTime < millis())
     {
