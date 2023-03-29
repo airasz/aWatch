@@ -32,6 +32,7 @@ void showCal()
         int nday = tnow.day,
             nmonth = tnow.month,
             nyear = tnow.year;
+        Serial.printf("nmonth  : %d \n", nmonth);
         String const dw[] = {"M", "S", "S", "R", "K", "J", "S"}; // indonesian day name start sunday
         int fday, nmon, bwidth, dwidth, dheight, row;
 
@@ -84,6 +85,80 @@ void showCal()
                 }
         }
         // dbFile.close();
+}
+void showCal(bool next)
+{
+        // true= nest from current, false = previous from current
+        int nday = tnow.day,
+            nmonth = tnow.month,
+            nyear = tnow.year;
+        if (next)
+        {
+                nmonth++;
+                if (nmonth > 12)
+                {
+                        nmonth = 1;
+                        nyear++;
+                }
+        }
+        else
+        {
+                nmonth--;
+                if (nmonth < 1)
+                {
+                        nmonth = 12;
+                        nyear--;
+                }
+        }
+        String const dw[] = {"M", "S", "S", "R", "K", "J", "S"}; // indonesian day name start sunday
+        int fday, nmon, bwidth, dwidth, dheight, row;
+
+        const int _do = 8; // display  X position offset
+        // size of a "day" cell on the calendar:
+        dwidth = tft->width() / 7;
+        dheight = tft->height() / 9;
+        tft->fillScreen(TFT_BLACK); // Clear screen
+        tft->setTextSize(1);
+        tft->setTextFont(2);
+        int dow = ttgo->rtc->getDayOfWeek(1, nmonth, nyear);
+        dow -= 1;
+        int maxday = MaxDate[nmonth - 1]; // get maximun day in current month
+        // month name
+        tft->setTextColor(TFT_WHITE);
+        tft->setCursor(2, row * dheight);
+        tft->print(bulan[nmonth - 1]);
+        tft->print(", ");
+        tft->print(nyear);
+        row++;
+        for (int i = 0; i < 7; i++)
+        {
+                // print day shortname
+                tft->setTextColor(i == 0 ? TFT_RED : TFT_BLUE);
+                tft->setCursor((i * dwidth) + _do, row * dheight);
+                tft->print(dw[i]);
+        }
+        row++;
+        for (int i = 1; i < maxday + dow + 1; i++)
+        {
+                tft->setTextColor(TFT_GREEN);
+                if (i % 7 == 0)
+                        row++;
+                if (i > dow)
+                {
+                        tft->setCursor(((i % 7) * dwidth) + _do, row * dheight);
+                        // if (i % 7 == 0) // coloring sunday
+                        //         tft->setTextColor(TFT_RED);
+                        // if (holyday(i - dow, nmonth))       // check if date is holyday?
+                        //         tft->setTextColor(TFT_RED); // coloring holyday
+                        tft->setTextColor((holyday(i - dow, nmonth - 1)) || (i % 7 == 0) ? TFT_RED : TFT_GREEN);
+                        if (i - dow == nday) // highlight present day
+                        {
+                                tft->fillRoundRect(((i % 7) * dwidth) + _do, (row * dheight) - 2, 18, 20, 2, rgbToHex(20, 20, 20));
+                                tft->setTextColor(TFT_WHITE);
+                        }
+                        tft->print(i - dow);
+                }
+        }
 }
 bool holyday(int d, int m)
 {
