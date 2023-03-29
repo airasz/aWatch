@@ -113,7 +113,7 @@ void sysinfo()
         tft->setTextColor(TFT_GREEN);
         tft->print("\n  CPU freq : ");
         tft->setTextColor(TFT_WHITE);
-        tft->printf("%dMHz/", getCpuFrequencyMhz());
+        tft->printf("%dMHz", getCpuFrequencyMhz());
 
         // tft->print("kb/");
         // tft->print(ESP.getFreePsram() / 1000000);
