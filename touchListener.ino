@@ -61,7 +61,7 @@ void touchListener()
         while (ttgo->getTouch(tx, ty))
         {
 
-                if (page_ID == 0)
+                if (page_ID == 0 || page_ID == 3)
                 {
                         if (ty < 60)
                         {
@@ -71,6 +71,8 @@ void touchListener()
                                         if (shiftX++ > maxShifting)
                                         {
                                                 swipeID = 2;
+                                                if (page_ID == 3)
+                                                        swipeID = 31;
                                                 swipeMe = 0;
                                         }
                                         // (shiftX > 50) && (swipeBRight = 1);
@@ -79,7 +81,10 @@ void touchListener()
                                 {
                                         if (shiftX++ > maxShifting)
                                         {
+
                                                 swipeID = 1;
+                                                if (page_ID == 3)
+                                                        swipeID = 32;
                                                 swipeMe = 0;
                                         }
                                         // (shiftX > 50) && (swipeBLeft = 1);
@@ -95,6 +100,8 @@ void touchListener()
                                         if (shiftX++ > maxShifting)
                                         {
                                                 swipeID = 6;
+                                                if (page_ID == 3)
+                                                        swipeID = 31;
                                                 swipeMe = 0;
                                         }
                                         // (shiftX > 50) && (swipeBRight = 1);
@@ -104,6 +111,8 @@ void touchListener()
                                         if (shiftX++ > maxShifting)
                                         {
                                                 swipeID = 5;
+                                                if (page_ID == 3)
+                                                        swipeID = 32;
                                                 swipeMe = 0;
                                         }
                                         // (shiftX > 50) && (swipeBLeft = 1);
@@ -117,6 +126,8 @@ void touchListener()
                                 if (shiftY++ > maxShifting)
                                 {
                                         swipeID = 10;
+                                        if (page_ID == 3)
+                                                swipeID = 31;
                                         swipeMe = 0;
                                 }
                                 // (shiftY > 50) && (swipeDown = 1);
@@ -128,6 +139,8 @@ void touchListener()
                                 if (shiftY++ > 20)
                                 {
                                         swipeID = 9;
+                                        if (page_ID == 3)
+                                                swipeID = 32;
                                         swipeMe = 0;
                                 }
                                 // (shiftY > 50) && (swipeUp = 1);
@@ -236,7 +249,7 @@ void handleTouch()
                         shiftY = 0;
                         if (tmptouchreg == 1) //============================  1
                         {
-                                if (page_ID == 0 || page_ID == 1 || page_ID == 3)
+                                if (page_ID == 0 || page_ID == 1 || page_ID == 3 || page_ID == 31 || page_ID == 32)
                                 {
                                         page_ID = 11;
                                         updateScreen(page_ID); // gui.ino
@@ -268,7 +281,7 @@ void handleTouch()
 
                         if (tmptouchreg == 2) //============================  2
                         {
-                                if (page_ID == 0 || page_ID == 11 || page_ID == 1) // calender
+                                if (page_ID == 0 || page_ID == 11 || page_ID == 1 || page_ID == 31 || page_ID == 32) // calender
                                 {
                                         page_ID = 3;
                                         updateScreen(page_ID); // gui.ino
@@ -284,7 +297,7 @@ void handleTouch()
 
                         if (tmptouchreg == 3) //============================  3
                         {
-                                if (page_ID == 0 || page_ID == 11 || page_ID == 3) // pray schedule
+                                if (page_ID == 0 || page_ID == 11 || page_ID == 3 || page_ID == 31 || page_ID == 32) // pray schedule
                                 {
                                         imnt = tnow.month;
                                         iday = tnow.day;
@@ -779,6 +792,7 @@ void handleTouch()
                         delay(50);
                         break;
                 case 5:
+                        // swipe left
                         CF--;
                         // if (CF < 0)
                         // {
@@ -795,6 +809,7 @@ void handleTouch()
                         clearSwipeCache();
                         break;
                 case 6:
+                        // swipe right
                         CF++;
                         // if (CF > 10)
                         // {
@@ -812,6 +827,7 @@ void handleTouch()
                         clearSwipeCache();
                         break;
                 case 10:
+                        // swipe down
                         page_ID = 2;
                         updateScreen(page_ID); // gui.ino
                                                // prevpage_ID = page_ID;
@@ -819,16 +835,17 @@ void handleTouch()
 
                         break;
                 case 9:
-                        // CF = 10;
-                        // (config.pedometer_enable) && (config.pedometer_enable = false) || (config.pedometer_enable = true);
-                        // if (config.pedometer_enable)
-                        // {
-                        //         config.pedometer_enable = false;
-                        // }
-                        // else
-                        // {
-                        //         config.pedometer_enable = true;
-                        // }
+                        // swipe up
+                        //  CF = 10;
+                        //  (config.pedometer_enable) && (config.pedometer_enable = false) || (config.pedometer_enable = true);
+                        //  if (config.pedometer_enable)
+                        //  {
+                        //          config.pedometer_enable = false;
+                        //  }
+                        //  else
+                        //  {
+                        //          config.pedometer_enable = true;
+                        //  }
                         config.pedometer_enable = !config.pedometer_enable;
 
                         EEPROM_writeAnything(0, config);
@@ -839,7 +856,28 @@ void handleTouch()
                         clearSwipeCache();
 
                         break;
-
+                case 31:
+                        // page_ID = swipeID;
+                        updateScreen(swipeID); // gui.ino
+                        shiftX = 0;
+                        shiftY = 0;
+                        swipeMe = 1;
+                        swipeID = 0;
+                        tmptouchreg = 0;
+                        htouchInterval = 700;
+                        prevmi = millis();
+                        break;
+                case 32:
+                        // page_ID = swipeID;
+                        updateScreen(swipeID); // gui.ino
+                        shiftX = 0;
+                        shiftY = 0;
+                        swipeMe = 1;
+                        swipeID = 0;
+                        tmptouchreg = 0;
+                        htouchInterval = 700;
+                        prevmi = millis();
+                        break;
                 default:
                         break;
                 }

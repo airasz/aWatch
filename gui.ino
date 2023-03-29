@@ -75,6 +75,14 @@ void updateScreen(int dis_ID)
         case 27:
                 startSetting(9);
                 break;
+        case 31:
+                showCal(true); // show next month
+                break;
+
+        case 32:
+                showCal(false); // show previous month
+                break;
+
         case 231:
                 startSetting(3);
                 break;
