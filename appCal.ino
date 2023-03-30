@@ -7,7 +7,7 @@ void init_holiday()
                 Serial.println("ERROR: DB file not found");
                 // return false;
         }
-        DynamicJsonDocument doc(214);
+        DynamicJsonDocument doc(1024);
         DeserializationError err = deserializeJson(doc, dbFile);
         if (err)
         {
@@ -21,7 +21,9 @@ void init_holiday()
                 {
                         int in = doc[String(i + 1)][ii];
                         hddata[i][ii] = in;
+                        // Serial.printf(" hddata[%d][%d] : %d ", i, ii, hddata[i][ii]);
                 }
+                Serial.println("");
         }
 
         dbFile.close();
@@ -47,7 +49,7 @@ void showCal()
         tft->setTextFont(2);
         int dow = ttgo->rtc->getDayOfWeek(1, nmonth, nyear);
         Serial.printf("dow  : %d \n", dow);
-        dow -= 1;
+
         int maxday = MaxDate[nmonth - 1]; // get maximun day in current month
         // month name
         tft->setTextColor(TFT_WHITE);
@@ -63,39 +65,37 @@ void showCal()
                 tft->setCursor((i * dwidth) + _do, row * dheight);
                 tft->print(dw[i]);
         }
-        row++;
+        row++; // NEXT ROW
         // dbFile = SPIFFS.open("/holiday.json", "r");
 
-        for (int i = 1; i < maxday + dow + 1; i++)
+        for (int i = 0; i < maxday + dow; i++)
         {
                 tft->setTextColor(TFT_GREEN);
-                if (i % 7 == 0)
+                if (i % 7 == 0 && i > 0)
                         row++;
-                if (i > dow)
+                if (i >= dow)
                 {
                         tft->setCursor(((i % 7) * dwidth) + _do, row * dheight);
                         // if (i % 7 == 0) // coloring sunday
                         //         tft->setTextColor(TFT_RED);
                         // if (holyday(i - dow, nmonth))       // check if date is holyday?
                         //         tft->setTextColor(TFT_RED); // coloring holyday
-                        tft->setTextColor((holyday(i - dow, nmonth - 1)) || (i % 7 == 0) ? TFT_RED : TFT_GREEN);
-                        if (i - dow == nday) // highlight present day
+                        tft->setTextColor((holyday(i - dow + 1, nmonth - 1)) || (i % 7 == 0) ? TFT_RED : TFT_GREEN);
+                        if (i - dow + 1 == nday) // highlight present day
                         {
-                                tft->fillRoundRect(((i % 7) * dwidth) + _do, (row * dheight) - 2, 18, 20, 2, rgbToHex(20, 20, 20));
+                                tft->fillRoundRect(((i % 7) * dwidth) + _do - 1, (row * dheight) - 2, 18, 20, 2, rgbToHex(20, 20, 20));
                                 tft->setTextColor(TFT_WHITE);
                         }
-                        tft->print(i - dow);
+                        tft->print(i - dow + 1);
                 }
         }
         // dbFile.close();
 }
 void showCal(bool next)
 {
-        // true= nest from current, false = previous from current
-
+        // true= next from current, false = previous from current
         if (next)
         {
-                // nmonth++;
                 if (nmonth++ > 12)
                 {
                         nmonth = 1;
@@ -104,7 +104,6 @@ void showCal(bool next)
         }
         else
         {
-                // nmonth--;
                 if (nmonth-- < 1)
                 {
                         nmonth = 12;
@@ -124,7 +123,7 @@ void showCal(bool next)
         int dow = ttgo->rtc->getDayOfWeek(1, nmonth, nyear);
 
         Serial.printf("dow  : %d \n", dow);
-        dow -= 1;
+        // dow -= 1;
         int maxday = MaxDate[nmonth - 1]; // get maximun day in current month
         // month name
         tft->setTextColor(TFT_WHITE);
@@ -141,24 +140,24 @@ void showCal(bool next)
                 tft->print(dw[i]);
         }
         row++;
-        for (int i = 1; i < maxday + dow + 1; i++)
+        for (int i = 0; i < maxday + dow; i++)
         {
                 tft->setTextColor(TFT_GREEN);
-                if (i % 7 == 0)
+                if (i % 7 == 0 && i > 0)
                         row++;
-                if (i > dow)
+                if (i >= dow)
                 {
                         tft->setCursor(((i % 7) * dwidth) + _do, row * dheight);
-                        tft->setTextColor((holyday(i - dow, nmonth - 1)) || (i % 7 == 0) ? TFT_RED : TFT_GREEN);
-                        if (i - dow == nday) // highlight present day
+                        tft->setTextColor(((holyday(i - dow + 1, nmonth - 1)) && nyear == tnow.year) || (i % 7 == 0) ? TFT_RED : TFT_GREEN);
+                        if (i - dow + 1 == nday) // highlight present day
                         {
                                 if (nmonth == tnow.month && nyear == tnow.year)
                                 {
-                                        tft->fillRoundRect(((i % 7) * dwidth) + _do, (row * dheight) - 2, 18, 20, 2, rgbToHex(20, 20, 20));
+                                        tft->fillRoundRect(((i % 7) * dwidth) + _do - 1, (row * dheight) - 2, 18, 20, 2, rgbToHex(20, 20, 20));
                                         tft->setTextColor(TFT_WHITE);
                                 }
                         }
-                        tft->print(i - dow);
+                        tft->print(i - dow + 1);
                 }
         }
 }
@@ -179,13 +178,11 @@ bool holyday(int d, int m)
         //     {0, 0, 0, 0},
         //     {25, 0, 0, 0}};
         for (int ii = 0; ii < 4; ii++)
-        {
                 if (d == hddata[m][ii])
                 {
                         hd = true;
                         break;
                 }
-        }
 
         return hd;
 }
