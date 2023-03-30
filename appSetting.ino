@@ -85,14 +85,18 @@ void startSetting(int setID)
                 drawPraySet();
                 break;
         case 9:
-                tft->drawString("select", 120, 24, 2);
-                tft->drawString("brand", 120, 32, 2);
+                tft->drawString("SELECT", 120, 22, 2);
+                tft->drawString("BRAND", 120, 34, 2);
                 // drawACremote();
                 drawSelectBrand();
                 break;
         case 10:
-                tft->drawString("AC", 120, 24, 2);
+                tft->drawString("pana", 120, 24, 2);
                 drawACremote();
+                break;
+        case 11:
+                tft->drawString("LG", 120, 24, 2);
+                drawRemoteLG();
                 break;
         default:
                 break;

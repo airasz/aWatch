@@ -6,6 +6,7 @@
 // 0=home<
 //                     \30.  setting
 
+// by pageID
 void updateScreen(int dis_ID)
 {
         // call every screen touched
@@ -74,6 +75,12 @@ void updateScreen(int dis_ID)
                 break;
         case 27:
                 startSetting(9); // to app remote select AC
+                break;
+        case 271:
+                startSetting(10); // to panasonic
+                break;
+        case 272:
+                startSetting(11); // to panasonic
                 break;
         case 31:
                 showCal(true); // show next month
