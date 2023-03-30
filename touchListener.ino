@@ -226,8 +226,8 @@ void handleTouch()
 {
         if (touchStage == 2)
         {
-                Serial.printf("swipeID: %d | ", swipeID);
-                Serial.printf(" tmptouchreg : %d\n", tmptouchreg);
+                // Serial.printf("swipeID: %d | ", swipeID);
+                // Serial.printf(" tmptouchreg : %d\n", tmptouchreg);
                 // Serial.printf(" swipeMe =  %s\n ", (swipeMe) ? "true" : "false");
                 // Serial.printf(" tmptouchreg =  %d\n ", tmptouchreg);
 
