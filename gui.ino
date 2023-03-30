@@ -73,7 +73,7 @@ void updateScreen(int dis_ID)
                 startSetting(8);
                 break;
         case 27:
-                startSetting(9);
+                startSetting(9); // to app remote select AC
                 break;
         case 31:
                 showCal(true); // show next month

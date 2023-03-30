@@ -85,6 +85,12 @@ void startSetting(int setID)
                 drawPraySet();
                 break;
         case 9:
+                tft->drawString("select", 120, 24, 2);
+                tft->drawString("brand", 120, 32, 2);
+                // drawACremote();
+                drawSelectBrand();
+                break;
+        case 10:
                 tft->drawString("AC", 120, 24, 2);
                 drawACremote();
                 break;
@@ -174,6 +180,7 @@ void drawHomeSettingBody()
         drawOutlineButton(80, 120, 80, 60, TFT_BLUE, TFT_WHITE, "FACE");
         drawOutlineButton(160, 120, 80, 60, TFT_BLUE, TFT_WHITE, "PRAY");
         drawOutlineButton(0, 180, 80, 60, TFT_BLUE, TFT_WHITE, "AC");
+        drawOutlineButton(0, 180, 80, 60, TFT_BLUE, TFT_WHITE, "AC");
 }
 void drawDisplaySetting()
 {
@@ -187,7 +194,7 @@ void drawStepSetting()
         tft->setTextFont(2);
         tft->setCursor(3, 76);
         tft->print("Enabled");
-        //row 2
+        // row 2
 
         drawSwitch(170, 70, TFT_BLUE, rgbToHex(200, 200, 200), config.stepcounter_filter > 0);
         // if (config.stepcounter_filter > 0)
@@ -198,7 +205,7 @@ void drawStepSetting()
         // {
         //         drawSwitch(170, 70, TFT_BLUE, rgbToHex(200, 200, 200), false);
         // }
-        //row3
+        // row3
 
         drawOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "-");
 
@@ -215,7 +222,7 @@ void drawStepSetting()
         s_length += " cm";
         drawOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, s_length);
 
-        //row 4
+        // row 4
 
         drawButton(0, 190, 240, 40, TFT_BLUE, TFT_WHITE, "Reset daily step counter");
         // tft->drawRoundRect(0, 190, 240, 40, 8, TFT_BLUE);
@@ -256,7 +263,7 @@ void updateWgetSeekBarTO(uint8_t X, uint8_t Y, uint8_t value)
         {
                 tft->setTextDatum(MC_DATUM);
                 tft->setTextColor(TFT_GREEN, TFT_BLACK);
-                tft->drawString("SCREEN TIMEOUT", 120, 124, 2); //184
+                tft->drawString("SCREEN TIMEOUT", 120, 124, 2); // 184
                 tft->setCursor(4, 196);
                 my_idle();
                 // tft->print(value);
@@ -264,7 +271,7 @@ void updateWgetSeekBarTO(uint8_t X, uint8_t Y, uint8_t value)
                 if (value < 9)
                         svalue += "0";
                 svalue += value;
-                drawButton(0, 132, 40, 30, TFT_BLACK, TFT_WHITE, svalue); //190
+                drawButton(0, 132, 40, 30, TFT_BLACK, TFT_WHITE, svalue); // 190
                 // tft->drawString(svalue, 4, 196, 2);
                 Serial.printf("valeu %d\n ", value);
                 int width = 220;
@@ -336,7 +343,7 @@ void updateWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
                 tft->setCursor(4, 136);
                 // String svalue = "";
                 char svalue[3];
-                sprintf(svalue, "%02d", value); //add 0 if one digit
+                sprintf(svalue, "%02d", value); // add 0 if one digit
                 // if (value < 9)
                 //         svalue += "0";
                 // svalue += value;
@@ -369,7 +376,7 @@ void drawWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
         tft->drawString("BRIGHTNESS", 120, 64, 2);
         // String svalue = "";
         char svalue[3];
-        sprintf(svalue, "%02d", value); //add 0 if one digit
+        sprintf(svalue, "%02d", value); // add 0 if one digit
         // if (value < 9)
         //         svalue += "0";
         // svalue += value;
