@@ -18,6 +18,9 @@ void startAC()
 {
         ac.begin();
 }
+void drawSelectBrand()
+{
+}
 void drawACremote()
 {
         Serial.println("draw AC remote");
