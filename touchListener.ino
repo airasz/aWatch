@@ -163,10 +163,7 @@ void touchListener()
         }
         if (touched)
         {
-                // Serial.print("X: ");
-                // Serial.print(tx);
-                // Serial.print("  |  Y: ");
-                // Serial.println(ty);
+                Serial.printf("tX  : %d | tY %d \n", tx, ty);
                 if (ty < 60) // 1-2-3
                 {
                         if (tx > 0 && tx < 80)
@@ -226,8 +223,8 @@ void handleTouch()
 {
         if (touchStage == 2)
         {
-                // Serial.printf("swipeID: %d | ", swipeID);
-                // Serial.printf(" tmptouchreg : %d\n", tmptouchreg);
+                Serial.printf("swipeID: %d | ", swipeID);
+                Serial.printf(" tmptouchreg : %d\n", tmptouchreg);
                 // Serial.printf(" swipeMe =  %s\n ", (swipeMe) ? "true" : "false");
                 // Serial.printf(" tmptouchreg =  %d\n ", tmptouchreg);
 

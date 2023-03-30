@@ -9,9 +9,9 @@ int itemp = 22;
 int imode = 0;
 int ifan = 0;
 int iswing = 0;
-String armode[] = {"auto", "", "dry", "cool"};
-String arfan[] = {"min", "med", "max", "auto"};
-String arswing[] = {"", "highest", "high", "med", "low", "lowest", "auto"};
+const String armode[] = {"auto", "", "dry", "cool"};
+const String arfan[] = {"min", "med", "max", "auto"};
+const String arswing[] = {"", "highest", "high", "med", "low", "lowest", "auto"};
 int aswing[5] = {1, 2, 3, 4, 15};
 // int step;
 void startAC()
@@ -20,9 +20,9 @@ void startAC()
 }
 void drawACremote()
 {
-
+        Serial.println("draw AC remote");
         // tft->fillRect(0, 60, 240, 180, TFT_BLACK);
-        //row2
+        // row2
         drawOutlineButton(0, 70, 60, 40, TFT_BLUE, TFT_WHITE, "-");
         drawOutlineButton(240 - 62, 70, 60, 40, TFT_BLUE, TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
@@ -35,7 +35,7 @@ void drawACremote()
         hou += armode[imode];
         drawOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, hou);
 
-        //row3
+        // row3
         drawOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "-");
 
         drawOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "+");
