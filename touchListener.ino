@@ -756,7 +756,7 @@ void handleTouch()
                                 {
                                         PanasonicOff();
                                 }
-                                else if (page_ID == 271)
+                                else if (page_ID == 272)
                                 {
                                         Ac_LG_Power_Down();
                                 }
