@@ -369,10 +369,11 @@ void handleTouch()
                                 }
                                 else if (page_ID == 272) // IR LG
                                 {
-                                        imode--;
-                                        // imode++;
-                                        (imode == 1) && (imode = 2);
-                                        (imode < 0) && (imode = 3);
+                                        // imode--;
+                                        // // imode++;
+                                        // (imode == 1) && (imode = 2);
+                                        // (imode < 0) && (imode = 3);
+                                        (acLG_flow-- < 0) && (acLG_flow == 2);
                                         updateScreen(page_ID); // gui.ino
                                 }
                                 else if (page_ID == 231)
@@ -474,9 +475,10 @@ void handleTouch()
                                 }
                                 else if (page_ID == 272) // IR LG
                                 {
-                                        imode++;
-                                        (imode == 1) && (imode = 2);
-                                        (imode > 3) && (imode = 0);
+                                        // imode++;
+                                        // (imode == 1) && (imode = 2);
+                                        // (imode > 3) && (imode = 0);
+                                        (acLG_flow++ > 2) && (acLG_flow == 0);
 
                                         updateScreen(page_ID); // gui.ino
                                 }
@@ -820,7 +822,8 @@ void handleTouch()
                                 }
                                 else if (page_ID == 272)
                                 {
-                                        Ac_LG_Activate(acLG_temperature, acLG_flow, acLG_heat); // turnon AC
+                                        // Ac_LG_Activate(acLG_temperature, acLG_flow, acLG_heat); // turnon AC
+                                        Ac_LG_Adjust(acLG_temperature, acLG_flow, acLG_heat); // turnon AC
                                 }
 
                                 else if (page_ID > 230 && page_ID < 234)

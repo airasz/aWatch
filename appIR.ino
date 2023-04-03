@@ -115,7 +115,7 @@ unsigned int acLG_flow = 0;
 
 const uint8_t kAcLG_Flow_Tower[3] = {0, 4, 6};
 const uint8_t kAcLG_Flow_Wall[4] = {0, 2, 4, 5};
-
+const String LGfan[3] = {"low", "mid", "high"};
 uint32_t acLG_code_to_sent;
 
 void Ac_LG_Send_Code(uint32_t code)
@@ -126,7 +126,7 @@ void Ac_LG_Send_Code(uint32_t code)
         Serial.println(code, HEX);
 
 #if SEND_LG
-        irsend.sendPanasonic(code, 28);
+        irsend.sendLG(code, 28);
 #else  // SEND_LG
         Serial.println("Can't send because SEND_LG has been disabled.");
 #endif // SEND_LG
@@ -134,6 +134,48 @@ void Ac_LG_Send_Code(uint32_t code)
 
 void Ac_LG_Activate(unsigned int temperature, unsigned int air_flow,
                     unsigned int heat)
+{
+        acLG_heat = heat;
+        unsigned int ac_msbits1 = 8;
+        unsigned int ac_msbits2 = 8;
+        unsigned int ac_msbits3 = 0;
+        unsigned int ac_msbits4;
+        if (acLG_heat == 1)
+                ac_msbits4 = 4; // heating
+        else
+                ac_msbits4 = 0; // cooling
+        unsigned int ac_msbits5 = (temperature < 15) ? 0 : temperature - 15;
+        unsigned int ac_msbits6 = 0;
+
+        if (air_flow <= 2)
+        {
+                if (kAcLG_Type == 0)
+                        ac_msbits6 = kAcLG_Flow_Tower[air_flow];
+                else
+                        ac_msbits6 = kAcLG_Flow_Wall[air_flow];
+        }
+
+        // calculating using other values
+        unsigned int ac_msbits7 = (ac_msbits3 + ac_msbits4 + ac_msbits5 +
+                                   ac_msbits6) &
+                                  B00001111;
+        acLG_code_to_sent = ac_msbits1 << 4;
+        acLG_code_to_sent = (acLG_code_to_sent + ac_msbits2) << 4;
+        acLG_code_to_sent = (acLG_code_to_sent + ac_msbits3) << 4;
+        acLG_code_to_sent = (acLG_code_to_sent + ac_msbits4) << 4;
+        acLG_code_to_sent = (acLG_code_to_sent + ac_msbits5) << 4;
+        acLG_code_to_sent = (acLG_code_to_sent + ac_msbits6) << 4;
+        acLG_code_to_sent = (acLG_code_to_sent + ac_msbits7);
+
+        Ac_LG_Send_Code(acLG_code_to_sent);
+
+        acLG_power_on = 1;
+        acLG_temperature = temperature;
+        acLG_flow = air_flow;
+}
+
+void Ac_LG_Adjust(unsigned int temperature, unsigned int air_flow,
+                  unsigned int heat)
 {
         acLG_heat = heat;
         unsigned int ac_msbits1 = 8;
@@ -195,11 +237,8 @@ void Ac_LG_Change_Air_Swing(int air_swing)
 
 void Ac_LG_Power_Down()
 {
-
         acLG_code_to_sent = 0x88C0051;
-
         Ac_LG_Send_Code(acLG_code_to_sent);
-
         acLG_power_on = 0;
 }
 
@@ -209,9 +248,7 @@ void Ac_LG_Air_Clean(int air_clean)
                 acLG_code_to_sent = 0x88C000C;
         else
                 acLG_code_to_sent = 0x88C0084;
-
         Ac_LG_Send_Code(acLG_code_to_sent);
-
         acLG_air_clean_state = air_clean;
 }
 
@@ -226,12 +263,12 @@ void drawRemoteLG()
         drawOutlineButton(240 - 62, 70, 60, 40, TFT_BLUE, TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
-        tft->drawString("MODE", 120, 64, 2);
+        tft->drawString("FAN", 120, 64, 2);
         String hou = "";
-        hou += armode[old_tmpmwarn];
+        hou += LGfan[old_tmpmwarn];
         drawOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, hou);
         hou = "";
-        hou += armode[imode];
+        hou += LGfan[acLG_flow];
         drawOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, hou);
 
         // row3
@@ -253,6 +290,6 @@ void drawRemoteLG()
         drawButton(80, 190, 80, 40, TFT_BLUE, TFT_WHITE, "OFF");
         drawButton(160, 190, 80, 40, TFT_BLUE, TFT_WHITE, "SEND");
 
-        old_tmpmwarn = imode;
+        old_tmpmwarn = acLG_flow;
         old_tmpvib = acLG_temperature;
 }
