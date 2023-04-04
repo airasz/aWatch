@@ -328,6 +328,12 @@ void handleTouch()
                                         updateScreen(page_ID); // gui.ino
                                         prevpage_ID = page_ID;
                                 }
+                                else if (page_ID == 271 || page_ID == 272) // back
+                                {
+                                        page_ID = 0;
+                                        updateScreen(page_ID); // gui.ino
+                                        prevpage_ID = page_ID;
+                                }
 
                                 tmptouchreg = 0;
                                 my_idle();
@@ -353,12 +359,21 @@ void handleTouch()
                                         (tmpmwarn < 0) && (tmpmwarn = 15);
                                         updateScreen(page_ID); // gui.ino
                                 }
-                                else if (page_ID == 27) // IR
+                                else if (page_ID == 271) // IR pana
                                 {
                                         imode--;
                                         // imode++;
                                         (imode == 1) && (imode = 2);
                                         (imode < 0) && (imode = 3);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 272) // IR LG
+                                {
+                                        // imode--;
+                                        // // imode++;
+                                        // (imode == 1) && (imode = 2);
+                                        // (imode < 0) && (imode = 3);
+                                        (acLG_flow-- < 0) && (acLG_flow == 2);
                                         updateScreen(page_ID); // gui.ino
                                 }
                                 else if (page_ID == 231)
@@ -450,11 +465,21 @@ void handleTouch()
                                         updateScreen(page_ID); // gui.ino
                                 }
 
-                                else if (page_ID == 27) // IR
+                                else if (page_ID == 271) // IR pana
                                 {
                                         imode++;
                                         (imode == 1) && (imode = 2);
                                         (imode > 3) && (imode = 0);
+
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 272) // IR LG
+                                {
+                                        // imode++;
+                                        // (imode == 1) && (imode = 2);
+                                        // (imode > 3) && (imode = 0);
+                                        (acLG_flow++ > 2) && (acLG_flow == 0);
+
                                         updateScreen(page_ID); // gui.ino
                                 }
                                 else if (page_ID == 231)
@@ -507,8 +532,22 @@ void handleTouch()
                                 }
                                 else if (page_ID == 27)
                                 {
+                                        // itemp--;
+                                        // (itemp < 19) && (itemp = 24);
+                                        page_ID = 271;
+                                        tft->fillRect(0, 60, 240, 180, TFT_BLACK);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 271) // panasonic
+                                {
                                         itemp--;
                                         (itemp < 19) && (itemp = 24);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 272) // panasonic
+                                {
+                                        acLG_temperature--;
+                                        (acLG_temperature < 20) && (acLG_temperature = 26);
                                         updateScreen(page_ID); // gui.ino
                                 }
                                 else if (page_ID == 231)
@@ -524,7 +563,7 @@ void handleTouch()
                                         updateScreen(page_ID); // gui.ino
                                 }
                         }
-                        if (tmptouchreg == 8) //============================  7
+                        if (tmptouchreg == 8) //============================  8
                         {
                                 if (page_ID == 2) // setting
                                 {
@@ -551,8 +590,20 @@ void handleTouch()
                                 }
                                 else if (page_ID == 27)
                                 {
+                                        page_ID = 272;
+                                        tft->fillRect(0, 60, 240, 180, TFT_BLACK);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 271)
+                                {
                                         itemp++;
-                                        (itemp > 24) && (itemp = 0);
+                                        (itemp > 24) && (itemp = 20);
+                                        updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 272)
+                                {
+                                        acLG_temperature++;
+                                        (acLG_temperature > 26) && (acLG_temperature = 20);
                                         updateScreen(page_ID); // gui.ino
                                 }
                                 else if (page_ID == 2) // setting
@@ -617,9 +668,13 @@ void handleTouch()
                                         page_ID = 2;
                                         updateScreen(page_ID); // gui.ino
                                 }
-                                else if (page_ID == 27)
+                                else if (page_ID == 271)
                                 {
                                         PanasonicOn();
+                                }
+                                else if (page_ID == 272)
+                                {
+                                        Ac_LG_Activate(acLG_temperature, acLG_flow, acLG_heat); // turnon AC
                                 }
                                 else if (page_ID == 26)
                                 {
@@ -648,7 +703,7 @@ void handleTouch()
 
                                 else if (page_ID == 2) // setting
                                 {
-                                        page_ID = 27;
+                                        page_ID = 27;                              // select AC brand
                                         tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
                                         updateScreen(page_ID);                     // gui.ino
                                         // Serial.println("page 26");
@@ -699,9 +754,13 @@ void handleTouch()
                                         toast("step counter resetted");
                                         prevpage_ID = page_ID;
                                 }
-                                else if (page_ID == 27)
+                                else if (page_ID == 271)
                                 {
                                         PanasonicOff();
+                                }
+                                else if (page_ID == 272)
+                                {
+                                        Ac_LG_Power_Down();
                                 }
                                 else if (page_ID > 230 && page_ID < 234)
                                 {
@@ -757,10 +816,16 @@ void handleTouch()
                                         EEPROM.commit();
                                         updateScreen(page_ID); // appSetting.ino
                                 }
-                                else if (page_ID == 27)
+                                else if (page_ID == 271)
                                 {
                                         PanasonicOn(); // appIR.ino
                                 }
+                                else if (page_ID == 272)
+                                {
+                                        // Ac_LG_Activate(acLG_temperature, acLG_flow, acLG_heat); // turnon AC
+                                        Ac_LG_Adjust(acLG_temperature, acLG_flow, acLG_heat); // turnon AC
+                                }
+
                                 else if (page_ID > 230 && page_ID < 234)
                                 {
 
