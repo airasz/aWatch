@@ -16,7 +16,7 @@ int rgbToHex(uint8_t r, uint8_t g, uint8_t b)
 void analogClockVariant(int v)
 {
         int wipetracelong, px, dgree, old_rnddot;
-        long dmCover;
+        long dmCover; // daily distance covered
         int nday = tnow.day,
             nmonth = tnow.month,
             nyear = tnow.year, g = 250;
@@ -26,8 +26,6 @@ void analogClockVariant(int v)
         hh = tnow.hour;
         mm = tnow.minute;
         ss = tnow.second;
-        int pnt = 10;
-        int pointT[pnt];
         int plygon;
         v -= 6;
         switch (v)
@@ -41,7 +39,7 @@ void analogClockVariant(int v)
                 // tft->fillCircle( 160, 120, 110, TFT_BLACK);
                 // colorRandomMedium = COLOR_MEDIUM[random(10)];          // LOCK FACE           // LOCK FACE
                 // 12 LINES
-                //rainbow color for every multiple 5  minute mark
+                // rainbow color for every multiple 5  minute mark
                 for (int i = 0; i < 360; i += 30)
                         tft->drawLine(posX(80, i), posY(80, i), posX(72, i), posY(72, i), COLOR_MEDIUM[random(10)]); // DRAW 12 LINES
 
@@ -54,7 +52,7 @@ void analogClockVariant(int v)
                         if (i % 90 == 0)
                                 tft->fillCircle(posX(78, i), posY(79, i), 3, TFT_WHITE); // DOTS
                 }
-                //middle dot
+                // middle dot
                 tft->fillCircle(120, 120, 3, TFT_RED);
                 // Serial.printf("hh=%01d, mm=%02d, ss=%03d\n",hh,mm,ss);
                 sdeg = ss * 6;                     // 0-59 -> 0-354   Pre-compute
@@ -69,12 +67,12 @@ void analogClockVariant(int v)
                 break;
 
         case 1:
-                //circle progress
+                // circle progress
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
                 hh12 = hh >= 12 ? hh - 12 : hh;
-                //convert 24 to 12 hours format
-                //progress minute
+                // convert 24 to 12 hours format
+                // progress minute
                 if (mm >= 30)
                 {
                         for (int i = (mm * 6); i < 360; i++)
@@ -90,7 +88,7 @@ void analogClockVariant(int v)
                                 tft->drawLine(posX(78, i), posY(78, i), posX(72, i), posY(72, i) + 1, TFT_BLACK);
                 }
 
-                //progress hour
+                // progress hour
                 if (hh12 >= 6)
                 {
                         for (int i = ((hh12 * 30) + (mm / 2)) - 1; i < 360; i++)
@@ -110,7 +108,7 @@ void analogClockVariant(int v)
                                 tft->drawLine(posX(74, i), posY(74, i) + 1, posX(60, i), posY(60, i) + 1, TFT_BLUE);
                 }
 
-                displaySysInfo(0); //appInfo.ino
+                displaySysInfo(0); // appInfo.ino
 
                 // Serial.printf("ohx=%01d, ohy=%02d, \n", ohx, ohy);
                 // Serial.printf("omx=%01d, omy=%02d, \n", omx, omy);
@@ -126,15 +124,15 @@ void analogClockVariant(int v)
                 tft->drawCircle(120, 120, 70, TFT_BLUE);
                 tft->drawCircle(120, 120, 60, TFT_BLUE);
 
-                //dot hour
+                // dot hour
                 for (int t = 15; t > (-1); t--)
                 {
-                        g = 255 - (t * 17);
+                        g = 255 - (t * 17); // create gradient squences dark to bright
                         dgree = ((hh * 30) + (mm / 2)) - t;
                         tft->fillCircle(posX(65, dgree), posY(65, dgree), 2, rgbToHex(0, 0, g));
                 }
 
-                //dot minutes
+                // dot minutes
                 for (int t = 15; t > (-1); t--)
                 {
                         g = 255 - (t * 17); // create gradient squences dark to bright
@@ -143,28 +141,16 @@ void analogClockVariant(int v)
                         tft->fillCircle(posX(75, dgree), posY(75, dgree), 2, rgbToHex(g, 0, 0));
                 }
 
-                // 12 LINES
-                for (int i = 0; i < 360; i += 30)
-                {
-                        sx = getCos(i);
-                        sy = getSin(i);
-                        x0 = sx * 37 + 40;
-                        yy0 = sy * 37 + 40;
-                        x1 = sx * 29 + 40;
-                        yy1 = sy * 29 + 40;
-                        //   tft->drawLine(x0, yy0, x1, yy1,  COLOR_MEDIUM[random(10)]);          // DRAW 12 LINES
-                }
-
                 // tft->drawLine((getCos(0) * 78) + 120, (getSin(0) * 78) + 120, (getCos(0) * 68) + 120, (getSin(0) * 88) + 120, COLOR_MEDIUM[random(10)]); // DRAW 12 LINES
                 tft->drawLine(posX(78, 0), posY(78, 0), posX(68, 0), posY(68, 0), COLOR_MEDIUM[random(10)]); // DRAW 12 LINES
 
-                displaySysInfo(0); //appInfo.ino
+                displaySysInfo(0); // appInfo.ino
                 // Serial.printf("hh=%01d, mm=%02d, ss=%03d\n", hh, mm, ss);
 
                 break;
 
         case 3:
-                //marine radar
+                // marine radar
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
                 // int colorRandomMedium = COLOR_MEDIUM[random(10)];
@@ -176,13 +162,13 @@ void analogClockVariant(int v)
                 hh = tnow.hour;
                 mm = tnow.minute;
 
-                //dot hour pretend deetected object
+                // dot hour pretend deetected object
                 dgree = ((hh * 30) + (mm / 2)) - 1;
                 // tft->fillCircle((getCos(dgree) * random(50, 76)) + 120, (getSin(dgree) * random(50, 76)) + 120, 2, rgbToHex(200, 225, 180));
                 tft->fillCircle(posX(random(50, 76), dgree), posY(random(50, 76), dgree), 2, rgbToHex(200, 225, 180));
 
-                //dot minutes
-                // 12 LINES (minutes step)
+                // dot minutes
+                //  12 LINES (minutes step)
                 for (int i = 0; i < 360; i += 30)
                 {
                         sx = cos((i - 90) * 0.0174532925);
@@ -213,10 +199,10 @@ void analogClockVariant(int v)
                         dgree = mdeg - (t * wipetracelong);
                         tft->drawLine(posX(76, dgree), posY(80, dgree), 120, 120, rgbToHex(t == 0 ? 200 : 0, t == 0 ? 255 : g, 0)); // Draw shadow swiper
                 }
-                displaySysInfo(1); //appInfo.ino
+                displaySysInfo(1); // appInfo.ino
                 break;
         case 4:
-                //atc radar
+                // atc radar
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
                 tnow = ttgo->rtc->getDateTime();
@@ -224,9 +210,9 @@ void analogClockVariant(int v)
                 mm = tnow.minute;
                 // ss = tnow.second;
                 ss = 0;
-                //manipulated for testing
-                // hh=2;
-                // mm=52;
+                // manipulated for testing
+                //  hh=2;
+                //  mm=52;
                 tft->drawCircle(120, 120, 80, 0x3186);
 
                 sdeg = ss * 6;
@@ -235,9 +221,8 @@ void analogClockVariant(int v)
                 mdeg = mm180 * 6 + sdeg * 0.01666667; // 0-59 -> 0-360 - includes seconds
                 hh > 5 ? hh180 = hh - 6 : hh180 = 6 + hh;
                 hdeg = hh180 * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
-                int io, old_x0, old_yy0;
 
-                //point to draw island
+                // point to draw island
                 int pointX[5];
                 // = {
                 pointX[0] = random(30, 60);
@@ -252,9 +237,6 @@ void analogClockVariant(int v)
                 pointY[2] = random(pointY[1] + 10, 180);
                 pointY[3] = random(180, 220);
                 pointY[4] = random(180, 220);
-
-                // int pnt = 10;
-                // int pointT[pnt];
 
                 // DRAW  random  shape ISLAND
                 plygon = 21;
@@ -296,7 +278,7 @@ void analogClockVariant(int v)
                         }
                         else
                         {
-                                //closing the cicle, match to start point
+                                // closing the cicle, match to start point
                                 tft->drawLine(Ox, Oy, sx, sy, 0x3186);
                                 // Serial.println("^3");
                         }
@@ -308,7 +290,7 @@ void analogClockVariant(int v)
                 // for (int i = 0; i < 5; i++)
                 //         tft->drawLine(pointX[i], pointY[i], (i < 4) ? pointX[i + 1] : pointX[0], (i < 4) ? pointY[i + 1] : pointY[0], 0x3186);
 
-                //draw oponent hand H & M with random bending
+                // draw oponent hand H & M with random bending
                 tft->drawLine(posX(120, hdeg), posY(120, hdeg), 120, 120, 0x3186); // DRAW  HOUR
                 tft->drawLine(posX(120, mdeg), posY(120, mdeg), 120, 120, 0x3186); // DRAW  MIN
                 tft->drawLine(posX(30, mdeg), posY(30, mdeg), 120, 120, TFT_BLUE); // DRAW  MIN
@@ -332,12 +314,12 @@ void analogClockVariant(int v)
                 tft->drawLine(posX(70, mdeg) + xx, posY(70, mdeg) + yy, 120 + xxx, 120 + yyy, TFT_BLUE); // DRAW  MIN
                 // tft->drawLine(posX(120, mdeg) + xx, posY(80, mdeg) + yy, 120 + xxx, 120 + yyy, TFT_BLUE);
 
-                //compute hour
+                // compute hour
                 sdeg = ss * 6;                     // 0-59 -> 0-354   Pre-compute
                 mdeg = mm * 6 + sdeg * 0.01666667; // 0-59 -> 0-360 - includes seconds
                 hdeg = hh * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
 
-                //draw real hand H & M
+                // draw real hand H & M
                 tft->drawLine(posX(120, hdeg), posY(120, hdeg), 120, 120, 0x3186); // DRAW  HOUR
                 tft->drawLine(posX(120, mdeg), posY(120, mdeg), 120, 120, 0x3186); // DRAW  MIN
 
@@ -369,7 +351,7 @@ void analogClockVariant(int v)
                 tft->printf("%.0f %s\n", dmCover > 1100 ? kCover : dmCover, dmCover > 1100 ? "km" : "m");
 
                 tft->drawRect(x0 - 2, yy0 - 2, 5, 5, TFT_GREEN);
-                tft->drawLine(x0 + 3, yy0 + 5, x0 + 10, yy0 + 14, TFT_WHITE); //🡦
+                tft->drawLine(x0 + 3, yy0 + 5, x0 + 10, yy0 + 14, TFT_WHITE); // 🡦
 
                 // tft->printf("M%d\n", mm);
                 // tft->printf("X%1d = Y%2d\n", x0, yy0);
@@ -485,16 +467,16 @@ void analogClockVariant(int v)
 
                 break;
         case 5:
-                //CF=9
-                javaneseClock(hh, mm); //clock_face_text.ino
+                // CF=9
+                javaneseClock(hh, mm); // clock_face_text.ino
                 break;
         case 6:
-                //CF=10
-                mathFace(hh, mm); //clock_face_text.ino
+                // CF=10
+                mathFace(hh, mm); // clock_face_text.ino
                 break;
         case 7:
-                //CF=11
-                recordActivity(); //clock_face_text.ino
+                // CF=11
+                recordActivity(); // clock_face_text.ino
                 break;
         default:
                 break;
