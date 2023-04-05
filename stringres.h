@@ -1,11 +1,11 @@
 
-//day name in javanese
+// day name in javanese
 String const Dino[] = {"Senen", "Seloso", "Rebo", "Kemis", "Jemuah", "Setu", "minggu"};
 
-//clock name in javanese
+// clock name in javanese
 String const Jam[] = {"tengah\n  wengi", "siji", "loro", "telu", "papat", "limo", "enem", "pitu", "wolu", "songo", "sepuluh", "sewelas",
                       "rolas", "siji", "loro", "telu", "papat", "limo", "enem", "pitu", "wolu", "songo", "sepuluh", "sewelas", "tengah\n  wengi"};
-//menit jowo
+// menit jowo
 String const menit[6][10] = {
     {"pas", "siji", "loro", "telu", "papat",
      "limo", "enem", "pitu", "wolu", "songo"},
@@ -33,69 +33,6 @@ String minuteTOword(int minute)
         word.toUpperCase();
         return word;
 }
-String upTime()
-{
-        const uint8_t MaxDate[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-        int u_day, u_hour, u_minute;
-        String uptimes = "";
-        if (tnow.month == startMonth)
-        {
-                u_day = tnow.day - stDay;
-                if (stHour > tnow.hour)
-                {
-                        u_day = -1;
-                        u_hour = (24 - (stHour - tnow.hour));
-                }
-                else if (stHour < tnow.hour)
-                {
-                        u_hour = tnow.hour - stHour;
-                }
-                else if (stHour == tnow.hour)
-                {
-                        u_hour = tnow.hour - stHour;
-                        if (stMinute > tnow.minute)
-                        {
-                                u_hour = -1;
-                                u_minute = (60 - (stMinute - tnow.minute));
-                        }
-                        if (stMinute <= tnow.minute)
-                        {
-                                u_minute = tnow.minute - stMinute;
-                        }
-                }
-        }
-        else
-        {
-                int max_Date = MaxDate[startMonth + 1];
-                u_day = (max_Date - (stDay - tnow.day));
-                if (stHour > tnow.hour)
-                {
-                        u_day = -1;
-                        u_hour = (24 - (stHour - tnow.hour));
-                }
-                else if (stHour < tnow.hour)
-                {
-                        u_hour = tnow.hour - stHour;
-                }
-                else if (stHour == tnow.hour)
-                {
-                        u_hour = tnow.hour - stHour;
-                        if (stMinute > tnow.minute)
-                        {
-                                u_hour = -1;
-                                u_minute = (60 - (stMinute - tnow.minute));
-                        }
-                        if (stMinute <= tnow.minute)
-                        {
-                                u_minute = tnow.minute - stMinute;
-                        }
-                }
-        }
-
-        return uptimes;
-}
-
 // String amenit[6][10] = {
 //     {"pas", "sji", "loro", "telu", "papat",
 //      "limo", "enem", "pitu", "wolu", "songo"},

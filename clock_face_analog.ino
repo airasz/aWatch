@@ -208,7 +208,6 @@ void analogClockVariant(int v)
                 tnow = ttgo->rtc->getDateTime();
                 hh = tnow.hour;
                 mm = tnow.minute;
-                // ss = tnow.second;
                 ss = 0;
                 // manipulated for testing
                 //  hh=2;
@@ -221,22 +220,6 @@ void analogClockVariant(int v)
                 mdeg = mm180 * 6 + sdeg * 0.01666667; // 0-59 -> 0-360 - includes seconds
                 hh > 5 ? hh180 = hh - 6 : hh180 = 6 + hh;
                 hdeg = hh180 * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
-
-                // point to draw island
-                int pointX[5];
-                // = {
-                pointX[0] = random(30, 60);
-                pointX[1] = random(130, 160);
-                pointX[2] = random(210, 230);
-                pointX[3] = random(130, 160);
-                pointX[4] = random(30, 60);
-                // };
-                int pointY[5];
-                pointY[0] = random(30, 100);
-                pointY[1] = random(30, 100);
-                pointY[2] = random(pointY[1] + 10, 180);
-                pointY[3] = random(180, 220);
-                pointY[4] = random(180, 220);
 
                 // DRAW  random  shape ISLAND
                 plygon = 21;
@@ -286,9 +269,6 @@ void analogClockVariant(int v)
                         Oy = y2;
                 }
                 // };
-                // DRAW  random petagon shape ISLAND
-                // for (int i = 0; i < 5; i++)
-                //         tft->drawLine(pointX[i], pointY[i], (i < 4) ? pointX[i + 1] : pointX[0], (i < 4) ? pointY[i + 1] : pointY[0], 0x3186);
 
                 // draw oponent hand H & M with random bending
                 tft->drawLine(posX(120, hdeg), posY(120, hdeg), 120, 120, 0x3186); // DRAW  HOUR
@@ -444,7 +424,6 @@ void analogClockVariant(int v)
                         tft->printf("%d-%d", tnow.day, tnow.month);
                         // tft->printf("X%1d = Y%2d\n", x0, yy0);
                         tft->drawLine(x0 + 3, yy0 + 5, x0 + 10, yy0 + 14, TFT_WHITE);
-                        // tft->drawCircle(x0, yy0, 9, TFT_RED);
                         tft->drawRect(x0 - 2, yy0 - 2, 5, 5, TFT_GREEN); // draw minute rect
                 }
                 // tft->drawString("M" + mm, x0 + 15, yy0 - 15 + 20);
@@ -452,10 +431,6 @@ void analogClockVariant(int v)
                 tft->setTextSize(0);
                 tft->setTextFont(2);
                 tft->setTextColor(TFT_GREEN);
-                // vbus_v = power->getVbusVoltage() / 1000;
-                // vbus_c = power->getVbusCurrent();
-                // batt_v = power->getBattVoltage() / 1000;
-                // per = power->getBattPercentage();
                 getPower();
                 tft->setCursor(2, 1);
                 tft->printf("%s : %.f mA       ", power->isChargeing() ? "charging" : "Discharge", power->isChargeing() ? chrg_c : dchrg_c);

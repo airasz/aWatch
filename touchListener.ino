@@ -806,7 +806,7 @@ void handleTouch()
                                         }
                                         else
                                         {
-                                                setprayalarm(false);
+                                                setprayalarm(false); // datajadwal.ino
                                                 config.alarm_pray = 1;
                                                 alarmset = 0;
                                                 // setprayalarm(false);
