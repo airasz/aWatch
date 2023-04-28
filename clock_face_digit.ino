@@ -11,7 +11,7 @@ void face(int face)
         if (face == 0)
         {
 
-                //info
+                // info
         }
         else if (face == 1)
         {
@@ -37,7 +37,7 @@ void clock_face_digit(int clock_style)
         tft->setTextSize(1);
 
         count = hh * 100 + mm;
-        //startTime = loopTime;
+        // startTime = loopTime;
         auto x_start = (clock_style < 4) ? 60 : 50;
         auto x_delta = (clock_style < 4) ? 70 : 60;
         auto r = (clock_style < 4) ? 5 : 14;
@@ -68,13 +68,18 @@ void clock_face_digit(int clock_style)
                         curr_digit = count % 10;
                 }
                 int rnd = random(10);
+                int xpath[20];
+                int ypath[20];
+                for (int i = 0; i < 20; i++)
+                        xpath[i] = 0, ypath[i] = 0;
+
                 for (int row = 0; row < 7; row++)
                 {
                         for (int col = 0; col < 5; col++)
                         {
                                 uint32_t color = DIGITS[curr_digit][row][col] ? COLORS_LIGHT[curr_digit] : COLORS_DARK[curr_digit];
                                 uint32_t colorrnd = DIGITS[curr_digit][row][col] ? COLORS_LIGHT[rnd] : COLORS_DARK[rnd];
-                                if (DIGITS[curr_digit][row][col] == 1)
+                                if (DIGITS[curr_digit][row][col] > 0)
                                 {
                                         if (clock_style == 2)
                                         {
@@ -86,7 +91,13 @@ void clock_face_digit(int clock_style)
                                         }
                                         else if (clock_style == 4)
                                         {
-                                                tft->fillCircle(x_start + col * 13 - 1 + random(4), y_start + row * 13 - 1 + random(4), r + 2, colorrnd);
+
+                                                int xc = x_start + col * 13 - 1 + (random(5));
+                                                int yc = y_start + row * 13 - 1 + (random(5));
+                                                xpath[DIGITS[curr_digit][row][col] - 1] = xc;
+                                                ypath[DIGITS[curr_digit][row][col] - 1] = yc;
+
+                                                // tft->fillCircle(x_start + col * 13 - 1 + random(4), y_start + row * 13 - 1 + random(4), r + 2, colorrnd);
                                                 // tft->fillCircle(x_start + col * 7 -1+random(4), y_start + row * 7-1+random(4), 3, BLACK);
                                                 // tft->fillCircle(x_start + col * 7 -1+random(4), y_start + row * 7-1+random(4), r, colorrnd);
                                         }
@@ -116,7 +127,18 @@ void clock_face_digit(int clock_style)
                                 }
                                 // delay(2);
                                 // tft->fillRect (x_start + col * 7, y_start + row * 7, r, colorrnd);
-                                //RGB565 = (((RGB888&0xf80000)>>8) + ((RGB888&0xfc00)>>5) + ((RGB888&0xf8)>>3));
+                                // RGB565 = (((RGB888&0xf80000)>>8) + ((RGB888&0xfc00)>>5) + ((RGB888&0xf8)>>3));
+                        }
+                }
+                if (clock_style == 4)
+                {
+                        int colll = COLORS_LIGHT[rnd];
+                        for (int i = 0; i < 19; i++)
+                        {
+                                // Serial.printf(" xpath[%d] : %d ", i, xpath[i]);
+                                // Serial.print("\n");
+                                if (xpath[i + 1] != 0)
+                                        tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
                         }
                 }
                 (pos == 1) ? x_start = 60 : x_start += 65;
@@ -132,5 +154,5 @@ void clock_face_digit(int clock_style)
                         y_start += 100;
                 // space betwen single digit
         }
-        displaySysInfo(2); //appInfo.ino
+        displaySysInfo(2); // appInfo.ino
 }
