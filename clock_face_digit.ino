@@ -130,6 +130,7 @@ void clock_face_digit(int clock_style)
                                 // RGB565 = (((RGB888&0xf80000)>>8) + ((RGB888&0xfc00)>>5) + ((RGB888&0xf8)>>3));
                         }
                 }
+                // Serial.printf("curr digit  : %d \n", curr_digit);
                 if (clock_style == 4)
                 {
                         int colll = COLORS_LIGHT[rnd];
@@ -138,7 +139,38 @@ void clock_face_digit(int clock_style)
                                 // Serial.printf(" xpath[%d] : %d ", i, xpath[i]);
                                 // Serial.print("\n");
                                 if (xpath[i + 1] != 0)
-                                        tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
+                                {
+                                        if (curr_digit == 0)
+                                        {
+                                                tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
+                                                if (i == 0)
+                                                        tft->drawLine(xpath[i], ypath[i], xpath[15], ypath[15], colll);
+                                        }
+                                        else if (curr_digit == 1)
+                                        {
+                                                if (i != 7)
+                                                        tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
+                                        }
+                                        else if (curr_digit == 3)
+                                        {
+                                                if (i != 7)
+                                                {
+                                                        tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
+                                                        if (i == 6)
+                                                                tft->drawLine(xpath[i], ypath[i], xpath[8], ypath[8], colll);
+                                                }
+                                        }
+                                        else if (curr_digit == 8)
+                                        {
+                                                tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
+                                                if (i == 0)
+                                                        tft->drawLine(xpath[i], ypath[i], xpath[16], ypath[16], colll);
+                                        }
+                                        else
+                                        {
+                                                tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
+                                        }
+                                }
                         }
                 }
                 (pos == 1) ? x_start = 60 : x_start += 65;

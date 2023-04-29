@@ -213,6 +213,7 @@ void analogClockVariant(int v)
                 //  hh=2;
                 //  mm=52;
                 tft->drawCircle(120, 120, 80, 0x3186);
+                // tft->drawSmoothCircle(120, 120, 80, TFT_BLACK, 0x3186);
 
                 sdeg = ss * 6;
                 mm > 29 ? mm180 = mm - 30 : mm180 = 30 + mm;
