@@ -148,7 +148,9 @@ void clock_face_digit(int clock_style)
                                         }
                                         else if (curr_digit == 1)
                                         {
-                                                if (i != 7)
+                                                if (i == 6)
+                                                        tft->drawLine(xpath[i], ypath[i], xpath[9], ypath[9], colll);
+                                                else
                                                         tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
                                         }
                                         else if (curr_digit == 3)
@@ -164,6 +166,8 @@ void clock_face_digit(int clock_style)
                                         {
                                                 tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
                                                 if (i == 0)
+                                                        tft->drawLine(xpath[i], ypath[i], xpath[9], ypath[9], colll);
+                                                if (i == 1)
                                                         tft->drawLine(xpath[i], ypath[i], xpath[16], ypath[16], colll);
                                         }
                                         else
