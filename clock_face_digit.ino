@@ -83,7 +83,8 @@ void clock_face_digit(int clock_style)
                                 {
                                         if (clock_style == 2)
                                         {
-                                                tft->fillCircle(x_start + col * 12, y_start + row * 12, r, colorrnd);
+                                                // tft->fillCircle(x_start + col * 12, y_start + row * 12, r, colorrnd);
+                                                tft->fillSmoothCircle(x_start + col * 12, y_start + row * 12, r, colorrnd, TFT_BLACK);
                                         }
                                         else if (clock_style == 3)
                                         {
@@ -114,7 +115,10 @@ void clock_face_digit(int clock_style)
                                         }
                                         else if (clock_style == 2)
                                         {
-                                                tft->drawCircle(x_start + col * 12, y_start + row * 12, r, colorrnd);
+                                                // tft->drawCircle(x_start + col * 12, y_start + row * 12, r, colorrnd);
+
+                                                tft->fillSmoothCircle(x_start + col * 12, y_start + row * 12, r, colorrnd, TFT_BLACK);
+                                                tft->fillSmoothCircle(x_start + col * 12, y_start + row * 12, r - 1, TFT_BLACK, colorrnd);
                                         }
                                         else if (clock_style == 5)
                                         {
@@ -133,7 +137,10 @@ void clock_face_digit(int clock_style)
                 // Serial.printf("curr digit  : %d \n", curr_digit);
                 if (clock_style == 4)
                 {
+
                         int colll = COLORS_LIGHT[rnd];
+                        // tft->drawLine(0, 0, 1, 1, TFT_BLACK);
+                        tft->drawLine(246, 246, 248, 248, colll);
                         for (int i = 0; i < 19; i++)
                         {
                                 // Serial.printf(" xpath[%d] : %d ", i, xpath[i]);
@@ -142,37 +149,57 @@ void clock_face_digit(int clock_style)
                                 {
                                         if (curr_digit == 0)
                                         {
-                                                tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
+                                                tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
+                                                // tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll, colll);
+                                                // tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
                                                 if (i == 0)
-                                                        tft->drawLine(xpath[i], ypath[i], xpath[15], ypath[15], colll);
+                                                        tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[15], ypath[15], 4, colll);
+                                                // tft->drawWideLine(xpath[i], ypath[i], xpath[15], ypath[15], 4, colll, colll);
+                                                // tft->drawLine(xpath[i], ypath[i], xpath[15], ypath[15], colll);
                                         }
                                         else if (curr_digit == 1)
                                         {
                                                 if (i == 6)
-                                                        tft->drawLine(xpath[i], ypath[i], xpath[9], ypath[9], colll);
+                                                        tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[9], ypath[9], 4, colll);
+                                                // tft->drawWideLine(xpath[i], ypath[i], xpath[9], ypath[9], 4, colll, colll);
+                                                // tft->drawLine(xpath[i], ypath[i], xpath[9], ypath[9], colll);
                                                 else
-                                                        tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
+                                                        tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
+                                                // tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll, colll);
+                                                // tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
                                         }
                                         else if (curr_digit == 3)
                                         {
                                                 if (i != 7)
                                                 {
-                                                        tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
+                                                        // tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
+                                                        // tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll, colll);
+                                                        tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
                                                         if (i == 6)
-                                                                tft->drawLine(xpath[i], ypath[i], xpath[8], ypath[8], colll);
+                                                                tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[8], ypath[8], 4, colll);
+                                                        // tft->drawWideLine(xpath[i], ypath[i], xpath[8], ypath[8], 4, colll, colll);
+                                                        // tft->drawLine(xpath[i], ypath[i], xpath[8], ypath[8], colll);
                                                 }
                                         }
                                         else if (curr_digit == 8)
                                         {
-                                                tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
+                                                // tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
+                                                // tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll, colll);
+                                                tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
                                                 if (i == 0)
-                                                        tft->drawLine(xpath[i], ypath[i], xpath[9], ypath[9], colll);
+                                                        tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[9], ypath[9], 4, colll);
+                                                // tft->drawWideLine(xpath[i], ypath[i], xpath[9], ypath[9], 4, colll, colll);
+                                                // tft->drawLine(xpath[i], ypath[i], xpath[9], ypath[9], colll);
                                                 if (i == 1)
-                                                        tft->drawLine(xpath[i], ypath[i], xpath[16], ypath[16], colll);
+                                                        tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[16], ypath[16], 4, colll);
+                                                // tft->drawWideLine(xpath[i], ypath[i], xpath[16], ypath[16], 4, colll, colll);
+                                                // tft->drawLine(xpath[i], ypath[i], xpath[16], ypath[16], colll);
                                         }
                                         else
                                         {
-                                                tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
+                                                // tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
+                                                // tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll, colll);
+                                                tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
                                         }
                                 }
                         }
