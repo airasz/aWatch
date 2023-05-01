@@ -47,8 +47,10 @@ void startSetting(int setID)
                 tmpyear = yyear;
 
                 tft->fillRect(0, 0, 240, 60, TFT_RED);
-                drawButton(2, 8, 78, 48, TFT_BLUE, TFT_WHITE, "BACK");
-                drawButton(160, 8, 78, 48, TFT_BLUE, TFT_WHITE, "EXIT");
+                // drawButton(2, 8, 78, 48, TFT_BLUE, TFT_WHITE, "BACK");
+                // drawButton(160, 8, 78, 48, TFT_BLUE, TFT_WHITE, "EXIT");
+                drawSmoothButton(2, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "BACK");
+                drawSmoothButton(160, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "EXIT");
                 tft->drawString("SETTING", 120, 24, 2);
                 drawHomeSettingBody();
                 break;
@@ -105,8 +107,10 @@ void startSetting(int setID)
 void drwaBaseHeader(int setID)
 {
         tft->fillRect(0, 0, 240, 60, TFT_RED);
-        drawButton(2, 8, 78, 48, TFT_BLUE, TFT_WHITE, "BACK");
-        drawButton(160, 8, 78, 48, TFT_BLUE, TFT_WHITE, "EXIT");
+        // drawButton(2, 8, 78, 48, TFT_BLUE, TFT_WHITE, "BACK");
+        drawSmoothButton(2, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "BACK");
+        // drawButton(160, 8, 78, 48, TFT_BLUE, TFT_WHITE, "EXIT");
+        drawSmoothButton(160, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "EXIT");
 }
 
 void drawHomeSettingBody()

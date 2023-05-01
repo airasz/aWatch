@@ -128,6 +128,15 @@ void drawButton(int x, int y, int w, int h, int bc, int tc, String txt)
         tft->fillRoundRect(x, y, w, h, 5, bc);
         tft->drawString(txt, x + (w / 2), y + (h / 2), 2);
 }
+void drawSmoothButton(int x, int y, int w, int h, int fc, int bc, int tc, String txt)
+{
+
+        tft->setTextDatum(MC_DATUM);
+        tft->setTextColor(tc);
+        // tft->fillRoundRect(x, y, w, h, 5, bc);
+        tft->fillSmoothRoundRect(x, y, w, h, 5, fc, bc);
+        tft->drawString(txt, x + (w / 2), y + (h / 2), 2);
+}
 void drawOutlineButton(int x, int y, int w, int h, int bc, int tc, String txt)
 {
 
@@ -154,5 +163,28 @@ void drawSwitch(int x, int y, int strokeColor, int activeColor, bool enabled)
                 tft->drawRoundRect(x, y, w, h, r, strokeColor);
                 // tft->fillCircle(170 + 3 + 12, 70 + 3 + 12, 12, TFT_BLUE);
                 tft->fillCircle(x + 3 + 12, y + 3 + 12, 12, TFT_BLUE);
+        }
+}
+void drawSmoothSwitch(int x, int y, int strokeColor, int activeColor, bool enabled)
+{
+        // size is fixed
+        int w = 60;
+        int h = 30;
+        int r = h / 2;
+        if (enabled)
+        {
+                tft->fillRoundRect(x, y, w, h, r, activeColor);
+                tft->drawRoundRect(x, y, w, h, r, strokeColor);
+                tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
+                // tft->fillCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE);
+                tft->fillSmoothCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE);
+        }
+        else
+        {
+                tft->fillRoundRect(x, y, w, h, r, TFT_BLACK);
+                tft->drawRoundRect(x, y, w, h, r, strokeColor);
+                // tft->fillCircle(170 + 3 + 12, 70 + 3 + 12, 12, TFT_BLUE);
+                // tft->fillCircle(x + 3 + 12, y + 3 + 12, 12, TFT_BLUE);
+                tft->fillSmoothCircle(x + 3 + 12, y + 3 + 12, 12, TFT_BLUE);
         }
 }

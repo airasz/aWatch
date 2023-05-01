@@ -78,16 +78,17 @@ void analogClockVariant(int v)
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
                 hh12 = hh >= 12 ? hh - 12 : hh;
-                sdeg = ss * 6;                     // 0-59 -> 0-354   Pre-compute
-                mdeg = mm * 6 + sdeg * 0.01666667; // 0-59 -> 0-360 - includes seconds
-                hdeg = hh * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
-
-                // convert 24 to 12 hours format
-                // progress minute
+                sdeg = ss * 6;                       // 0-59 -> 0-354   Pre-compute
+                mdeg = mm * 6 + sdeg * 0.01666667;   // 0-59 -> 0-360 - includes seconds
+                hdeg = hh12 * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
+                // int startMAngle, endMAngle, startHAngle, endHAngle;
+                // clock degree is oposite position to arc degre
+                //  convert 24 to 12 hours format
+                //  progress minute
                 if (mm >= 30)
                 {
                         // drawSmoothArc(x, y, out_radius, in_radius, start_angle, end_angle, fcolor, bcolor, rooudend);//flse
-                        tft->drawSmoothArc(120, 120, 80, 72, mdeg, 360, TFT_RED, TFT_GREEN, false);
+                        tft->drawSmoothArc(120, 120, 84, 76, mdeg - 180, 180, TFT_RED, TFT_BLACK, false);
                         // for (int i = (mm * 6); i < 360; i++)
                         //         tft->drawLine(posX(80, i), posY(80, i), posX(72, i), posY(72, i) + 1, TFT_RED);
                         // for (int i = 0 + 2; i < (mm * 6) - 3; i++)
@@ -95,7 +96,7 @@ void analogClockVariant(int v)
                 }
                 else
                 {
-                        tft->drawSmoothArc(120, 120, 80, 72, 0, mdeg, TFT_RED, TFT_GREEN, false);
+                        tft->drawSmoothArc(120, 120, 84, 76, 180, 180 + mdeg, TFT_RED, TFT_BLACK, false);
 
                         // for (int i = 0 + 2; i < (mm * 6) - 3; i++)
                         //         tft->fillCircle(posX(76, i), posY(76, i), 2, TFT_RED);
@@ -106,21 +107,25 @@ void analogClockVariant(int v)
                 // progress hour
                 if (hh12 >= 6)
                 {
-                        for (int i = ((hh12 * 30) + (mm / 2)) - 1; i < 360; i++)
-                                tft->drawLine(posX(74, i), posY(74, i) + 1, posX(66, i), posY(66, i) + 1, TFT_BLUE);
+                        tft->drawSmoothArc(120, 120, 66, 74, hdeg - 180, 180, TFT_BLUE, TFT_BLACK, false);
+
+                        // for (int i = ((hh12 * 30) + (mm / 2)) - 1; i < 360; i++)
+                        //         tft->drawLine(posX(74, i), posY(74, i) + 1, posX(66, i), posY(66, i) + 1, TFT_BLUE);
                 }
                 else
                 {
-                        for (int i = 0; i < ((hh12 * 30) + (mm / 2)) - 1; i++)
-                                tft->drawLine(posX(74, i), posY(74, i) + 1, posX(66, i), posY(66, i) + 1, TFT_BLUE);
+                        tft->drawSmoothArc(120, 120, 66, 74, 180, 180 + hdeg, TFT_BLUE, TFT_BLACK, false);
+
+                        // for (int i = 0; i < ((hh12 * 30) + (mm / 2)) - 1; i++)
+                        //         tft->drawLine(posX(74, i), posY(74, i) + 1, posX(66, i), posY(66, i) + 1, TFT_BLUE);
                 }
 
                 // 12 LINES
                 for (int i = 0; i < 360; i += 30)
                 {
-                        tft->drawLine(posX(74, i), posY(74, i) + 1, posX(66, i), posY(66, i) + 1, TFT_BLUE);
+                        tft->drawLine(posX(74, i), posY(74, i) + 1, posX(66, i), posY(66, i) + 1, TFT_WHITE);
                         if (i % 90 == 0)
-                                tft->drawLine(posX(74, i), posY(74, i) + 1, posX(60, i), posY(60, i) + 1, TFT_BLUE);
+                                tft->drawLine(posX(74, i), posY(74, i) + 1, posX(60, i), posY(60, i) + 1, TFT_WHITE);
                 }
 
                 displaySysInfo(0); // appInfo.ino
