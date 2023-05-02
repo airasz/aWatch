@@ -228,9 +228,12 @@ void updateWgetSeekBarTO(uint8_t X, uint8_t Y, uint8_t value)
 
                 int SBvalue = (X + 2) + (((width - X) / 30) * value);
                 int SBOldvalue = (X + 2) + (((width - X) / 30) * oldValue);
-                tft->fillCircle(SBOldvalue, Y + 3, 2, TFT_BLACK);
-                tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-                tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
+                // tft->fillCircle(SBOldvalue, Y + 3, 2, TFT_BLACK);
+                tft->fillSmoothCircle(SBOldvalue, Y + 5, 2, TFT_BLACK, TFT_BLACK);
+                // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
+                tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, TFT_BLUE, TFT_BLACK);
+                // tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
+                tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
                 oldValue = value;
                 drawButton(0, 190, 80, 40, TFT_BLUE, TFT_WHITE, "SAVE");
         }
@@ -253,8 +256,10 @@ void drawWgetSeekBarTO(uint8_t X, uint8_t Y, uint8_t value)
         int SBvalue = (X + 2) + (((width - X) / 30) * value);
         int SBOldvalue = (X + 2) + (((width - X) / 30) * oldValue);
         // tft->fillCircle(SBOldvalue, Y + 3, 2, TFT_BLACK);
-        tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-        tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
+        // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
+        tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, TFT_BLUE, TFT_BLACK);
+        // tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
+        tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
         oldValue = value;
 }
 
@@ -305,9 +310,13 @@ void updateWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
 
                 int SBvalue = (X + 2) + (((width - X) / 15) * value);
                 int SBOldvalue = (X + 2) + (((width - X) / 15) * oldValue2);
-                tft->fillCircle(SBOldvalue, Y + 3, 2, TFT_BLACK);
-                tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-                tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
+                tft->fillCircle(SBOldvalue, Y + 5, 2, TFT_BLACK);
+                // tft->fillSmoothCircle(SBOldvalue, Y + 5, 2, TFT_BLACK, TFT_BLACK);
+                // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
+                tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, TFT_BLUE, TFT_BLACK);
+
+                tft->fillCircle(SBvalue, Y + 5, 2, TFT_WHITE);
+                // tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
                 oldValue2 = value;
                 drawButton(0, 190, 80, 40, TFT_BLUE, TFT_WHITE, "SAVE");
         }
@@ -316,7 +325,7 @@ void drawWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
 {
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_GREEN);
-        tft->drawString("BRIGHTNESS", 120, 64, 2);
+        tft->drawString("BRIGHTNESS", 120, 66, 2);
         // String svalue = "";
         char svalue[3];
         sprintf(svalue, "%02d", value); // add 0 if one digit
@@ -329,7 +338,9 @@ void drawWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
 
         int SBvalue = (X + 2) + (((width - X) / 15) * value);
         int SBOldvalue = (X + 2) + (((width - X) / 15) * oldValue2);
-        tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-        tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
+        // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
+        tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, TFT_BLUE, TFT_BLACK);
+        tft->fillCircle(SBvalue, Y + 5, 2, TFT_WHITE);
+        // tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
         oldValue2 = value;
 }

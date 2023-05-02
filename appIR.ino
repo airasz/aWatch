@@ -22,44 +22,44 @@ void startAC()
 void drawSelectBrand()
 {
 
-        drawOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "Pana");
-        drawOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "LG");
+        drawSmoothOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "Pana");
+        drawSmoothOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "LG");
 }
 void drawACremote()
 {
         Serial.println("draw AC remote");
         // tft->fillRect(0, 60, 240, 180, TFT_BLACK);
         // row2
-        drawOutlineButton(0, 70, 60, 40, TFT_BLUE, TFT_WHITE, "-");
-        drawOutlineButton(240 - 62, 70, 60, 40, TFT_BLUE, TFT_WHITE, "+");
+        drawSmoothOutlineButton(0, 70, 60, 40, TFT_BLUE, TFT_WHITE, "-");
+        drawSmoothOutlineButton(240 - 62, 70, 60, 40, TFT_BLUE, TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
         tft->drawString("MODE", 120, 64, 2);
         String hou = "";
         hou += armode[old_tmpmwarn];
-        drawOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, hou);
+        drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, hou);
         hou = "";
         hou += armode[imode];
-        drawOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, hou);
+        drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, hou);
 
         // row3
-        drawOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "-");
+        drawSmoothOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "-");
 
-        drawOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "+");
+        drawSmoothOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
         tft->drawString("TEMP", 120, 124, 2);
 
         String mnit = "";
         mnit += old_tmpvib;
-        drawOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, mnit);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, mnit);
         mnit = "";
         mnit += itemp;
-        drawOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, mnit);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, mnit);
 
-        drawButton(0, 190, 80, 40, TFT_BLUE, TFT_WHITE, "ON");
-        drawButton(80, 190, 80, 40, TFT_BLUE, TFT_WHITE, "OFF");
-        drawButton(160, 190, 80, 40, TFT_BLUE, TFT_WHITE, "SEND");
+        drawButton(1, 190, 78, 40, TFT_BLUE, TFT_WHITE, "ON");
+        drawButton(81, 190, 78, 40, TFT_BLUE, TFT_WHITE, "OFF");
+        drawButton(161, 190, 78, 40, TFT_BLUE, TFT_WHITE, "SEND");
 
         old_tmpmwarn = imode;
         old_tmpvib = itemp;
@@ -259,32 +259,32 @@ void drawRemoteLG()
         Serial.println("draw LG AC remote");
         // tft->fillRect(0, 60, 240, 180, TFT_BLACK);
         // row2
-        drawOutlineButton(0, 70, 60, 40, TFT_BLUE, TFT_WHITE, "-");
-        drawOutlineButton(240 - 62, 70, 60, 40, TFT_BLUE, TFT_WHITE, "+");
+        drawSmoothOutlineButton(0, 70, 60, 40, TFT_BLUE, TFT_WHITE, "-");
+        drawSmoothOutlineButton(240 - 62, 70, 60, 40, TFT_BLUE, TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
         tft->drawString("FAN", 120, 64, 2);
         String hou = "";
         hou += LGfan[old_tmpmwarn];
-        drawOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, hou);
+        drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, hou);
         hou = "";
         hou += LGfan[acLG_flow];
-        drawOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, hou);
+        drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, hou);
 
         // row3
-        drawOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "-");
+        drawSmoothOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "-");
 
-        drawOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "+");
+        drawSmoothOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
         tft->drawString("TEMP", 120, 124, 2);
 
         String mnit = "";
         mnit += old_tmpvib;
-        drawOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, mnit);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, mnit);
         mnit = "";
         mnit += acLG_temperature;
-        drawOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, mnit);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, mnit);
 
         drawButton(0, 190, 80, 40, TFT_BLUE, TFT_WHITE, "ON");
         drawButton(80, 190, 80, 40, TFT_BLUE, TFT_WHITE, "OFF");

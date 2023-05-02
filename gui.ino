@@ -145,6 +145,15 @@ void drawOutlineButton(int x, int y, int w, int h, int bc, int tc, String txt)
         tft->drawRoundRect(x, y, w, h, 5, bc);
         tft->drawString(txt, x + (w / 2), y + (h / 2), 2);
 }
+void drawSmoothOutlineButton(int x, int y, int w, int h, int bc, int tc, String txt)
+{
+
+        tft->setTextDatum(MC_DATUM);
+        tft->setTextColor(tc);
+        // tft->drawRoundRect(x, y, w, h, 5, bc);
+        tft->drawSmoothRoundRect(x, y, 5, 5 - 1, w, h, bc, TFT_BLACK);
+        tft->drawString(txt, x + (w / 2), y + (h / 2), 2);
+}
 void drawSwitch(int x, int y, int strokeColor, int activeColor, bool enabled)
 {
         // size is fixed
@@ -173,18 +182,71 @@ void drawSmoothSwitch(int x, int y, int strokeColor, int activeColor, bool enabl
         int r = h / 2;
         if (enabled)
         {
-                tft->fillRoundRect(x, y, w, h, r, activeColor);
-                tft->drawRoundRect(x, y, w, h, r, strokeColor);
+                // tft->fillRoundRect(x, y, w, h, r, activeColor);
+                // tft->drawRoundRect(x, y, w, h, r, strokeColor);
+                // tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
+
+                // tft->fillSmoothRoundRect(x, y, w, h, r, strokeColor, TFT_BLACK);
+                // tft->fillSmoothRoundRect(x + 1, y + 1, w - 2, h - 2, r, TFT_WHITE, strokeColor);
+
+                tft->fillSmoothRoundRect(x, y, w, h, r, TFT_BLACK, TFT_WHITE); // clear area before draw
                 tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
-                // tft->fillCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE);
-                tft->fillSmoothCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE);
+                tft->fillCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE);
+                // tft->fillSmoothCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE, TFT_WHITE);
         }
         else
         {
-                tft->fillRoundRect(x, y, w, h, r, TFT_BLACK);
-                tft->drawRoundRect(x, y, w, h, r, strokeColor);
+                // tft->fillRoundRect(x, y, w, h, r, TFT_BLACK);
+                // tft->drawRoundRect(x, y, w, h, r, strokeColor);
+
                 // tft->fillCircle(170 + 3 + 12, 70 + 3 + 12, 12, TFT_BLUE);
                 // tft->fillCircle(x + 3 + 12, y + 3 + 12, 12, TFT_BLUE);
-                tft->fillSmoothCircle(x + 3 + 12, y + 3 + 12, 12, TFT_BLUE);
+
+                tft->fillSmoothRoundRect(x, y, w, h, r, TFT_BLACK, TFT_BLACK); // clear area before draw
+                tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
+
+                // tft->fillSmoothRoundRect(x, y, w, h, r, strokeColor, TFT_BLACK);
+                // tft->fillSmoothRoundRect(x + 1, y + 1, w - 2, h - 2, r, TFT_BLACK, strokeColor);
+
+                tft->fillCircle(x + 3 + 12, y + 3 + 12, 12, TFT_BLUE);
+                // tft->fillSmoothCircle(x + 3 + 12, y + 3 + 12, 12, TFT_BLUE, TFT_BLACK);
+        }
+}
+void drawSmoothSwitch2(int x, int y, int strokeColor, int activeColor, bool enabled)
+{
+        // size is fixed
+        int w = 60;
+        int h = 30;
+        int r = h / 2;
+        if (enabled)
+        {
+                // tft->fillRoundRect(x, y, w, h, r, activeColor);
+                // tft->drawRoundRect(x, y, w, h, r, strokeColor);
+                // tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
+
+                // tft->fillSmoothRoundRect(x, y, w, h, r, strokeColor, TFT_BLACK);
+                // tft->fillSmoothRoundRect(x + 1, y + 1, w - 2, h - 2, r, TFT_WHITE, strokeColor);
+
+                tft->fillSmoothRoundRect(x, y, w, h, r, TFT_BLACK, TFT_WHITE); // clear area before draw
+                tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
+                tft->fillCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE);
+                // tft->fillSmoothCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE, TFT_WHITE);
+        }
+        else
+        {
+                // tft->fillRoundRect(x, y, w, h, r, TFT_BLACK);
+                // tft->drawRoundRect(x, y, w, h, r, strokeColor);
+
+                // tft->fillCircle(170 + 3 + 12, 70 + 3 + 12, 12, TFT_BLUE);
+                // tft->fillCircle(x + 3 + 12, y + 3 + 12, 12, TFT_BLUE);
+
+                tft->fillSmoothRoundRect(x, y, w, h, r, TFT_BLACK, TFT_BLACK); // clear area before draw
+                tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
+
+                // tft->fillSmoothRoundRect(x, y, w, h, r, strokeColor, TFT_BLACK);
+                // tft->fillSmoothRoundRect(x + 1, y + 1, w - 2, h - 2, r, TFT_BLACK, strokeColor);
+
+                tft->fillCircle(x + 3 + 12, y + 3 + 12, 12, TFT_BLUE);
+                // tft->fillSmoothCircle(x + 3 + 12, y + 3 + 12, 12, TFT_BLUE, TFT_BLACK);
         }
 }

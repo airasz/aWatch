@@ -36,7 +36,7 @@ void analogClockVariant(int v)
                 // int colorRandomMedium = COLOR_MEDIUM[random(10)];
                 // tft->drawCircle(120, 120, 80, COLOR_MEDIUM[random(10)]);
 
-                // tft->drawSmoothCircle(120, 120, 80, COLOR_MEDIUM[random(10)], COLOR_MEDIUM[random(10)]);
+                tft->drawSmoothCircle(120, 120, 82, COLOR_MEDIUM[random(10)], TFT_BLACK);
                 // tft->fillSmoothCircle(120, 120, 80, COLOR_MEDIUM[random(10)], COLOR_MEDIUM[random(10)]);
                 tft->fillSmoothCircle(120, 120, 80, COLORS_DARK[random(10)], TFT_BLACK);
                 // tft->fillCircle( 160, 120, 118, TFT_GREEN);            // CLOCK FACE
@@ -74,7 +74,7 @@ void analogClockVariant(int v)
                 break;
 
         case 1:
-                // circle progress
+                // arc progress
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
                 hh12 = hh >= 12 ? hh - 12 : hh;
@@ -144,14 +144,17 @@ void analogClockVariant(int v)
                 // tft->drawCircle(120, 120, 70, TFT_BLUE);
                 // tft->drawCircle(120, 120, 60, TFT_BLUE);
 
-                tft->fillSmoothCircle(120, 120, 80, TFT_PURPLE, TFT_BLACK);
-                tft->fillSmoothCircle(120, 120, 79, TFT_BLACK, TFT_PURPLE);
+                // tft->fillSmoothCircle(120, 120, 80, TFT_PURPLE, TFT_BLACK);
+                // tft->fillSmoothCircle(120, 120, 79, TFT_BLACK, TFT_PURPLE);
+                tft->drawSmoothCircle(120, 120, 80, COLOR_MEDIUM[random(10)], TFT_BLACK);
 
-                tft->fillSmoothCircle(120, 120, 70, TFT_BLUE, TFT_BLACK);
-                tft->fillSmoothCircle(120, 120, 69, TFT_BLACK, TFT_BLUE);
+                // tft->fillSmoothCircle(120, 120, 70, TFT_BLUE, TFT_BLACK);
+                // tft->fillSmoothCircle(120, 120, 69, TFT_BLACK, TFT_BLUE);
+                tft->drawSmoothCircle(120, 120, 70, COLOR_MEDIUM[random(10)], TFT_BLACK);
 
-                tft->fillSmoothCircle(120, 120, 60, TFT_BLUE, TFT_BLACK);
-                tft->fillSmoothCircle(120, 120, 59, TFT_BLACK, TFT_BLUE);
+                // tft->fillSmoothCircle(120, 120, 60, TFT_BLUE, TFT_BLACK);
+                // tft->fillSmoothCircle(120, 120, 59, TFT_BLACK, TFT_BLUE);
+                tft->drawSmoothCircle(120, 120, 60, COLOR_MEDIUM[random(10)], TFT_BLACK);
 
                 // dot hour
                 for (int t = 15; t > (-1); t--)
@@ -191,12 +194,15 @@ void analogClockVariant(int v)
                 // tft->drawCircle(120, 120, 40, 0x0140);
                 // tft->drawCircle(120, 120, 20, 0x0140);
 
-                tft->fillSmoothCircle(120, 120, 60, 0x0140, TFT_BLACK);
-                tft->fillSmoothCircle(120, 120, 59, TFT_BLACK, 0x0140);
-                tft->fillSmoothCircle(120, 120, 40, 0x0140, TFT_BLACK);
-                tft->fillSmoothCircle(120, 120, 39, TFT_BLACK, 0x0140);
-                tft->fillSmoothCircle(120, 120, 20, 0x0140, TFT_BLACK);
-                tft->fillSmoothCircle(120, 120, 19, TFT_BLACK, 0x0140);
+                tft->drawSmoothCircle(120, 120, 60, 0x0140, TFT_BLACK);
+                tft->drawSmoothCircle(120, 120, 40, 0x0140, TFT_BLACK);
+                tft->drawSmoothCircle(120, 120, 20, 0x0140, TFT_BLACK);
+                // tft->fillSmoothCircle(120, 120, 60, 0x0140, TFT_BLACK);
+                // tft->fillSmoothCircle(120, 120, 59, TFT_BLACK, 0x0140);
+                // tft->fillSmoothCircle(120, 120, 40, 0x0140, TFT_BLACK);
+                // tft->fillSmoothCircle(120, 120, 39, TFT_BLACK, 0x0140);
+                // tft->fillSmoothCircle(120, 120, 20, 0x0140, TFT_BLACK);
+                // tft->fillSmoothCircle(120, 120, 19, TFT_BLACK, 0x0140);
                 tnow = ttgo->rtc->getDateTime();
                 hh = tnow.hour;
                 mm = tnow.minute;
