@@ -11,9 +11,9 @@ void drawAlarmsetting()
 void drawAlarmSet()
 {
         // tft->fillRect(0, 60, 240, 180, TFT_BLACK);
-        //row2
-        drawOutlineButton(0, 70, 60, 40, TFT_BLUE, TFT_WHITE, "-");
-        drawOutlineButton(240 - 62, 70, 60, 40, TFT_BLUE, TFT_WHITE, "+");
+        // row2
+        drawSmoothOutlineButton(0, 70, 60, 40, TFT_BLUE, TFT_WHITE, "-");
+        drawSmoothOutlineButton(240 - 62, 70, 60, 40, TFT_BLUE, TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
 
@@ -21,26 +21,26 @@ void drawAlarmSet()
 
         String hou = "";
         hou += old_tmpha;
-        drawOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, hou);
+        drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, hou);
         hou = "";
         hou += tmpha;
-        drawOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, hou);
+        drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, hou);
 
-        //row3
-        drawOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "-");
-        drawOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "+");
+        // row3
+        drawSmoothOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "-");
+        drawSmoothOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
         tft->drawString("MINUTE ALARM", 120, 124, 2);
 
         String mnit = "";
         mnit += old_tmpma;
-        drawOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, mnit);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, mnit);
         mnit = "";
         mnit += tmpma;
-        drawOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, mnit);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, mnit);
 
-        //row 4
+        // row 4
 
         if (tmpha != config.alarm_h || tmpma != config.alarm_m || tmpalarmenable != config.alarm_enable)
         {
@@ -51,7 +51,7 @@ void drawAlarmSet()
         tft->setTextFont(2);
         tft->setCursor(83, 196);
         tft->print("Enabled");
-        //row 4
+        // row 4
 
         drawSwitch(170, 190, TFT_BLUE, rgbToHex(200, 200, 200), tmpalarmenable);
 

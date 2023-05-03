@@ -150,20 +150,20 @@ void drawStepSetting()
         // }
         // row3
 
-        drawOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "-");
+        drawSmoothOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "-");
 
-        drawOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "+");
+        drawSmoothOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
         tft->drawString("Step length", 120, 120, 2);
         String s_length = "";
         s_length += old_stepLength;
         s_length += " cm";
-        drawOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, s_length);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, s_length);
         s_length = "";
         s_length += stepLenght;
         s_length += " cm";
-        drawOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, s_length);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, s_length);
 
         // row 4
 

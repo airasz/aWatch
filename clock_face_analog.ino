@@ -31,6 +31,7 @@ void analogClockVariant(int v)
         switch (v)
         {
         case 0:
+                // face=6
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
                 // int colorRandomMedium = COLOR_MEDIUM[random(10)];
@@ -74,7 +75,7 @@ void analogClockVariant(int v)
                 break;
 
         case 1:
-                // arc progress
+                // arc progress. face=7
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
                 hh12 = hh >= 12 ? hh - 12 : hh;
@@ -135,7 +136,7 @@ void analogClockVariant(int v)
                 break;
 
         case 2:
-                // comet race mode
+                // comet race mode. face =8
                 // Serial.printf("hh=%01d, mm=%02d, ss=%03d\n", hh, mm, ss);
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
@@ -182,7 +183,7 @@ void analogClockVariant(int v)
                 break;
 
         case 3:
-                // marine radar
+                // marine radar. face =9
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
                 // int colorRandomMedium = COLOR_MEDIUM[random(10)];
@@ -247,7 +248,7 @@ void analogClockVariant(int v)
                 displaySysInfo(1); // appInfo.ino
                 break;
         case 4:
-                // atc radar
+                // atc radar . face 10
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
                 tnow = ttgo->rtc->getDateTime();
@@ -488,16 +489,72 @@ void analogClockVariant(int v)
 
                 break;
         case 5:
-                // CF=9
+                // CF=11
                 javaneseClock(hh, mm); // clock_face_text.ino
                 break;
         case 6:
-                // CF=10
+                // CF=12
                 mathFace(hh, mm); // clock_face_text.ino
                 break;
         case 7:
-                // CF=11
-                recordActivity(); // clock_face_text.ino
+                // CF=13
+                // recordActivity(); // clock_face_text.ino
+
+                tft->fillScreen(TFT_BLACK);        // CLEAR DISPLAY
+                sdeg = ss * 6;                     // 0-59 -> 0-354   Pre-compute
+                mdeg = mm * 6 + sdeg * 0.01666667; // 0-59 -> 0-360 - includes seconds
+                hdeg = hh * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
+                hh += hh > 12 ? (-12) : 0;
+
+                int HX2, HY2;
+                int xx2;
+                xx2 = 120;
+                int yy2;
+                yy2 = 120;
+                int xx;
+                xx = posX(50, hdeg, xx2);
+                int yy;
+                yy = posY(50, hdeg, yy2);
+                int mx;
+                mx = posX(80, mdeg, xx);
+                if (mx > 180)
+                {
+                        xx2 = 120 - (mx - 180);
+                        xx = posX(50, hdeg, xx2);
+                        mx = posX(80, mdeg, xx);
+                }
+                if (mx < 60)
+                {
+                        xx2 = 120 + (60 - mx);
+                        xx = posX(50, hdeg, xx2);
+                        mx = posX(80, mdeg, xx);
+                }
+                int my;
+                my = posY(80, mdeg, yy);
+                if (my > 180)
+                {
+                        yy2 = 120 - (my - 180);
+                        yy = posY(50, hdeg, yy2);
+                        my = posY(80, mdeg, yy);
+                }
+                if (my < 60)
+                {
+                        yy2 = 120 + (60 - my);
+                        yy = posY(50, hdeg, yy2);
+                        my = posY(80, mdeg, yy);
+                }
+                int hcol, mcol;
+                hcol = COLOR_MEDIUM[random(10)];
+                mcol = COLOR_MEDIUM[random(10)];
+                // tft->drawSmoothCircle(xx, yy, 80, mcol, TFT_BLACK);
+                tft->drawWideLine(mx, my, xx, yy, 6, mcol, TFT_BLACK); // DRAW  MINUTE
+
+                tft->fillSmoothCircle(xx, yy, 4, TFT_WHITE, TFT_BLACK);
+                // tft->drawSmoothCircle(xx2, yy2, 50, hcol, TFT_BLACK);
+                tft->drawWideLine(xx, yy, xx2, yy2, 6, hcol, TFT_BLACK); // DRAW  MINUTE
+
+                tft->fillSmoothCircle(xx2, yy2, 6, TFT_WHITE, TFT_BLACK);
+                displaySysInfo(0); // appInfo.ino
                 break;
         default:
                 break;
@@ -542,5 +599,16 @@ uint16_t posX(int radius, int degree)
 uint16_t posY(int radius, int degree)
 {
         int r = getSin(degree) * radius + 120;
+        return r;
+}
+
+uint16_t posX(int radius, int degree, int pivot)
+{
+        int r = getCos(degree) * radius + pivot;
+        return r;
+}
+uint16_t posY(int radius, int degree, int pivot)
+{
+        int r = getSin(degree) * radius + pivot;
         return r;
 }
