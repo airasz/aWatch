@@ -26,8 +26,9 @@ void updateScreen(int dis_ID)
                         // screenTimeOut = cface == 10 ? config.screensaver_timeout + 5 : config.screensaver_timeout;
 
                         // (config.rnd_face) ? cface = random(2, 13) : cface = CF;
-                        cface = config.rnd_face ? random(2, 13) : CF;
-                        screenTimeOut = cface == 10 ? config.screensaver_timeout + 5 : config.screensaver_timeout;
+                        cface = config.rnd_face ? random(2, 14) : CF;
+                        screenTimeOut = cface == 1 ? config.screensaver_timeout + 5 : config.screensaver_timeout;
+                        screenTimeOut = dis_ID != 0 ? config.screensaver_timeout + 15 : config.screensaver_timeout;
                         // if (cface == 10)
                         // {
                         //         screenTimeOut = config.screensaver_timeout + 5;
@@ -189,10 +190,11 @@ void drawSmoothSwitch(int x, int y, int strokeColor, int activeColor, bool enabl
                 // tft->fillSmoothRoundRect(x, y, w, h, r, strokeColor, TFT_BLACK);
                 // tft->fillSmoothRoundRect(x + 1, y + 1, w - 2, h - 2, r, TFT_WHITE, strokeColor);
 
-                tft->fillSmoothRoundRect(x, y, w, h, r, TFT_BLACK, TFT_WHITE); // clear area before draw
+                tft->fillSmoothRoundRect(x, y, w, h, r, TFT_BLACK, TFT_BLACK); // clear area before draw
                 tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
+                // tft->fillSmoothCircle(80, 120, 4, TFT_BLACK, TFT_BLACK);
                 tft->fillCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE);
-                // tft->fillSmoothCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE, TFT_WHITE);
+                // tft->fillSmoothCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE, TFT_BLACK);
         }
         else
         {
@@ -205,6 +207,7 @@ void drawSmoothSwitch(int x, int y, int strokeColor, int activeColor, bool enabl
                 tft->fillSmoothRoundRect(x, y, w, h, r, TFT_BLACK, TFT_BLACK); // clear area before draw
                 tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
 
+                tft->fillSmoothCircle(80, 120, 4, TFT_BLACK, TFT_BLACK);
                 // tft->fillSmoothRoundRect(x, y, w, h, r, strokeColor, TFT_BLACK);
                 // tft->fillSmoothRoundRect(x + 1, y + 1, w - 2, h - 2, r, TFT_BLACK, strokeColor);
 
@@ -222,15 +225,15 @@ void drawSmoothSwitch2(int x, int y, int strokeColor, int activeColor, bool enab
         {
                 // tft->fillRoundRect(x, y, w, h, r, activeColor);
                 // tft->drawRoundRect(x, y, w, h, r, strokeColor);
-                // tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
+                tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
 
                 // tft->fillSmoothRoundRect(x, y, w, h, r, strokeColor, TFT_BLACK);
                 // tft->fillSmoothRoundRect(x + 1, y + 1, w - 2, h - 2, r, TFT_WHITE, strokeColor);
 
                 tft->fillSmoothRoundRect(x, y, w, h, r, TFT_BLACK, TFT_WHITE); // clear area before draw
                 tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
-                tft->fillCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE);
-                // tft->fillSmoothCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE, TFT_WHITE);
+                // tft->fillCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE);
+                tft->fillSmoothCircle(x + w - 3 - 12, y + 3 + 12, 12, TFT_BLUE, TFT_WHITE);
         }
         else
         {
