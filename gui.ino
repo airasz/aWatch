@@ -28,7 +28,6 @@ void updateScreen(int dis_ID)
                         // (config.rnd_face) ? cface = random(2, 13) : cface = CF;
                         cface = config.rnd_face ? random(2, 14) : CF;
                         screenTimeOut = cface == 1 ? config.screensaver_timeout + 5 : config.screensaver_timeout;
-                        screenTimeOut = dis_ID != 0 ? config.screensaver_timeout + 15 : config.screensaver_timeout;
                         // if (cface == 10)
                         // {
                         //         screenTimeOut = config.screensaver_timeout + 5;
@@ -49,60 +48,80 @@ void updateScreen(int dis_ID)
                 break;
         case 1:
                 showDayPray();
+                screenTimeOut = config.screensaver_timeout + 8;
                 break;
         case 2:
                 startSetting(0);
+                screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 3:
                 showCal();
+                screenTimeOut = config.screensaver_timeout + 8;
                 break;
         case 11:
                 sysinfo();
+                screenTimeOut = config.screensaver_timeout + 8;
                 break;
         case 21:
                 startSetting(1);
+                screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 22:
                 startSetting(2);
+                screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 24:
                 startSetting(6);
+                screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 25:
                 startSetting(7);
+                screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 26:
                 startSetting(8);
+                screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 27:
                 startSetting(9); // to app remote select AC
+                screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 271:
                 startSetting(10); // to panasonic
+                screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 272:
                 startSetting(11); // to panasonic
+                screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 31:
                 showCal(true); // show next month
+                screenTimeOut = config.screensaver_timeout + 8;
                 break;
 
         case 32:
                 showCal(false); // show previous month
+                screenTimeOut = config.screensaver_timeout + 8;
                 break;
 
         case 231:
                 startSetting(3);
+                screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 232:
                 startSetting(4);
+                screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 233:
                 startSetting(5);
+                screenTimeOut = config.screensaver_timeout + 15;
                 break;
         default:
                 break;
         }
+
+        screenTimeOut = dis_ID != 0 ? config.screensaver_timeout + 15 : config.screensaver_timeout;
+        Serial.printf("st out  : %d \n", screenTimeOut);
 }
 
 void resetTO()
