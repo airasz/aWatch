@@ -562,7 +562,7 @@ void analogClockVariant(int v)
                 }
                 // tft->drawSmoothCircle(xx, yy, 80, mcol, TFT_BLACK);
                 tft->drawWideLine(mx, my, xx, yy, 6, mcol, TFT_BLACK); // DRAW  MINUTE
-                tft->fillSmoothCircle(xx, yy, 4, TFT_WHITE, TFT_BLACK);
+                tft->fillSmoothCircle(xx, yy, 6, TFT_WHITE, TFT_BLACK);
                 // draw 5 minutes line guide
                 for (int i = 0; i < 720; i += 30)
                 {
@@ -625,23 +625,23 @@ float getSin(int degree)
         float r = sin((degree - 90) * 0.0174532925);
         return r;
 }
-uint16_t posX(int radius, int degree)
+int posX(int radius, int degree)
 {
         int r = getCos(degree) * radius + 120;
         return r;
 }
-uint16_t posY(int radius, int degree)
+int posY(int radius, int degree)
 {
         int r = getSin(degree) * radius + 120;
         return r;
 }
 
-uint16_t posX(int radius, int degree, int pivot)
+int posX(int radius, int degree, int pivot)
 {
         int r = getCos(degree) * radius + pivot;
         return r;
 }
-uint16_t posY(int radius, int degree, int pivot)
+int posY(int radius, int degree, int pivot)
 {
         int r = getSin(degree) * radius + pivot;
         return r;
