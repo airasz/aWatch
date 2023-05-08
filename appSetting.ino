@@ -47,8 +47,10 @@ void startSetting(int setID)
                 tmpyear = yyear;
 
                 tft->fillRect(0, 0, 240, 60, TFT_RED);
-                drawButton(2, 8, 78, 48, TFT_BLUE, TFT_WHITE, "BACK");
-                drawButton(160, 8, 78, 48, TFT_BLUE, TFT_WHITE, "EXIT");
+                // drawButton(2, 8, 78, 48, TFT_BLUE, TFT_WHITE, "BACK");
+                // drawButton(160, 8, 78, 48, TFT_BLUE, TFT_WHITE, "EXIT");
+                drawSmoothButton(2, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "BACK");
+                drawSmoothButton(160, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "EXIT");
                 tft->drawString("SETTING", 120, 24, 2);
                 drawHomeSettingBody();
                 break;
@@ -105,75 +107,12 @@ void startSetting(int setID)
 void drwaBaseHeader(int setID)
 {
         tft->fillRect(0, 0, 240, 60, TFT_RED);
-        drawButton(2, 8, 78, 48, TFT_BLUE, TFT_WHITE, "BACK");
-        drawButton(160, 8, 78, 48, TFT_BLUE, TFT_WHITE, "EXIT");
-}
-
-// root off setting screen
-void drawHomeSettingHeader(int setID)
-{
-        // tft->fillRect(0, 0, 240, 60, TFT_RED);
         // drawButton(2, 8, 78, 48, TFT_BLUE, TFT_WHITE, "BACK");
-
-        tft->setTextFont(2);
-        tft->setTextDatum(MC_DATUM);
-        tft->setTextColor(TFT_WHITE);
-        // tft->fillRoundRect(160, 8, 78, 48, 5, TFT_BLUE);
-
-        // tft->setCursor(200, 24);
-        // tft->print("Exit");
-        // tft->drawString("EXIT", 160 + (78 / 2), 24, 2);
+        drawSmoothButton(2, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "BACK");
         // drawButton(160, 8, 78, 48, TFT_BLUE, TFT_WHITE, "EXIT");
-        // tft->setTextPadding(tft->width() - 80);
-        // tft->setFreeFont(FSSO12);
-        switch (setID)
-        {
-        case 0:
-                // tft->drawString("SETTING", 120, 24, 2);
-                drawButton(80, 0, 80, 60, TFT_RED, TFT_WHITE, "SETTING");
-                drawHomeSettingBody();
-                break;
-        case 1:
-                // tft->drawString("STEP", 120, 24, 2);
-                drawButton(80, 0, 80, 60, TFT_RED, TFT_WHITE, "STEP");
-                drawStepSetting();
-                break;
-        case 2:
-                // tft->drawString("DISPLAY", 120, 24, 2);
-                drawButton(80, 0, 80, 60, TFT_RED, TFT_WHITE, "DISPLAY");
-                drawDisplaySetting();
-                break;
-        case 3:
-                // tft->drawString("TIME", 120, 24, 2);
-                drawButton(80, 0, 80, 60, TFT_RED, TFT_WHITE, "TIME");
-                drawTimeSetting(1);
-                break;
-        case 4:
-                // tft->drawString("DATE", 120, 24, 2);
-                drawButton(80, 0, 80, 60, TFT_RED, TFT_WHITE, "DATE");
-                drawTimeSetting(2);
-                break;
-        case 5:
-                // tft->drawString("DATE", 120, 24, 2);
-                drawButton(80, 0, 80, 60, TFT_RED, TFT_WHITE, "DATE");
-                drawTimeSetting(3);
-                break;
-        case 6:
-                tft->drawString("ALARM", 120, 24, 2);
-                drawAlarmSet();
-                break;
-        case 7:
-                tft->drawString("FACE", 120, 24, 2);
-                drawSetFace();
-        case 8:
-                tft->drawString("PRAY", 120, 24, 2);
-                drawPraySet();
-        default:
-                break;
-        }
-
-        // tft->setFreeFont(NULL);
+        drawSmoothButton(160, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "EXIT");
 }
+
 void drawHomeSettingBody()
 {
         tft->fillRect(0, 60, 240, 180, TFT_BLACK);
@@ -211,20 +150,20 @@ void drawStepSetting()
         // }
         // row3
 
-        drawOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "-");
+        drawSmoothOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "-");
 
-        drawOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "+");
+        drawSmoothOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
         tft->drawString("Step length", 120, 120, 2);
         String s_length = "";
         s_length += old_stepLength;
         s_length += " cm";
-        drawOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, s_length);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, s_length);
         s_length = "";
         s_length += stepLenght;
         s_length += " cm";
-        drawOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, s_length);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, s_length);
 
         // row 4
 
@@ -289,9 +228,12 @@ void updateWgetSeekBarTO(uint8_t X, uint8_t Y, uint8_t value)
 
                 int SBvalue = (X + 2) + (((width - X) / 30) * value);
                 int SBOldvalue = (X + 2) + (((width - X) / 30) * oldValue);
-                tft->fillCircle(SBOldvalue, Y + 3, 2, TFT_BLACK);
-                tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-                tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
+                // tft->fillCircle(SBOldvalue, Y + 3, 2, TFT_BLACK);
+                tft->fillSmoothCircle(SBOldvalue, Y + 5, 2, TFT_BLACK, TFT_BLACK);
+                // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
+                tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, TFT_BLUE, TFT_BLACK);
+                // tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
+                tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
                 oldValue = value;
                 drawButton(0, 190, 80, 40, TFT_BLUE, TFT_WHITE, "SAVE");
         }
@@ -314,8 +256,10 @@ void drawWgetSeekBarTO(uint8_t X, uint8_t Y, uint8_t value)
         int SBvalue = (X + 2) + (((width - X) / 30) * value);
         int SBOldvalue = (X + 2) + (((width - X) / 30) * oldValue);
         // tft->fillCircle(SBOldvalue, Y + 3, 2, TFT_BLACK);
-        tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-        tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
+        // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
+        tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, TFT_BLUE, TFT_BLACK);
+        // tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
+        tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
         oldValue = value;
 }
 
@@ -366,9 +310,13 @@ void updateWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
 
                 int SBvalue = (X + 2) + (((width - X) / 15) * value);
                 int SBOldvalue = (X + 2) + (((width - X) / 15) * oldValue2);
-                tft->fillCircle(SBOldvalue, Y + 3, 2, TFT_BLACK);
-                tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-                tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
+                tft->fillCircle(SBOldvalue, Y + 5, 2, TFT_BLACK);
+                // tft->fillSmoothCircle(SBOldvalue, Y + 5, 2, TFT_BLACK, TFT_BLACK);
+                // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
+                tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, TFT_BLUE, TFT_BLACK);
+
+                tft->fillCircle(SBvalue, Y + 5, 2, TFT_WHITE);
+                // tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
                 oldValue2 = value;
                 drawButton(0, 190, 80, 40, TFT_BLUE, TFT_WHITE, "SAVE");
         }
@@ -377,7 +325,7 @@ void drawWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
 {
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_GREEN);
-        tft->drawString("BRIGHTNESS", 120, 64, 2);
+        tft->drawString("BRIGHTNESS", 120, 66, 2);
         // String svalue = "";
         char svalue[3];
         sprintf(svalue, "%02d", value); // add 0 if one digit
@@ -390,7 +338,9 @@ void drawWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
 
         int SBvalue = (X + 2) + (((width - X) / 15) * value);
         int SBOldvalue = (X + 2) + (((width - X) / 15) * oldValue2);
-        tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-        tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
+        // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
+        tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, TFT_BLUE, TFT_BLACK);
+        tft->fillCircle(SBvalue, Y + 5, 2, TFT_WHITE);
+        // tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
         oldValue2 = value;
 }

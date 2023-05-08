@@ -68,7 +68,7 @@ uint16_t getpray(uint8_t mnt, uint8_t day, uint8_t prayID)
     return in;
 }
 
-//return string
+// return string
 String getDailyJWS(int id)
 {
     // String jadwal = "";
@@ -77,7 +77,7 @@ String getDailyJWS(int id)
     // formating();
     if (tomorow)
     {
-        //if maximum day, jump to next month
+        // if maximum day, jump to next month
         if (iday + 1 > maxday)
         {
             imnt += 1;
@@ -122,7 +122,6 @@ String getDailyJWS(int id)
 }
 void setprayalarm(bool next)
 {
-
     if (!alarmset)
     {
         ttgo->rtc->resetAlarm();
