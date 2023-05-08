@@ -87,7 +87,7 @@ void analogClockVariant(int v)
 
                 // tft->fillCircle(120, 120, 5, TFT_RED); // DOT   CENTER
 
-                tft->fillSmoothCircle(120, 120, 6, TFT_RED, TFT_BLACK);
+                tft->fillSmoothCircle(120, 120, 6, TFT_RED, i_colcircle);
                 // tft->fillSmoothCircle(120, 120, 77, TFT_BLACK, TFT_RED);
                 displaySysInfo(0); // appInfo.ino
                 break;
