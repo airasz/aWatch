@@ -861,7 +861,7 @@ void handleTouch()
                         //         Serial.printf("clock face change to : %d\n", CF);
                         //         CF = 10;
                         // }
-                        (CF < 2) && (CF = 13);
+                        (CF < 2) && (CF = 14);
                         config.clock_face = CF;
                         EEPROM_writeAnything(0, config);
                         EEPROM.commit();
@@ -878,7 +878,7 @@ void handleTouch()
                         //         Serial.printf("clock face change to : %d\n", CF);
                         //         CF = 0;
                         // }
-                        (CF > 13) && (CF = 2);
+                        (CF > 14) && (CF = 2);
                         config.clock_face = CF;
                         EEPROM_writeAnything(0, config);
                         EEPROM.commit();
