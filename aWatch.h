@@ -147,6 +147,7 @@ int stepMonth, stepDay, stepHour, stepMinute;
 boolean date_is_up;
 boolean steps_is_up;
 boolean initialAnalog;
+bool enableSS = false;
 extern uint8_t number_of_sounds;
 char buff[512];
 unsigned int half_width;

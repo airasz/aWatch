@@ -90,6 +90,9 @@ void analogClockVariant(int v)
                 tft->fillSmoothCircle(120, 120, 6, TFT_RED, i_colcircle);
                 // tft->fillSmoothCircle(120, 120, 77, TFT_BLACK, TFT_RED);
                 displaySysInfo(0); // appInfo.ino
+
+                if (enableSS)
+                        screenServer();
                 break;
         case 1:
                 // chaotic pendulum
@@ -150,6 +153,8 @@ void analogClockVariant(int v)
                 tft->drawWideLine(xx, yy, xx2, yy2, 6, hcol, TFT_BLACK); // DRAW  HOUR HAND
                 tft->fillSmoothCircle(xx2, yy2, 6, TFT_WHITE, TFT_BLACK);
                 displaySysInfo(0); // appInfo.ino
+                if (enableSS)
+                        screenServer();
                 break;
         case 2:
                 // arc progress. face=7
@@ -210,6 +215,9 @@ void analogClockVariant(int v)
 
                 // Serial.printf("ohx=%01d, ohy=%02d, \n", ohx, ohy);
                 // Serial.printf("omx=%01d, omy=%02d, \n", omx, omy);
+
+                if (enableSS)
+                        screenServer();
                 break;
 
         case 3:
@@ -255,6 +263,9 @@ void analogClockVariant(int v)
                 tft->drawLine(posX(78, 0), posY(78, 0), posX(68, 0), posY(68, 0), COLOR_MEDIUM[random(10)]); // DRAW 12 LINES
 
                 displaySysInfo(0); // appInfo.ino
+
+                if (enableSS)
+                        screenServer();
                 // Serial.printf("hh=%01d, mm=%02d, ss=%03d\n", hh, mm, ss);
 
                 break;
@@ -323,6 +334,9 @@ void analogClockVariant(int v)
                         tft->drawLine(posX(76, dgree), posY(80, dgree), 120, 120, rgbToHex(t == 0 ? 200 : 0, t == 0 ? 255 : g, 0)); // Draw shadow swiper
                 }
                 displaySysInfo(1); // appInfo.ino
+
+                if (enableSS)
+                        screenServer();
                 break;
         case 5:
                 // atc radar . face 10
@@ -564,14 +578,22 @@ void analogClockVariant(int v)
                 // tft->printf("usb : [%.1fV|%.fmA] bat : [%.1fV|%d%%]", vbus_v, vbus_c, batt_v, per);
                 tft->printf("%s : [ %.1fV | %.0f%s ]", power->isChargeing() ? "usb " : "battery ", power->isChargeing() ? vbus_v : batt_v, power->isChargeing() ? vbus_c : per, power->isChargeing() ? "mA" : "%");
 
+                if (enableSS)
+                        screenServer();
                 break;
         case 6:
                 // CF=11
                 javaneseClock(hh, mm); // clock_face_text.ino
+
+                if (enableSS)
+                        screenServer();
                 break;
         case 7:
                 // CF=12
                 mathFace(hh, mm); // clock_face_text.ino
+
+                if (enableSS)
+                        screenServer();
                 break;
         case 8:
                 // CF=13
@@ -665,6 +687,9 @@ void analogClockVariant(int v)
                 tft->drawWideLine(xx, yy, xx2, yy2, 6, hcol, TFT_BLACK); // DRAW  HOUR HAND
                 tft->fillSmoothCircle(xx2, yy2, 6, TFT_WHITE, TFT_BLACK);
                 displaySysInfo(0); // appInfo.ino
+
+                if (enableSS)
+                        screenServer();
                 break;
         default:
                 break;
