@@ -121,7 +121,7 @@ void updateScreen(int dis_ID)
         }
 
         screenTimeOut = dis_ID != 0 ? config.screensaver_timeout + 15 : config.screensaver_timeout;
-        Serial.printf("st out  : %d \n", screenTimeOut);
+        // Serial.printf("st out  : %d \n", screenTimeOut);
 }
 
 void resetTO()
