@@ -150,16 +150,16 @@ void clock_face_digit(int clock_style)
                                 {
                                         if (curr_digit == 0)
                                         {
-                                                //   tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
+                                                //   tft->drawBoldLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
                                                 tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 10, colll, bcoll);
                                                 if (i > 0)
-                                                        tft->drawBoldSmoothLine(xpath[i - 1], ypath[i - 1], xpath[i], ypath[i], 4, colll);
+                                                        tft->drawBoldLine(xpath[i - 1], ypath[i - 1], xpath[i], ypath[i], 4, colll);
                                                 if (i == 1)
-                                                        tft->drawBoldSmoothLine(xpath[i - 1], ypath[i - 1], xpath[15], ypath[15], 4, colll);
+                                                        tft->drawBoldLine(xpath[i - 1], ypath[i - 1], xpath[15], ypath[15], 4, colll);
 
                                                 // tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
                                                 if (i == 0)
-                                                        //   tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[15], ypath[15], 4, colll);
+                                                        //   tft->drawBoldLine(xpath[i], ypath[i], xpath[15], ypath[15], 4, colll);
                                                         tft->drawWideLine(xpath[i], ypath[i], xpath[15], ypath[15], 10, colll, bcoll);
                                                 // tft->drawLine(xpath[i], ypath[i], xpath[15], ypath[15], colll);
                                         }
@@ -167,20 +167,20 @@ void clock_face_digit(int clock_style)
                                         {
                                                 if (i == 6)
                                                 {
-                                                        //   tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[9], ypath[9], 4, colll);
+                                                        //   tft->drawBoldLine(xpath[i], ypath[i], xpath[9], ypath[9], 4, colll);
                                                         tft->drawWideLine(xpath[i], ypath[i], xpath[9], ypath[9], 10, colll, bcoll);
                                                         // tft->drawLine(xpath[i], ypath[i], xpath[9], ypath[9], colll);}
                                                 }
                                                 else
-                                                { //   tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
+                                                { //   tft->drawBoldLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
 
                                                         if (i == 7)
                                                         {
-                                                                tft->drawBoldSmoothLine(xpath[i - 2], ypath[i - 2], xpath[6], ypath[6], 4, colll);
+                                                                tft->drawBoldLine(xpath[i - 2], ypath[i - 2], xpath[6], ypath[6], 4, colll);
                                                         }
                                                         tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 10, colll, bcoll);
                                                         if (i > 0 && i - 1 != 6)
-                                                                tft->drawBoldSmoothLine(xpath[i - 1], ypath[i - 1], xpath[i], ypath[i], 4, colll);
+                                                                tft->drawBoldLine(xpath[i - 1], ypath[i - 1], xpath[i], ypath[i], 4, colll);
                                                         // tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);}
                                                 }
                                         }
@@ -191,47 +191,47 @@ void clock_face_digit(int clock_style)
                                                         // tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
                                                         tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 10, colll, bcoll);
                                                         if (i > 0 && i - 1 != 7)
-                                                                tft->drawBoldSmoothLine(xpath[i - 1], ypath[i - 1], xpath[i], ypath[i], 4, colll);
-                                                        //   tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
+                                                                tft->drawBoldLine(xpath[i - 1], ypath[i - 1], xpath[i], ypath[i], 4, colll);
+                                                        //   tft->drawBoldLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
                                                         if (i == 8)
-                                                                //   tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[8], ypath[8], 4, colll);
+                                                                //   tft->drawBoldLine(xpath[i], ypath[i], xpath[8], ypath[8], 4, colll);
                                                                 tft->drawWideLine(xpath[i - 2], ypath[i - 2], xpath[8], ypath[8], 10, colll, bcoll);
                                                         if (i == 9)
                                                         {
-                                                                tft->drawBoldSmoothLine(xpath[6], ypath[6], xpath[7], ypath[7], 4, colll);
-                                                                tft->drawBoldSmoothLine(xpath[6], ypath[6], xpath[5], ypath[5], 4, colll);
+                                                                tft->drawBoldLine(xpath[6], ypath[6], xpath[7], ypath[7], 4, colll);
+                                                                tft->drawBoldLine(xpath[6], ypath[6], xpath[5], ypath[5], 4, colll);
                                                         }
                                                         // tft->drawLine(xpath[i], ypath[i], xpath[8], ypath[8], colll);
                                                 }
 
                                                 else // i==7
-                                                        tft->drawBoldSmoothLine(xpath[i - 1], ypath[i - 1], xpath[8], ypath[8], 4, colll);
+                                                        tft->drawBoldLine(xpath[i - 1], ypath[i - 1], xpath[8], ypath[8], 4, colll);
                                         }
                                         else if (curr_digit == 8)
                                         {
                                                 // tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
                                                 tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 10, colll, bcoll);
                                                 if (i > 0)
-                                                        tft->drawBoldSmoothLine(xpath[i - 1], ypath[i - 1], xpath[i], ypath[i], 4, colll);
+                                                        tft->drawBoldLine(xpath[i - 1], ypath[i - 1], xpath[i], ypath[i], 4, colll);
 
-                                                //   tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
+                                                //   tft->drawBoldLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
                                                 if (i == 0)
-                                                        //   tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[9], ypath[9], 4, colll);
+                                                        //   tft->drawBoldLine(xpath[i], ypath[i], xpath[9], ypath[9], 4, colll);
                                                         tft->drawWideLine(xpath[i], ypath[i], xpath[9], ypath[9], 10, colll, bcoll);
                                                 // tft->drawLine(xpath[i], ypath[i], xpath[9], ypath[9], colll);
                                                 if (i == 1)
-                                                //   tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[16], ypath[16], 4, colll);
+                                                //   tft->drawBoldLine(xpath[i], ypath[i], xpath[16], ypath[16], 4, colll);
                                                 {
                                                         tft->drawWideLine(xpath[i], ypath[i], xpath[16], ypath[16], 10, colll, bcoll);
-                                                        tft->drawBoldSmoothLine(xpath[i - 1], ypath[i - 1], xpath[9], ypath[9], 4, colll);
+                                                        tft->drawBoldLine(xpath[i - 1], ypath[i - 1], xpath[9], ypath[9], 4, colll);
                                                 }
                                                 if (i == 2)
-                                                        tft->drawBoldSmoothLine(xpath[i - 1], ypath[i - 1], xpath[16], ypath[16], 4, colll);
+                                                        tft->drawBoldLine(xpath[i - 1], ypath[i - 1], xpath[16], ypath[16], 4, colll);
                                                 if (i == 15)
                                                 {
-                                                        tft->drawBoldSmoothLine(xpath[1], ypath[1], xpath[16], ypath[16], 4, colll);
-                                                        tft->drawBoldSmoothLine(xpath[0], ypath[0], xpath[1], ypath[1], 4, colll);
-                                                        tft->drawBoldSmoothLine(xpath[0], ypath[0], xpath[9], ypath[9], 4, colll);
+                                                        tft->drawBoldLine(xpath[1], ypath[1], xpath[16], ypath[16], 4, colll);
+                                                        tft->drawBoldLine(xpath[0], ypath[0], xpath[1], ypath[1], 4, colll);
+                                                        tft->drawBoldLine(xpath[0], ypath[0], xpath[9], ypath[9], 4, colll);
                                                 }
                                                 // tft->drawLine(xpath[i], ypath[i], xpath[16], ypath[16], colll);
                                         }
@@ -240,9 +240,9 @@ void clock_face_digit(int clock_style)
                                                 // tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
                                                 tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 10, colll, bcoll);
                                                 if (i > 0)
-                                                        tft->drawBoldSmoothLine(xpath[i - 1], ypath[i - 1], xpath[i], ypath[i], 4, colll);
+                                                        tft->drawBoldLine(xpath[i - 1], ypath[i - 1], xpath[i], ypath[i], 4, colll);
                                                 // tft->drawWideLine(xpath[-i], ypath[-i], xpath[i], ypath[i], 6, colll, bcoll);
-                                                // tft->drawBoldSmoothLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
+                                                // tft->drawBoldLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
                                         }
                                 }
                         }
@@ -261,4 +261,7 @@ void clock_face_digit(int clock_style)
                 // space betwen single digit
         }
         displaySysInfo(2); // appInfo.ino
+
+        if (enableSS)
+                screenServer();
 }
