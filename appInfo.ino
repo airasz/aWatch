@@ -56,7 +56,7 @@ void sysinfo()
                 float kCover;
                 if (mCover > 1100)
                         kCover = (float)mCover / 1000.0;
-                tft->printf("%.1f %s\n", mCover > 1100 ? kCover : mCover, mCover > 1100 ? "km" : "m"); // .0f > 1|| .1 > 1.1
+                tft->printf(mCover > 1100 ? "%.1f %s\n" : "%.0f %s\n", mCover > 1100 ? kCover : mCover, mCover > 1100 ? "km" : "m"); // .0f > 1|| .1 > 1.1
 
                 tft->setTextColor(TFT_GREEN);
                 tft->print("  Daily Step : ");
@@ -69,7 +69,7 @@ void sysinfo()
                 long dmCover = ((daily_step)*stepLenght) / 100;
                 if (dmCover > 1100)
                         kCover = (float)dmCover / 1000.0;
-                tft->printf("%.1f %s\n", dmCover > 1100 ? kCover : dmCover, dmCover > 1100 ? "km" : "m");
+                tft->printf(dmCover > 1100 ? "%.1f %s\n" : "%.0f %s\n", dmCover > 1100 ? kCover : dmCover, dmCover > 1100 ? "km" : "m");
         }
         if (config.alarm_enable)
         {
