@@ -59,11 +59,7 @@ void analogClockVariant(int v)
                 // tft->fillCircle( 160, 120, 110, TFT_BLACK);
                 // colorRandomMedium = COLOR_MEDIUM[random(10)];          // LOCK FACE           // LOCK FACE
                 // 12 LINES
-<<<<<<< HEAD
-                // rainbow color for every multiple 5  minute mark
-=======
                 // rainbow color for every multiple 5  minute line mark
->>>>>>> smooth_graphic
                 for (int i = 0; i < 360; i += 30)
                         tft->drawLine(posX(80, i), posY(80, i), posX(72, i), posY(72, i), COLOR_MEDIUM[random(10)]); // DRAW 12 LINES
 
@@ -96,12 +92,77 @@ void analogClockVariant(int v)
                 displaySysInfo(0); // appInfo.ino
                 break;
         case 1:
-                // circle progress
+                // chaotic pendulum
+
+                hh += hh > 12 ? (-12) : 0;         // make 12 hr format
+                tft->fillScreen(TFT_BLACK);        // CLEAR DISPLAY
+                sdeg = ss * 6;                     // 0-59 -> 0-354   Pre-compute
+                mdeg = mm * 6 + sdeg * 0.01666667; // 0-59 -> 0-360 - includes seconds
+                hdeg = hh * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
+
+                xx2 = 120;
+                yy2 = 120;
+                xx = posX(70, hdeg, xx2);
+                yy = posY(70, hdeg, yy2);
+                mx = posX(80, mdeg, xx2);
+                my = posY(80, mdeg, yy2);
+                hcol = COLOR_MEDIUM[random(10)];
+                mcol = COLOR_MEDIUM[random(10)];
+                // draw a slice minute  guide
+                for (int i = 0; i < 720; i += 6)
+                {
+                        if (i + 1 > mdeg - 50 && i + 1 < mdeg + 50 || i + 1 > (360 + mdeg) - 50 && i + 1 < (mdeg + 360) + 50)
+                        {
+                                if (i % 15 == 0)
+                                        // tft->drawLine(posX(90, i, xx), posY(90, i, yy), posX(90 - 20, i, xx), posY(90 - 20, i, yy), rgbToHex(200, 80, 0));
+                                        tft->drawWideLine(posX(90, i, xx2), posY(90, i, yy2), posX(90 - 20, i, xx2), posY(90 - 20, i, yy2), 2, rgbToHex(200, 80, 0), TFT_BLACK); // DRAW  MINUTE
+                                else
+                                        tft->drawWideLine(posX(90, i, xx2), posY(90, i, yy2), posX(90 - 10, i, xx2), posY(90 - 10, i, yy2), 1, TFT_YELLOW, TFT_BLACK); // DRAW  MINUTE
+                                // tft->drawLine(posX(90, i, xx), posY(90, i, yy), posX(90 - 10, i, xx), posY(90 - 10, i, yy), TFT_YELLOW);
+                        }
+                }
+                // tft->drawSmoothCircle(xx, yy, 80, mcol, TFT_BLACK);
+                tft->drawWideLine(mx, my, xx2, yy2, 6, mcol, TFT_BLACK); // DRAW  MINUTE
+                // tft->fillSmoothCircle(xx, yy, 6, TFT_WHITE, TFT_BLACK);
+                // draw 5 minutes line guide
+                for (int i = 0; i < 720; i += 30)
+                {
+                        if (i + 1 > hdeg - 60 && i + 1 < hdeg + 60 || i + 1 > (360 + hdeg) - 60 && i + 1 < (hdeg + 360) + 60)
+                        {
+                                // line(posX(xx/2, i,xx2), posY(xx/2, i,xx2), posX((xx/2), i,xx2), posY((yy/2), i,xx2));
+                                if (i % 90 == 0)
+                                        // tft->drawLine(posX(60, i, xx2), posY(60, i, yy2), posX(60 - 20, i, xx2), posY(60 - 20, i, yy2), TFT_WHITE);
+                                        tft->drawWideLine(posX(80, i, xx2), posY(80, i, yy2), posX(80 - 20, i, xx2), posY(80 - 20, i, yy2), 3, TFT_WHITE, TFT_BLACK); // DRAW  MINUTE
+                                else
+                                        tft->drawWideLine(posX(80, i, xx2), posY(80, i, yy2), posX(80 - 10, i, xx2), posY(80 - 10, i, yy2), 2, TFT_WHITE, TFT_BLACK); // DRAW  MINUTE
+
+                                // tft->drawLine(posX(60, i, xx2), posY(60, i, yy2), posX(60 - 10, i, xx2), posY(60 - 10, i, yy2), TFT_WHITE);
+                        }
+                }
+                // for (int i = 0; i < 360; i += 30)
+                // {
+                //         if (i > (hrdeg - 45))
+                //                 tft->drawLine(posX(50, i), posY(50, i), posX(42, i), posY(42, i), COLOR_MEDIUM[random(10)]); // DRAW 12 LINES
+                // }
+                // 60 DOTS
+
+                // tft->drawSmoothCircle(xx2, yy2, 50, hcol, TFT_BLACK);
+                tft->drawWideLine(xx, yy, xx2, yy2, 6, hcol, TFT_BLACK); // DRAW  HOUR HAND
+                tft->fillSmoothCircle(xx2, yy2, 6, TFT_WHITE, TFT_BLACK);
+                displaySysInfo(0); // appInfo.ino
+                break;
+        case 2:
+                // arc progress. face=7
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
                 hh12 = hh >= 12 ? hh - 12 : hh;
-                // convert 24 to 12 hours format
-                // progress minute
+                sdeg = ss * 6;                       // 0-59 -> 0-354   Pre-compute
+                mdeg = mm * 6 + sdeg * 0.01666667;   // 0-59 -> 0-360 - includes seconds
+                hdeg = hh12 * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
+                // int startMAngle, endMAngle, startHAngle, endHAngle;
+                // clock degree is oposite position to arc degre
+                //  convert 24 to 12 hours format
+                //  progress minute
                 if (mm >= 30)
                 {
                         // drawSmoothArc(x, y, out_radius, in_radius, start_angle, end_angle, fcolor, bcolor, rooudend);//flse
@@ -161,6 +222,18 @@ void analogClockVariant(int v)
                 // tft->drawCircle(120, 120, 70, TFT_BLUE);
                 // tft->drawCircle(120, 120, 60, TFT_BLUE);
 
+                // tft->fillSmoothCircle(120, 120, 80, TFT_PURPLE, TFT_BLACK);
+                // tft->fillSmoothCircle(120, 120, 79, TFT_BLACK, TFT_PURPLE);
+                tft->drawSmoothCircle(120, 120, 80, COLOR_MEDIUM[random(10)], TFT_BLACK);
+
+                // tft->fillSmoothCircle(120, 120, 70, TFT_BLUE, TFT_BLACK);
+                // tft->fillSmoothCircle(120, 120, 69, TFT_BLACK, TFT_BLUE);
+                tft->drawSmoothCircle(120, 120, 70, COLOR_MEDIUM[random(10)], TFT_BLACK);
+
+                // tft->fillSmoothCircle(120, 120, 60, TFT_BLUE, TFT_BLACK);
+                // tft->fillSmoothCircle(120, 120, 59, TFT_BLACK, TFT_BLUE);
+                tft->drawSmoothCircle(120, 120, 60, COLOR_MEDIUM[random(10)], TFT_BLACK);
+
                 // dot hour
                 for (int t = 15; t > (-1); t--)
                 {
@@ -186,8 +259,8 @@ void analogClockVariant(int v)
 
                 break;
 
-        case 3:
-                // marine radar
+        case 4:
+                // marine radar. face =9
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
                 // int colorRandomMedium = COLOR_MEDIUM[random(10)];
@@ -251,8 +324,8 @@ void analogClockVariant(int v)
                 }
                 displaySysInfo(1); // appInfo.ino
                 break;
-        case 4:
-                // atc radar
+        case 5:
+                // atc radar . face 10
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
                 tnow = ttgo->rtc->getDateTime();
@@ -271,22 +344,6 @@ void analogClockVariant(int v)
                 mdeg = mm180 * 6 + sdeg * 0.01666667; // 0-59 -> 0-360 - includes seconds
                 hh > 5 ? hh180 = hh - 6 : hh180 = 6 + hh;
                 hdeg = hh180 * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
-
-                // point to draw island
-                int pointX[5];
-                // = {
-                pointX[0] = random(30, 60);
-                pointX[1] = random(130, 160);
-                pointX[2] = random(210, 230);
-                pointX[3] = random(130, 160);
-                pointX[4] = random(30, 60);
-                // };
-                int pointY[5];
-                pointY[0] = random(30, 100);
-                pointY[1] = random(30, 100);
-                pointY[2] = random(pointY[1] + 10, 180);
-                pointY[3] = random(180, 220);
-                pointY[4] = random(180, 220);
 
                 // DRAW  random  shape ISLAND
                 plygon = 21;
