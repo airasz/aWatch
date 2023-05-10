@@ -6,41 +6,41 @@ void drawTimeSetting(int group)
         {
 
                 // row2
-                drawSmoothOutlineButton(0, 70, 60, 40, colorAccent, TFT_WHITE, "-");
-                drawSmoothOutlineButton(240 - 62, 70, 60, 40, colorAccent, TFT_WHITE, "+");
+                drawSmoothOutlineButton(0, 70, 60, 40, config.colorAccent, TFT_WHITE, "-");
+                drawSmoothOutlineButton(240 - 62, 70, 60, 40, config.colorAccent, TFT_WHITE, "+");
                 tft->setTextDatum(MC_DATUM);
                 tft->setTextColor(TFT_WHITE);
                 tft->drawString("HOUR", 120, 64, 2);
 
                 String hou = "";
                 hou += old_hh;
-                drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, colorAccent, TFT_BLACK, hou);
+                drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_BLACK, hou);
                 hou = "";
                 hou += hh;
-                drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, colorAccent, TFT_WHITE, hou);
+                drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_WHITE, hou);
 
                 // row3
-                drawSmoothOutlineButton(0, 130, 60, 40, colorAccent, TFT_WHITE, "-");
-                drawSmoothOutlineButton(240 - 62, 130, 60, 40, colorAccent, TFT_WHITE, "+");
+                drawSmoothOutlineButton(0, 130, 60, 40, config.colorAccent, TFT_WHITE, "-");
+                drawSmoothOutlineButton(240 - 62, 130, 60, 40, config.colorAccent, TFT_WHITE, "+");
                 tft->setTextDatum(MC_DATUM);
                 tft->setTextColor(TFT_WHITE);
                 tft->drawString("MINUTE", 120, 124, 2);
                 String mnit = "";
                 mnit += old_mm;
-                drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, colorAccent, TFT_BLACK, mnit);
+                drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_BLACK, mnit);
                 mnit = "";
                 mnit += mm;
-                drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, colorAccent, TFT_WHITE, mnit);
+                drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_WHITE, mnit);
 
                 // row 4
                 if (hh != tmphh || mm != tmpmm)
                 {
-                        drawButton(0, 190, 240, 40, colorAccent, TFT_WHITE, "Write to RTC");
+                        drawButton(0, 190, 240, 40, config.colorAccent, TFT_WHITE, "Write to RTC");
                         write2RTC = 1;
                 }
                 else
                 {
-                        drawButton(0, 190, 240, 40, colorAccent, TFT_WHITE, "NEXT");
+                        drawButton(0, 190, 240, 40, config.colorAccent, TFT_WHITE, "NEXT");
                 }
                 old_hh = hh;
                 old_mm = mm;
@@ -49,41 +49,41 @@ void drawTimeSetting(int group)
         {
 
                 // row2
-                drawSmoothOutlineButton(0, 70, 60, 40, colorAccent, TFT_WHITE, "-");
-                drawSmoothOutlineButton(240 - 62, 70, 60, 40, colorAccent, TFT_WHITE, "+");
+                drawSmoothOutlineButton(0, 70, 60, 40, config.colorAccent, TFT_WHITE, "-");
+                drawSmoothOutlineButton(240 - 62, 70, 60, 40, config.colorAccent, TFT_WHITE, "+");
                 tft->setTextDatum(MC_DATUM);
                 tft->setTextColor(TFT_WHITE);
                 tft->drawString("DAY", 120, 64, 2);
 
                 String sday = "";
                 sday += old_day;
-                drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, colorAccent, TFT_BLACK, sday);
+                drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_BLACK, sday);
                 sday = "";
                 sday += dday;
-                drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, colorAccent, TFT_WHITE, sday);
+                drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_WHITE, sday);
 
                 // row3
-                drawSmoothOutlineButton(0, 130, 60, 40, colorAccent, TFT_WHITE, "-");
-                drawSmoothOutlineButton(240 - 62, 130, 60, 40, colorAccent, TFT_WHITE, "+");
+                drawSmoothOutlineButton(0, 130, 60, 40, config.colorAccent, TFT_WHITE, "-");
+                drawSmoothOutlineButton(240 - 62, 130, 60, 40, config.colorAccent, TFT_WHITE, "+");
                 tft->setTextDatum(MC_DATUM);
                 tft->setTextColor(TFT_WHITE);
                 tft->drawString("MONTH", 120, 124, 2);
                 String smonth = "";
                 smonth += old_mnt;
-                drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, colorAccent, TFT_BLACK, smonth);
+                drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_BLACK, smonth);
                 smonth = "";
                 smonth += mmonth;
-                drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, colorAccent, TFT_WHITE, smonth);
+                drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_WHITE, smonth);
 
                 // row 4
                 if (dday != tmpday || mmonth != tmpmnt)
                 {
-                        drawButton(0, 190, 240, 40, colorAccent, TFT_WHITE, "Write to RTC");
+                        drawButton(0, 190, 240, 40, config.colorAccent, TFT_WHITE, "Write to RTC");
                         write2RTC = 1;
                 }
                 else
                 {
-                        drawButton(0, 190, 240, 40, colorAccent, TFT_WHITE, "NEXT");
+                        drawButton(0, 190, 240, 40, config.colorAccent, TFT_WHITE, "NEXT");
                 }
                 old_day = dday;
                 old_mnt = mmonth;
@@ -91,27 +91,27 @@ void drawTimeSetting(int group)
         else if (group == 3)
         {
                 // row2
-                drawSmoothOutlineButton(0, 70, 60, 40, colorAccent, TFT_WHITE, "-");
-                drawSmoothOutlineButton(240 - 62, 70, 60, 40, colorAccent, TFT_WHITE, "+");
+                drawSmoothOutlineButton(0, 70, 60, 40, config.colorAccent, TFT_WHITE, "-");
+                drawSmoothOutlineButton(240 - 62, 70, 60, 40, config.colorAccent, TFT_WHITE, "+");
                 tft->setTextDatum(MC_DATUM);
                 tft->setTextColor(TFT_WHITE);
                 tft->drawString("YEAR", 120, 64, 2);
                 String syear = "";
                 syear += old_year;
-                drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, colorAccent, TFT_BLACK, syear);
+                drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_BLACK, syear);
                 syear = "";
                 syear += yyear;
-                drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, colorAccent, TFT_WHITE, syear);
+                drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_WHITE, syear);
 
                 // row 4
                 if (yyear != tmpyear)
                 {
-                        drawButton(0, 190, 240, 40, colorAccent, TFT_WHITE, "Write to RTC");
+                        drawButton(0, 190, 240, 40, config.colorAccent, TFT_WHITE, "Write to RTC");
                         write2RTC = 1;
                 }
                 else
                 {
-                        drawButton(0, 190, 240, 40, colorAccent, TFT_WHITE, "DONE");
+                        drawButton(0, 190, 240, 40, config.colorAccent, TFT_WHITE, "DONE");
                 }
                 old_year = yyear;
         }
