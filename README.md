@@ -11,7 +11,8 @@ feature:
     - adjustable brightness.
     - adjustable screen timeout.
     - switch between random face or static face every wake up.
-disable: 
+
+Disable: 
   - wakeup on double touch.
   - LVGL
 
