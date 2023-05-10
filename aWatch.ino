@@ -369,6 +369,7 @@ void setup()
   // config.screensaver_timeout = 20;
   // EEPROM_writeAnything(0, config);
   // EEPROM.commit();
+  //  config.colorAccent = COLOR_ACCENT[config.colorAccent];
   CF = config.clock_face; // max 9
   clock_face_now = config.clock_face;
   screenTimeOut = config.screensaver_timeout;

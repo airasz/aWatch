@@ -6,14 +6,14 @@ void drawAlarmsetting()
         tft->setTextFont(2);
         tft->setCursor(3, 76);
         tft->print("Enabled");
-        drawSwitch(170, 70, config.colorAccent, rgbToHex(200, 200, 200), config.alarm_enable);
+        drawSwitch(170, 70, COLOR_ACCENT[config.colorAccent], rgbToHex(200, 200, 200), config.alarm_enable);
 }
 void drawAlarmSet()
 {
         // tft->fillRect(0, 60, 240, 180, TFT_BLACK);
         // row2
-        drawSmoothOutlineButton(0, 70, 60, 40, config.colorAccent, TFT_WHITE, "-");
-        drawSmoothOutlineButton(240 - 62, 70, 60, 40, config.colorAccent, TFT_WHITE, "+");
+        drawSmoothOutlineButton(0, 70, 60, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "-");
+        drawSmoothOutlineButton(240 - 62, 70, 60, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
 
@@ -21,30 +21,30 @@ void drawAlarmSet()
 
         String hou = "";
         hou += old_tmpha;
-        drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_BLACK, hou);
+        drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, COLOR_ACCENT[config.colorAccent], TFT_BLACK, hou);
         hou = "";
         hou += tmpha;
-        drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_WHITE, hou);
+        drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, hou);
 
         // row3
-        drawSmoothOutlineButton(0, 130, 60, 40, config.colorAccent, TFT_WHITE, "-");
-        drawSmoothOutlineButton(240 - 62, 130, 60, 40, config.colorAccent, TFT_WHITE, "+");
+        drawSmoothOutlineButton(0, 130, 60, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "-");
+        drawSmoothOutlineButton(240 - 62, 130, 60, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
         tft->drawString("MINUTE ALARM", 120, 124, 2);
 
         String mnit = "";
         mnit += old_tmpma;
-        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_BLACK, mnit);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, COLOR_ACCENT[config.colorAccent], TFT_BLACK, mnit);
         mnit = "";
         mnit += tmpma;
-        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_WHITE, mnit);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, mnit);
 
         // row 4
 
         if (tmpha != config.alarm_h || tmpma != config.alarm_m || tmpalarmenable != config.alarm_enable)
         {
-                drawButton(0, 190, 80, 40, config.colorAccent, TFT_WHITE, "SAVE");
+                drawButton(0, 190, 80, 40, COLOR_ACCENT[config.colorAccent], TFT_BLACK, "SAVE");
                 bwriteAlarm = true;
         }
 
@@ -53,7 +53,7 @@ void drawAlarmSet()
         tft->print("Enabled");
         // row 4
 
-        drawSwitch(170, 190, TFT_BLUE, rgbToHex(200, 200, 200), tmpalarmenable);
+        drawSwitch(170, 190, COLOR_ACCENT[config.colorAccent], rgbToHex(200, 200, 200), tmpalarmenable);
 
         old_tmpha = tmpha;
         old_tmpma = tmpma;

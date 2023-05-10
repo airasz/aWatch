@@ -8,10 +8,10 @@ void drawDisplaySetting()
         setSTO();
         setSBright();
 
-        // drawButton(1, 190, 78, 40, config.colorAccent, TFT_WHITE, "ON");
-        // drawButton(81, 190, 78, 40, config.colorAccent, TFT_WHITE, "OFF");
+        // drawButton(1, 190, 78, 40, COLOR_ACCENT[config.colorAccent], TFT_BLACK, "ON");
+        // drawButton(81, 190, 78, 40, COLOR_ACCENT[config.colorAccent], TFT_BLACK, "OFF");
 
-        drawButton(161, 190, 78, 40, config.colorAccent, TFT_WHITE, "NEXT");
+        drawButton(161, 190, 78, 40, COLOR_ACCENT[config.colorAccent], TFT_BLACK, "NEXT");
 }
 void drawStepSetting()
 {
@@ -20,7 +20,7 @@ void drawStepSetting()
         tft->print("Enabled");
         // row 2
 
-        drawSwitch(170, 70, TFT_BLUE, rgbToHex(200, 200, 200), config.stepcounter_filter > 0);
+        drawSwitch(170, 70, COLOR_ACCENT[config.colorAccent], rgbToHex(200, 200, 200), config.stepcounter_filter > 0);
         // if (config.stepcounter_filter > 0)
         // {
         //         drawSwitch(170, 70, TFT_BLUE, rgbToHex(200, 200, 200), true);
@@ -31,24 +31,24 @@ void drawStepSetting()
         // }
         // row3
 
-        drawSmoothOutlineButton(0, 130, 60, 40, config.colorAccent, TFT_WHITE, "-");
+        drawSmoothOutlineButton(0, 130, 60, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "-");
 
-        drawSmoothOutlineButton(240 - 62, 130, 60, 40, config.colorAccent, TFT_WHITE, "+");
+        drawSmoothOutlineButton(240 - 62, 130, 60, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
         tft->drawString("Step length", 120, 120, 2);
         String s_length = "";
         s_length += old_stepLength;
         s_length += " cm";
-        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_BLACK, s_length);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, COLOR_ACCENT[config.colorAccent], TFT_BLACK, s_length);
         s_length = "";
         s_length += stepLenght;
         s_length += " cm";
-        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, config.colorAccent, TFT_WHITE, s_length);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, s_length);
 
         // row 4
 
-        drawButton(0, 190, 240, 40, config.colorAccent, TFT_WHITE, "Reset daily step counter");
+        drawButton(0, 190, 240, 40, COLOR_ACCENT[config.colorAccent], TFT_BLACK, "Reset daily step counter");
         // tft->drawRoundRect(0, 190, 240, 40, 8, TFT_BLUE);
         // tft->setCursor(13, 200);
         // tft->print("Reset step counter");
@@ -112,11 +112,11 @@ void updateWgetSeekBarTO(uint8_t X, uint8_t Y, uint8_t value)
                 // tft->fillCircle(SBOldvalue, Y + 3, 2, TFT_BLACK);
                 tft->fillSmoothCircle(SBOldvalue, Y + 5, 2, TFT_BLACK, TFT_BLACK);
                 // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-                tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, config.colorAccent, TFT_BLACK);
+                tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, COLOR_ACCENT[config.colorAccent], TFT_BLACK);
                 // tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
                 tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
                 oldValue = value;
-                drawButton(0, 190, 80, 40, config.colorAccent, TFT_WHITE, "SAVE");
+                drawButton(0, 190, 80, 40, COLOR_ACCENT[config.colorAccent], TFT_BLACK, "SAVE");
         }
 }
 void drawWgetSeekBarTO(uint8_t X, uint8_t Y, uint8_t value)
@@ -138,7 +138,7 @@ void drawWgetSeekBarTO(uint8_t X, uint8_t Y, uint8_t value)
         int SBOldvalue = (X + 2) + (((width - X) / 30) * oldValue);
         // tft->fillCircle(SBOldvalue, Y + 3, 2, TFT_BLACK);
         // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-        tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, config.colorAccent, TFT_BLACK);
+        tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, COLOR_ACCENT[config.colorAccent], TFT_BLACK);
         // tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
         tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
         oldValue = value;
@@ -194,12 +194,12 @@ void updateWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
                 tft->fillCircle(SBOldvalue, Y + 5, 2, TFT_BLACK);
                 // tft->fillSmoothCircle(SBOldvalue, Y + 5, 2, TFT_BLACK, TFT_BLACK);
                 // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-                tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, config.colorAccent, TFT_BLACK);
+                tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, COLOR_ACCENT[config.colorAccent], TFT_BLACK);
 
                 tft->fillCircle(SBvalue, Y + 5, 2, TFT_WHITE);
                 // tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
                 oldValue2 = value;
-                drawButton(0, 190, 80, 40, config.colorAccent, TFT_WHITE, "SAVE");
+                drawButton(0, 190, 80, 40, COLOR_ACCENT[config.colorAccent], TFT_BLACK, "SAVE");
         }
 }
 void drawWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
@@ -220,7 +220,7 @@ void drawWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
         int SBvalue = (X + 2) + (((width - X) / 15) * value);
         int SBOldvalue = (X + 2) + (((width - X) / 15) * oldValue2);
         // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-        tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, config.colorAccent, TFT_BLACK);
+        tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, COLOR_ACCENT[config.colorAccent], TFT_BLACK);
         tft->fillCircle(SBvalue, Y + 5, 2, TFT_WHITE);
         // tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
         oldValue2 = value;
@@ -229,13 +229,13 @@ void pickAccent()
 {
 
         tft->fillRect(0, 60, 240, 180, TFT_BLACK);
-        drawButton(0, 60, 80, 60, COLOR_ACCENT[0], TFT_WHITE, "PURPLE");    // 4
-        drawButton(80, 60, 80, 60, COLOR_ACCENT[1], TFT_WHITE, "BLUE");     // 5
-        drawButton(160, 60, 80, 60, COLOR_ACCENT[2], TFT_WHITE, "GREEN");   // 6
-        drawButton(0, 120, 80, 60, COLOR_ACCENT[3], TFT_WHITE, "YELLOW");   // 7
-        drawButton(80, 120, 80, 60, COLOR_ACCENT[4], TFT_WHITE, "PINK");    // 8
-        drawButton(160, 120, 80, 60, COLOR_ACCENT[5], TFT_WHITE, "ORANGE"); // 9
-        drawButton(0, 180, 80, 60, COLOR_ACCENT[6], TFT_WHITE, "RED");      // 10
-        drawButton(80, 180, 80, 60, COLOR_ACCENT[7], TFT_WHITE, "MAGENTA"); // 11
-        drawButton(160, 180, 80, 60, COLOR_ACCENT[8], TFT_WHITE, "D_CYAN"); // 11
+        drawButton(0, 60, 80, 60, COLOR_ACCENT[0], TFT_BLACK, "PURPLE");    // 4
+        drawButton(80, 60, 80, 60, COLOR_ACCENT[1], TFT_BLACK, "BLUE");     // 5
+        drawButton(160, 60, 80, 60, COLOR_ACCENT[2], TFT_BLACK, "GREEN");   // 6
+        drawButton(0, 120, 80, 60, COLOR_ACCENT[3], TFT_BLACK, "YELLOW");   // 7
+        drawButton(80, 120, 80, 60, COLOR_ACCENT[4], TFT_BLACK, "PINK");    // 8
+        drawButton(160, 120, 80, 60, COLOR_ACCENT[5], TFT_BLACK, "ORANGE"); // 9
+        drawButton(0, 180, 80, 60, COLOR_ACCENT[6], TFT_BLACK, "RED");      // 10
+        drawButton(80, 180, 80, 60, COLOR_ACCENT[7], TFT_BLACK, "MAGENTA"); // 11
+        drawButton(160, 180, 80, 60, COLOR_ACCENT[8], TFT_BLACK, "D_CYAN"); // 11
 }

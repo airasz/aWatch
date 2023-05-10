@@ -21,7 +21,9 @@ void startSetting(int setID)
         // }
         // drawHomeSettingHeader(setID);
         // tft->fillRect(0, 60, 240, 180, TFT_BLACK); //clear body area
-        tft->fillRect(80, 0, 80, 60, TFT_RED);
+        tft->fillRect(80, 0, 80, 60, COLOR_ACCENT[config.colorAccent]);
+
+        tft->setTextColor(TFT_BLACK);
         switch (setID)
         {
         case 0:
@@ -44,11 +46,12 @@ void startSetting(int setID)
                 tmpmnt = mmonth;
                 tmpyear = yyear;
 
-                tft->fillRect(0, 0, 240, 60, TFT_RED);
-                // drawButton(2, 8, 78, 48, config.colorAccent, TFT_WHITE, "BACK");
-                // drawButton(160, 8, 78, 48, config.colorAccent, TFT_WHITE, "EXIT");
-                drawSmoothButton(2, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "BACK");
-                drawSmoothButton(160, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "EXIT");
+                tft->fillRect(0, 0, 240, 60, COLOR_ACCENT[config.colorAccent]);
+                // drawButton(2, 8, 78, 48, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "BACK");
+                // drawButton(160, 8, 78, 48, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "EXIT");
+                drawSmoothButton(2, 8, 78, 48, TFT_BLACK, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "BACK");
+                drawSmoothButton(160, 8, 78, 48, TFT_BLACK, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "EXIT");
+                tft->setTextColor(TFT_BLACK);
                 tft->drawString("SETTING", 120, 24, 2);
                 drawHomeSettingBody();
                 break;
@@ -105,21 +108,21 @@ void startSetting(int setID)
 void drwaBaseHeader(int setID)
 {
         tft->fillRect(0, 0, 240, 60, TFT_RED);
-        // drawButton(2, 8, 78, 48, config.colorAccent, TFT_WHITE, "BACK");
-        drawSmoothButton(2, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "BACK");
-        // drawButton(160, 8, 78, 48, config.colorAccent, TFT_WHITE, "EXIT");
-        drawSmoothButton(160, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "EXIT");
+        // drawButton(2, 8, 78, 48, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "BACK");
+        drawSmoothButton(2, 8, 78, 48, TFT_BLACK, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "BACK");
+        // drawButton(160, 8, 78, 48, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "EXIT");
+        drawSmoothButton(160, 8, 78, 48, TFT_BLACK, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "EXIT");
 }
 
 void drawHomeSettingBody()
 {
         tft->fillRect(0, 60, 240, 180, TFT_BLACK);
-        drawOutlineButton(0, 60, 80, 60, config.colorAccent, TFT_WHITE, "STEP");
-        drawOutlineButton(80, 60, 80, 60, config.colorAccent, TFT_WHITE, "DISPLAY");
-        drawOutlineButton(160, 60, 80, 60, config.colorAccent, TFT_WHITE, "TIME");
-        drawOutlineButton(0, 120, 80, 60, config.colorAccent, TFT_WHITE, "ALARM");
-        drawOutlineButton(80, 120, 80, 60, config.colorAccent, TFT_WHITE, "FACE");
-        drawOutlineButton(160, 120, 80, 60, config.colorAccent, TFT_WHITE, "PRAY");
-        drawOutlineButton(0, 180, 80, 60, config.colorAccent, TFT_WHITE, "AC");
-        drawOutlineButton(0, 180, 80, 60, config.colorAccent, TFT_WHITE, "AC");
+        drawOutlineButton(0, 60, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "STEP");
+        drawOutlineButton(80, 60, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "DISPLAY");
+        drawOutlineButton(160, 60, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "TIME");
+        drawOutlineButton(0, 120, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "ALARM");
+        drawOutlineButton(80, 120, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "FACE");
+        drawOutlineButton(160, 120, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "PRAY");
+        drawOutlineButton(0, 180, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "AC");
+        drawOutlineButton(0, 180, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "AC");
 }
