@@ -119,6 +119,7 @@ typedef struct config_t
     boolean alarm_pray;
     uint8_t alarmpraywarning;
     uint8_t vib;
+    uint16_t colorAccent;
 } CONFIGGEN;
 CONFIGGEN config;
 // http://www.barth-dev.de/online/rgb565-color-picker/
@@ -133,7 +134,8 @@ const uint32_t COLORS_DARK[10] = {
 // uint32_t COLOR_MEDIUM[] = {
 //     TFT_PURPLE, TFT_BLUE, TFT_GREEN, TFT_YELLOW, TFT_GREENYELLOW,
 //     TFT_PINK, TFT_ORANGE, TFT_RED, TFT_CYAN, TFT_MAGENTA}
-uint32_t COLOR_MEDIUM[] = {TFT_PURPLE, TFT_BLUE, TFT_GREEN, TFT_YELLOW, TFT_GREENYELLOW, TFT_PINK, TFT_ORANGE, TFT_RED, TFT_CYAN, TFT_MAGENTA};
+const uint32_t COLOR_MEDIUM[] = {TFT_PURPLE, TFT_BLUE, TFT_GREEN, TFT_YELLOW, TFT_GREENYELLOW, TFT_PINK, TFT_ORANGE, TFT_RED, TFT_CYAN, TFT_MAGENTA};
+const uint32_t COLOR_ACCENT[] = {TFT_PURPLE, TFT_BLUE, TFT_GREEN, TFT_YELLOW, TFT_PINK, TFT_ORANGE, TFT_RED, TFT_MAGENTA, TFT_DARKCYAN};
 
 String const bulan[] =
     {"Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli",

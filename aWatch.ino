@@ -361,6 +361,7 @@ void setup()
     config.alarm_pray = false;
     config.alarmpraywarning = 3;
     config.vib = 8;
+    config.colorAccent = 2;
     EEPROM_writeAnything(0, config);
     EEPROM.commit();
   }
