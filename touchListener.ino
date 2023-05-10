@@ -202,7 +202,7 @@ void touchListener()
                 }
                 if (page_ID == 22)
                 {
-                        adjusting(tx, ty);
+                        adjusting(tx, ty); // update slider
                 }
                 swipeMe = 1;
                 touched = 0;
@@ -347,6 +347,12 @@ void handleTouch()
                                         updateScreen(page_ID);                     // gui.ino
                                         prevpage_ID = page_ID;
                                 }
+                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                {
+                                        config.colorAccent = tmptouchreg - 4;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                }
                                 else if (page_ID == 24)
                                 {
                                         tmpha--;
@@ -405,6 +411,12 @@ void handleTouch()
                                         updateScreen(page_ID);                     // gui.ino
                                         prevpage_ID = page_ID;
                                 }
+                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                {
+                                        config.colorAccent = tmptouchreg - 4;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                }
                         }
                         if (tmptouchreg == 6) //============================  6
                         {
@@ -425,6 +437,12 @@ void handleTouch()
                                                 EEPROM.commit();
                                                 updateScreen(page_ID); // appSetting.ino
                                         }
+                                }
+                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                {
+                                        config.colorAccent = tmptouchreg - 4;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
                                 }
                                 if (page_ID == 25)
                                 {
@@ -538,6 +556,12 @@ void handleTouch()
                                         tft->fillRect(0, 60, 240, 180, TFT_BLACK);
                                         updateScreen(page_ID); // gui.ino
                                 }
+                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                {
+                                        config.colorAccent = tmptouchreg - 4;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                }
                                 else if (page_ID == 271) // panasonic
                                 {
                                         itemp--;
@@ -571,6 +595,12 @@ void handleTouch()
                                         tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
                                         updateScreen(page_ID);                     // gui.ino
                                 }
+                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                {
+                                        config.colorAccent = tmptouchreg - 4;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                }
                         }
                         if (tmptouchreg == 9) //============================  9
                         {
@@ -593,6 +623,12 @@ void handleTouch()
                                         page_ID = 272;
                                         tft->fillRect(0, 60, 240, 180, TFT_BLACK);
                                         updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                {
+                                        config.colorAccent = tmptouchreg - 4;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
                                 }
                                 else if (page_ID == 271)
                                 {
@@ -667,6 +703,12 @@ void handleTouch()
                                         writeAlarm();
                                         page_ID = 2;
                                         updateScreen(page_ID); // gui.ino
+                                }
+                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                {
+                                        config.colorAccent = tmptouchreg - 4;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
                                 }
                                 else if (page_ID == 271)
                                 {
@@ -754,6 +796,12 @@ void handleTouch()
                                         toast("step counter resetted");
                                         prevpage_ID = page_ID;
                                 }
+                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                {
+                                        config.colorAccent = tmptouchreg - 4;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                }
                                 else if (page_ID == 271)
                                 {
                                         PanasonicOff();
@@ -793,6 +841,11 @@ void handleTouch()
                                         drawToast("step counter resetted");
                                         prevpage_ID = page_ID;
                                 }
+                                else if (page_ID == 22)
+                                {
+                                        page_ID = 221;
+                                        updateScreen(page_ID); // gui.ino
+                                }
                                 else if (page_ID == 24)
                                 {
                                         tmpalarmenable = !tmpalarmenable;
@@ -815,6 +868,12 @@ void handleTouch()
                                         EEPROM_writeAnything(0, config);
                                         EEPROM.commit();
                                         updateScreen(page_ID); // appSetting.ino
+                                }
+                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                {
+                                        config.colorAccent = tmptouchreg - 4;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
                                 }
                                 else if (page_ID == 271)
                                 {
