@@ -47,8 +47,8 @@ void startSetting(int setID)
                 tmpyear = yyear;
 
                 tft->fillRect(0, 0, 240, 60, TFT_RED);
-                // drawButton(2, 8, 78, 48, TFT_BLUE, TFT_WHITE, "BACK");
-                // drawButton(160, 8, 78, 48, TFT_BLUE, TFT_WHITE, "EXIT");
+                // drawButton(2, 8, 78, 48, colorAccent, TFT_WHITE, "BACK");
+                // drawButton(160, 8, 78, 48, colorAccent, TFT_WHITE, "EXIT");
                 drawSmoothButton(2, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "BACK");
                 drawSmoothButton(160, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "EXIT");
                 tft->drawString("SETTING", 120, 24, 2);
@@ -107,23 +107,23 @@ void startSetting(int setID)
 void drwaBaseHeader(int setID)
 {
         tft->fillRect(0, 0, 240, 60, TFT_RED);
-        // drawButton(2, 8, 78, 48, TFT_BLUE, TFT_WHITE, "BACK");
+        // drawButton(2, 8, 78, 48, colorAccent, TFT_WHITE, "BACK");
         drawSmoothButton(2, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "BACK");
-        // drawButton(160, 8, 78, 48, TFT_BLUE, TFT_WHITE, "EXIT");
+        // drawButton(160, 8, 78, 48, colorAccent, TFT_WHITE, "EXIT");
         drawSmoothButton(160, 8, 78, 48, TFT_BLUE, TFT_RED, TFT_WHITE, "EXIT");
 }
 
 void drawHomeSettingBody()
 {
         tft->fillRect(0, 60, 240, 180, TFT_BLACK);
-        drawOutlineButton(0, 60, 80, 60, TFT_BLUE, TFT_WHITE, "STEP");
-        drawOutlineButton(80, 60, 80, 60, TFT_BLUE, TFT_WHITE, "DISPLAY");
-        drawOutlineButton(160, 60, 80, 60, TFT_BLUE, TFT_WHITE, "TIME");
-        drawOutlineButton(0, 120, 80, 60, TFT_BLUE, TFT_WHITE, "ALARM");
-        drawOutlineButton(80, 120, 80, 60, TFT_BLUE, TFT_WHITE, "FACE");
-        drawOutlineButton(160, 120, 80, 60, TFT_BLUE, TFT_WHITE, "PRAY");
-        drawOutlineButton(0, 180, 80, 60, TFT_BLUE, TFT_WHITE, "AC");
-        drawOutlineButton(0, 180, 80, 60, TFT_BLUE, TFT_WHITE, "AC");
+        drawOutlineButton(0, 60, 80, 60, colorAccent, TFT_WHITE, "STEP");
+        drawOutlineButton(80, 60, 80, 60, colorAccent, TFT_WHITE, "DISPLAY");
+        drawOutlineButton(160, 60, 80, 60, colorAccent, TFT_WHITE, "TIME");
+        drawOutlineButton(0, 120, 80, 60, colorAccent, TFT_WHITE, "ALARM");
+        drawOutlineButton(80, 120, 80, 60, colorAccent, TFT_WHITE, "FACE");
+        drawOutlineButton(160, 120, 80, 60, colorAccent, TFT_WHITE, "PRAY");
+        drawOutlineButton(0, 180, 80, 60, colorAccent, TFT_WHITE, "AC");
+        drawOutlineButton(0, 180, 80, 60, colorAccent, TFT_WHITE, "AC");
 }
 void drawDisplaySetting()
 {
@@ -150,24 +150,24 @@ void drawStepSetting()
         // }
         // row3
 
-        drawSmoothOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "-");
+        drawSmoothOutlineButton(0, 130, 60, 40, colorAccent, TFT_WHITE, "-");
 
-        drawSmoothOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "+");
+        drawSmoothOutlineButton(240 - 62, 130, 60, 40, colorAccent, TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
         tft->drawString("Step length", 120, 120, 2);
         String s_length = "";
         s_length += old_stepLength;
         s_length += " cm";
-        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, s_length);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, colorAccent, TFT_BLACK, s_length);
         s_length = "";
         s_length += stepLenght;
         s_length += " cm";
-        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, s_length);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, colorAccent, TFT_WHITE, s_length);
 
         // row 4
 
-        drawButton(0, 190, 240, 40, TFT_BLUE, TFT_WHITE, "Reset daily step counter");
+        drawButton(0, 190, 240, 40, colorAccent, TFT_WHITE, "Reset daily step counter");
         // tft->drawRoundRect(0, 190, 240, 40, 8, TFT_BLUE);
         // tft->setCursor(13, 200);
         // tft->print("Reset step counter");
@@ -231,11 +231,11 @@ void updateWgetSeekBarTO(uint8_t X, uint8_t Y, uint8_t value)
                 // tft->fillCircle(SBOldvalue, Y + 3, 2, TFT_BLACK);
                 tft->fillSmoothCircle(SBOldvalue, Y + 5, 2, TFT_BLACK, TFT_BLACK);
                 // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-                tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, TFT_BLUE, TFT_BLACK);
+                tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, colorAccent, TFT_BLACK);
                 // tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
                 tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
                 oldValue = value;
-                drawButton(0, 190, 80, 40, TFT_BLUE, TFT_WHITE, "SAVE");
+                drawButton(0, 190, 80, 40, colorAccent, TFT_WHITE, "SAVE");
         }
 }
 void drawWgetSeekBarTO(uint8_t X, uint8_t Y, uint8_t value)
@@ -257,7 +257,7 @@ void drawWgetSeekBarTO(uint8_t X, uint8_t Y, uint8_t value)
         int SBOldvalue = (X + 2) + (((width - X) / 30) * oldValue);
         // tft->fillCircle(SBOldvalue, Y + 3, 2, TFT_BLACK);
         // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-        tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, TFT_BLUE, TFT_BLACK);
+        tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, colorAccent, TFT_BLACK);
         // tft->fillCircle(SBvalue, Y + 3, 2, TFT_WHITE);
         tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
         oldValue = value;
@@ -313,12 +313,12 @@ void updateWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
                 tft->fillCircle(SBOldvalue, Y + 5, 2, TFT_BLACK);
                 // tft->fillSmoothCircle(SBOldvalue, Y + 5, 2, TFT_BLACK, TFT_BLACK);
                 // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-                tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, TFT_BLUE, TFT_BLACK);
+                tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, colorAccent, TFT_BLACK);
 
                 tft->fillCircle(SBvalue, Y + 5, 2, TFT_WHITE);
                 // tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
                 oldValue2 = value;
-                drawButton(0, 190, 80, 40, TFT_BLUE, TFT_WHITE, "SAVE");
+                drawButton(0, 190, 80, 40, colorAccent, TFT_WHITE, "SAVE");
         }
 }
 void drawWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
@@ -339,7 +339,7 @@ void drawWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
         int SBvalue = (X + 2) + (((width - X) / 15) * value);
         int SBOldvalue = (X + 2) + (((width - X) / 15) * oldValue2);
         // tft->drawRoundRect(X, Y, width - X, 8, 3, TFT_BLUE);
-        tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, TFT_BLUE, TFT_BLACK);
+        tft->drawSmoothRoundRect(X, Y, 4, 4 - 1, width - X, 10, colorAccent, TFT_BLACK);
         tft->fillCircle(SBvalue, Y + 5, 2, TFT_WHITE);
         // tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
         oldValue2 = value;

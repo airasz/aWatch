@@ -11,38 +11,38 @@ void drawPraySet()
 {
 
         // row2
-        drawSmoothOutlineButton(0, 70, 60, 40, TFT_BLUE, TFT_WHITE, "-");
-        drawSmoothOutlineButton(240 - 62, 70, 60, 40, TFT_BLUE, TFT_WHITE, "+");
+        drawSmoothOutlineButton(0, 70, 60, 40, colorAccent, TFT_WHITE, "-");
+        drawSmoothOutlineButton(240 - 62, 70, 60, 40, colorAccent, TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
         tft->drawString("ALERT MIN", 120, 64, 2);
         String hou = "";
         hou += old_tmpmwarn;
-        drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, hou);
+        drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, colorAccent, TFT_BLACK, hou);
         hou = "";
         hou += tmpmwarn;
-        drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, hou);
+        drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, colorAccent, TFT_WHITE, hou);
 
         // row3
-        drawSmoothOutlineButton(0, 130, 60, 40, TFT_BLUE, TFT_WHITE, "-");
+        drawSmoothOutlineButton(0, 130, 60, 40, colorAccent, TFT_WHITE, "-");
 
-        drawSmoothOutlineButton(240 - 62, 130, 60, 40, TFT_BLUE, TFT_WHITE, "+");
+        drawSmoothOutlineButton(240 - 62, 130, 60, 40, colorAccent, TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
         tft->drawString("VIBRATIONS", 120, 124, 2);
 
         String mnit = "";
         mnit += old_tmpvib;
-        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_BLACK, mnit);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, colorAccent, TFT_BLACK, mnit);
         mnit = "";
         mnit += tmpvib;
-        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, TFT_BLUE, TFT_WHITE, mnit);
+        drawSmoothOutlineButton(62, 130, 240 - 62 - 60 - 2, 40, colorAccent, TFT_WHITE, mnit);
 
         // row 4
 
         if (tmpmwarn != config.alarmpraywarning || tmpvib != config.vib || tmpalarmpray != config.alarm_pray)
         {
-                drawButton(0, 190, 80, 40, TFT_BLUE, TFT_WHITE, "SAVE");
+                drawButton(0, 190, 80, 40, colorAccent, TFT_WHITE, "SAVE");
                 // bwriteAlarm = true;
         }
 
