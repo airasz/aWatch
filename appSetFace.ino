@@ -27,19 +27,19 @@ void drawFaceFilter(int col)
         if (col == 0)
         {
                 drawOutlineButton(0, 180, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "ANALOG"); // 7//3
-                if (config.show_analog)
-                        tft->fillCircle(0 + 10, 180 + 10, 6, TFT_WHITE);
+                                                                                                          // if (config.show_analog)
+                tft->fillCircle(0 + 10, 180 + 10, 6, (config.show_analog) ? TFT_WHITE : TFT_BLACK);
         }
         else if (col == 1)
         {
                 drawOutlineButton(80, 180, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "NUMBER"); // 8//4
-                if (config.show_number)
-                        tft->fillCircle(80 + 10, 180 + 10, 6, TFT_WHITE);
+                                                                                                           // if (config.show_number)
+                tft->fillCircle(80 + 10, 180 + 10, 6, (config.show_number) ? TFT_WHITE : TFT_BLACK);
         }
         else if (col == 2)
         {
                 drawOutlineButton(160, 180, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "TEXT"); // 9//5}
-                if (config.show_text)
-                        tft->fillCircle(160 + 10, 180 + 10, 6, TFT_WHITE);
+                                                                                                          // if (config.show_text)
+                tft->fillCircle(160 + 10, 180 + 10, 6, (config.show_text) ? TFT_WHITE : TFT_BLACK);
         }
 }
