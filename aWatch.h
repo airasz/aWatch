@@ -148,7 +148,7 @@ const uint8_t MaxDate[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 int startMonth, stDay, stHour, stMinute, currentMonth; // date on watch on boot
 int stepMonth, stepDay, stepHour, stepMinute;
-
+uint8_t listPointer=0; //pointer to facelist
 boolean date_is_up;
 boolean steps_is_up;
 boolean initialAnalog;
