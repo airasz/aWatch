@@ -468,6 +468,8 @@ void handleTouch()
                                         if (config.rnd_face)
                                         {
                                                 config.rnd_face = 0;
+                                                CF = faceList[random(0, faceList.size() + 1)];
+
                                                 EEPROM_writeAnything(0, config);
                                                 EEPROM.commit();
                                                 updateScreen(page_ID); // appSetting.ino
@@ -737,6 +739,7 @@ void handleTouch()
                                                 EEPROM_writeAnything(0, config);
                                                 EEPROM.commit();
                                                 drawFaceFilter(0); // appSetFace.ino
+                                                fillFaceList();
                                         }
                                         else
                                         {
@@ -744,6 +747,7 @@ void handleTouch()
                                                 EEPROM_writeAnything(0, config);
                                                 EEPROM.commit();
                                                 drawFaceFilter(0); // appSetFace.ino
+                                                fillFaceList();
                                         }
                                         // config.show_analog = !config.show_analog;
                                         // drawFaceFilter(0);
@@ -1022,11 +1026,11 @@ void handleTouch()
 
                         if (!faceList.isEmpty())
                         {
-                                int f;
-                                f = faceList.size();
-                                (f-- < 0) && (f = faceList.size());
+                                // int f;
+                                // f = faceList.size();
+                                (listPointer-- < 0) && (listPointer = faceList.size());
                                 // config.clock_face = CF;
-                                CF = faceList[f];
+                                CF = faceList[listPointer];
                                 // config.clock_face = CF;
 
                                 config.clock_face = CF;
@@ -1050,11 +1054,11 @@ void handleTouch()
                         // (CF > 14) && (CF = 2);
                         if (!faceList.isEmpty())
                         {
-                                int f;
-                                f = faceList.size();
-                                (f++ > faceList.size()) && (f = 0);
+                                // int f;
+                                // f = faceList.size();
+                                (listPointer++ > faceList.size()) && (listPointer = 0);
                                 config.clock_face = CF;
-                                CF = faceList[f];
+                                CF = faceList[listPointer];
                                 config.clock_face = CF;
                                 EEPROM_writeAnything(0, config);
                                 EEPROM.commit();
