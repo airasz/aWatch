@@ -21,7 +21,7 @@ void startSetting(int setID)
         // }
         // drawHomeSettingHeader(setID);
         // tft->fillRect(0, 60, 240, 180, TFT_BLACK); //clear body area
-        tft->fillRect(80, 0, 80, 60, COLOR_ACCENT[config.colorAccent]);
+        tft->fillRect(80, 0, 80, 60, TFT_WHITE);
 
         tft->setTextColor(TFT_BLACK);
         switch (setID)
