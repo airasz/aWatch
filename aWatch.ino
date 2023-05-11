@@ -372,7 +372,7 @@ void setup()
   }
 
   fillFaceList();
-
+  CF = faceList[listPointer];
   // config.screensaver_timeout = 20;
   // EEPROM_writeAnything(0, config);
   // EEPROM.commit();
@@ -869,11 +869,11 @@ void fillFaceList()
     for (size_t i = 0; i < 4; i++)
       faceList.add(i + 2);
   if (config.show_analog)
-    for (size_t i = 0; i < 8; i++)
+    for (size_t i = 0; i < 7; i++)
       faceList.add(i + 6);
   if (config.show_text)
     for (size_t i = 0; i < 2; i++)
-      faceList.add(i + 12);
+      faceList.add(i + 13);
 
   // force fill to avoid error
   if (faceList.size() == 0)
