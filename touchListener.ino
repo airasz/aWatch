@@ -729,6 +729,13 @@ void handleTouch()
                                         page_ID = 2;
                                         updateScreen(page_ID); // gui.ino
                                 }
+                                if (page_ID == 25)
+                                {
+                                        config.show_analog = !config.show_analog;
+                                        drawFaceFilter(0);
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                }
                                 else if (page_ID == 221) // pickAccent() appSetDisplay.ino
                                 {
                                         config.colorAccent = tmptouchreg - 4;
@@ -823,6 +830,13 @@ void handleTouch()
                                         toast("step counter resetted");
                                         prevpage_ID = page_ID;
                                 }
+                                if (page_ID == 25)
+                                {
+                                        config.show_number = !config.show_number;
+                                        drawFaceFilter(1);
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                }
                                 else if (page_ID == 221) // pickAccent() appSetDisplay.ino
                                 {
                                         config.colorAccent = tmptouchreg - 4;
@@ -887,6 +901,14 @@ void handleTouch()
                                 {
                                         tmpalarmenable = !tmpalarmenable;
                                         updateScreen(page_ID); // gui.ino
+                                }
+
+                                if (page_ID == 25)
+                                {
+                                        config.show_text = !config.show_text;
+                                        drawFaceFilter(2);
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
                                 }
                                 if (page_ID == 26)
                                 {

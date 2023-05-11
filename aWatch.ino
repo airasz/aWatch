@@ -22,6 +22,7 @@
 
 #include <WiFi.h>
 #include <HTTPClient.h> //Remove Audio Lib error
+#include "ArrayList.h"
 /* #include "AudioFileSourcePROGMEM.h"
 #include "AudioFileSourceID3.h"
 #include "AudioGeneratorMP3.h"
@@ -359,6 +360,9 @@ void setup()
     config.twelve_hr_clock = 0;
     config.metric_units = false;
     config.alarm_pray = false;
+    config.show_analog = true;
+    config.show_number = false;
+    config.show_text = false;
     config.alarmpraywarning = 3;
     config.vib = 8;
     config.colorAccent = 2;

@@ -83,7 +83,7 @@ void updateScreen(int dis_ID)
                 screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 25:
-                startSetting(7);
+                startSetting(7); // setface
                 screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 26:

@@ -117,6 +117,9 @@ typedef struct config_t
     int8_t twelve_hr_clock;
     boolean metric_units;
     boolean alarm_pray;
+    boolean show_analog;
+    boolean show_number;
+    boolean show_text;
     uint8_t alarmpraywarning;
     uint8_t vib;
     uint16_t colorAccent;
