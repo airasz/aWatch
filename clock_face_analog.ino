@@ -582,20 +582,6 @@ void analogClockVariant(int v)
                         screenServer();
                 break;
         case 6:
-                // CF=11
-                javaneseClock(hh, mm); // clock_face_text.ino
-
-                if (enableSS)
-                        screenServer();
-                break;
-        case 7:
-                // CF=12
-                mathFace(hh, mm); // clock_face_text.ino
-
-                if (enableSS)
-                        screenServer();
-                break;
-        case 8:
                 // CF=13
                 // chaotic pendulum
 
@@ -691,6 +677,21 @@ void analogClockVariant(int v)
                 if (enableSS)
                         screenServer();
                 break;
+        case 7:
+                // CF=11
+                javaneseClock(hh, mm); // clock_face_text.ino
+
+                if (enableSS)
+                        screenServer();
+                break;
+        case 8:
+                // CF=12
+                mathFace(hh, mm); // clock_face_text.ino
+
+                if (enableSS)
+                        screenServer();
+                break;
+
         default:
                 break;
         }

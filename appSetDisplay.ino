@@ -228,7 +228,7 @@ void drawWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
 void pickAccent()
 {
         // set title
-        tft->fillRect(80, 0, 80, 60, COLOR_ACCENT[config.colorAccent]);
+        tft->fillRect(80, 0, 80, 60, TFT_WHITE);
         tft->setTextColor(TFT_BLACK);
         tft->drawString("PICK", 120, 22, 2);
         tft->drawString("ACCENT", 120, 34, 2);

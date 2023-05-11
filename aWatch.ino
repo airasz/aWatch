@@ -53,6 +53,7 @@ auto inApp = false;
 // using namespace ace_time;
 auto tomorow = false;
 // CONFI config;
+ArrayList<int> faceList;
 
 RTC_DATA_ATTR int wakeupCounter = 0;
 
@@ -369,6 +370,8 @@ void setup()
     EEPROM_writeAnything(0, config);
     EEPROM.commit();
   }
+
+  fillFaceList();
 
   // config.screensaver_timeout = 20;
   // EEPROM_writeAnything(0, config);
@@ -844,4 +847,40 @@ void checkday()
   daily_step = step_counter - minfactor;
   // if (config.alarm_pray)
   //   setprayalarm(false);
+}
+template <typename T>
+void printArray(ArrayList<T> &list)
+{
+  for (int i = 0; i < list.size(); i++)
+  {
+    Serial.print("[" + String(i) + "]: ");
+    Serial.println(list[i]);
+  }
+  Serial.println();
+}
+void fillFaceList()
+{
+  // filling list
+  faceList.add(12);
+  Serial.printf("facelist size  : %d \n", faceList.size());
+  if (!faceList.isEmpty())
+    faceList.clear();
+  if (config.show_number)
+    for (size_t i = 0; i < 4; i++)
+      faceList.add(i + 2);
+  if (config.show_analog)
+    for (size_t i = 0; i < 8; i++)
+      faceList.add(i + 6);
+  if (config.show_text)
+    for (size_t i = 0; i < 2; i++)
+      faceList.add(i + 12);
+
+  // force fill to avoid error
+  if (faceList.size() == 0)
+  {
+    for (size_t i = 0; i < 4; i++)
+      faceList.add(i + 2);
+  }
+
+  printArray(faceList);
 }

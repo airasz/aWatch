@@ -729,12 +729,26 @@ void handleTouch()
                                         page_ID = 2;
                                         updateScreen(page_ID); // gui.ino
                                 }
-                                if (page_ID == 25)
+                                else if (page_ID == 25)
                                 {
-                                        config.show_analog = !config.show_analog;
-                                        drawFaceFilter(0);
-                                        EEPROM_writeAnything(0, config);
-                                        EEPROM.commit();
+                                        if (config.show_analog)
+                                        {
+                                                config.show_analog = 0;
+                                                EEPROM_writeAnything(0, config);
+                                                EEPROM.commit();
+                                                drawFaceFilter(0); // appSetFace.ino
+                                        }
+                                        else
+                                        {
+                                                config.show_analog = 1;
+                                                EEPROM_writeAnything(0, config);
+                                                EEPROM.commit();
+                                                drawFaceFilter(0); // appSetFace.ino
+                                        }
+                                        // config.show_analog = !config.show_analog;
+                                        // drawFaceFilter(0);
+                                        // EEPROM_writeAnything(0, config);
+                                        // EEPROM.commit();
                                 }
                                 else if (page_ID == 221) // pickAccent() appSetDisplay.ino
                                 {
@@ -761,6 +775,7 @@ void handleTouch()
                                                 EEPROM_writeAnything(0, config);
                                                 EEPROM.commit();
                                                 setprayalarm(false); // datajadwal.ino
+                                                fillFaceList();
                                         }
 
                                         if (tmpvib != config.vib)
@@ -769,6 +784,7 @@ void handleTouch()
                                                 EEPROM_writeAnything(0, config);
                                                 EEPROM.commit();
                                                 setprayalarm(false); // datajadwal.ino
+                                                fillFaceList();
                                         }
                                         config.alarm_pray = 1;
                                         alarmset = 0;
@@ -830,12 +846,24 @@ void handleTouch()
                                         toast("step counter resetted");
                                         prevpage_ID = page_ID;
                                 }
-                                if (page_ID == 25)
+                                else if (page_ID == 25)
                                 {
-                                        config.show_number = !config.show_number;
-                                        drawFaceFilter(1);
-                                        EEPROM_writeAnything(0, config);
-                                        EEPROM.commit();
+                                        if (config.show_number)
+                                        {
+                                                config.show_number = 0;
+                                                EEPROM_writeAnything(0, config);
+                                                EEPROM.commit();
+                                                drawFaceFilter(1); // appSetFace.ino
+                                                fillFaceList();
+                                        }
+                                        else
+                                        {
+                                                config.show_number = 1;
+                                                EEPROM_writeAnything(0, config);
+                                                EEPROM.commit();
+                                                drawFaceFilter(1); // appSetFace.ino
+                                                fillFaceList();
+                                        }
                                 }
                                 else if (page_ID == 221) // pickAccent() appSetDisplay.ino
                                 {
@@ -903,12 +931,29 @@ void handleTouch()
                                         updateScreen(page_ID); // gui.ino
                                 }
 
-                                if (page_ID == 25)
+                                else if (page_ID == 25)
                                 {
-                                        config.show_text = !config.show_text;
-                                        drawFaceFilter(2);
-                                        EEPROM_writeAnything(0, config);
-                                        EEPROM.commit();
+                                        if (config.show_text)
+                                        {
+                                                config.show_text = 0;
+                                                EEPROM_writeAnything(0, config);
+                                                EEPROM.commit();
+                                                drawFaceFilter(2); // appSetFace.ino
+                                                fillFaceList();
+                                        }
+                                        else
+                                        {
+                                                config.show_text = 1;
+                                                EEPROM_writeAnything(0, config);
+                                                EEPROM.commit();
+                                                drawFaceFilter(2); // appSetFace.ino
+                                                fillFaceList();
+                                        }
+                                        // config.show_text = !config.show_text;
+                                        Serial.printf("show text face : %s \n", config.show_text ? "true" : "false");
+                                        // drawFaceFilter(2);
+                                        // EEPROM_writeAnything(0, config);
+                                        // EEPROM.commit();
                                 }
                                 if (page_ID == 26)
                                 {
@@ -967,16 +1012,27 @@ void handleTouch()
                         break;
                 case 5:
                         // swipe left
-                        CF--;
+                        // CF--;
                         // if (CF < 0)
                         // {
                         //         Serial.printf("clock face change to : %d\n", CF);
                         //         CF = 10;
                         // }
-                        (CF < 2) && (CF = 14);
-                        config.clock_face = CF;
-                        EEPROM_writeAnything(0, config);
-                        EEPROM.commit();
+                        // (CF < 2) && (CF = 14);
+
+                        if (!faceList.isEmpty())
+                        {
+                                int f;
+                                f = faceList.size();
+                                (f-- < 0) && (f = faceList.size());
+                                // config.clock_face = CF;
+                                CF = faceList[f];
+                                // config.clock_face = CF;
+
+                                config.clock_face = CF;
+                                EEPROM_writeAnything(0, config);
+                                EEPROM.commit();
+                        }
                         // clock_face_digit(CF);
                         face(CF);
                         my_idle();
@@ -984,16 +1040,25 @@ void handleTouch()
                         break;
                 case 6:
                         // swipe right
-                        CF++;
+                        // CF++;
                         // if (CF > 10)
                         // {
                         //         Serial.printf("clock face change to : %d\n", CF);
                         //         CF = 0;
                         // }
-                        (CF > 14) && (CF = 2);
-                        config.clock_face = CF;
-                        EEPROM_writeAnything(0, config);
-                        EEPROM.commit();
+
+                        // (CF > 14) && (CF = 2);
+                        if (!faceList.isEmpty())
+                        {
+                                int f;
+                                f = faceList.size();
+                                (f++ > faceList.size()) && (f = 0);
+                                config.clock_face = CF;
+                                CF = faceList[f];
+                                config.clock_face = CF;
+                                EEPROM_writeAnything(0, config);
+                                EEPROM.commit();
+                        }
                         // clock_face_digit(CF);
 
                         face(CF);

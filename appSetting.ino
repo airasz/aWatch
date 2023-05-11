@@ -46,11 +46,11 @@ void startSetting(int setID)
                 tmpmnt = mmonth;
                 tmpyear = yyear;
 
-                tft->fillRect(0, 0, 240, 60, COLOR_ACCENT[config.colorAccent]);
+                tft->fillRect(0, 0, 240, 60, TFT_WHITE);
                 // drawButton(2, 8, 78, 48, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "BACK");
                 // drawButton(160, 8, 78, 48, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "EXIT");
-                drawSmoothButton(2, 8, 78, 48, TFT_BLACK, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "BACK");
-                drawSmoothButton(160, 8, 78, 48, TFT_BLACK, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "EXIT");
+                drawSmoothButton(2, 8, 78, 48, TFT_BLACK, TFT_WHITE, TFT_WHITE, "BACK");
+                drawSmoothButton(160, 8, 78, 48, TFT_BLACK, TFT_WHITE, TFT_WHITE, "EXIT");
                 tft->setTextColor(TFT_BLACK);
                 tft->drawString("SETTING", 120, 24, 2);
                 drawHomeSettingBody();

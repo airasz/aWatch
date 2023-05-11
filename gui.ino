@@ -26,7 +26,7 @@ void updateScreen(int dis_ID)
                         // screenTimeOut = cface == 10 ? config.screensaver_timeout + 5 : config.screensaver_timeout;
 
                         // (config.rnd_face) ? cface = random(2, 13) : cface = CF;
-                        cface = config.rnd_face ? random(2, 15) : CF;
+                        cface = config.rnd_face ? faceList[random(0, faceList.size() + 1)] : CF;
                         screenTimeOut = cface == 1 ? config.screensaver_timeout + 5 : config.screensaver_timeout;
                         // if (cface == 10)
                         // {
