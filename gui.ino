@@ -43,7 +43,7 @@ void updateScreen(int dis_ID)
                 }
                 if (alarm_active)
                 {
-                        drawButton(0, 190, 240, 40, config.colorAccent, TFT_WHITE, alarm_msg);
+                        drawButton(0, 190, 240, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, alarm_msg);
                 }
                 break;
         case 1:
@@ -202,7 +202,7 @@ void drawSwitch(int x, int y, int strokeColor, int activeColor, bool enabled)
                 tft->fillCircle(x + 3 + 12, y + 3 + 12, 12, COLOR_ACCENT[config.colorAccent]);
         }
 }
-void drawSmoothSwitch(int x, int y, int strokeColor, int activeColor, bool enabled)
+void drawSmoothSwitch_(int x, int y, int strokeColor, int activeColor, bool enabled)
 {
         // size is fixed
         int w = 60;
@@ -278,5 +278,27 @@ void drawSmoothSwitch2(int x, int y, int strokeColor, int activeColor, bool enab
 
                 tft->fillCircle(x + 3 + 12, y + 3 + 12, 12, TFT_BLUE);
                 // tft->fillSmoothCircle(x + 3 + 12, y + 3 + 12, 12, TFT_BLUE, TFT_BLACK);
+        }
+}
+
+void drawSmoothSwitch(int x, int y, int strokeColor, int activeColor, bool enabled)
+{
+        // size is fixed
+        int w = 60;
+        int h = 30;
+        int r = h / 2;
+        if (enabled)
+        {
+
+                tft->fillSmoothRoundRect(x, y, w, h, r, TFT_BLACK, TFT_BLACK); // clear area before draw
+                tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
+                tft->fillSmoothRoundRect(x + 3, y + 3, w - 5, h - 5, r, TFT_WHITE, strokeColor); // fill inside
+                tft->fillSmoothCircle(x + w - 3 - 12, y + 3 + 12, 10, strokeColor, TFT_WHITE);
+        }
+        else
+        {
+                tft->fillSmoothRoundRect(x, y, w, h, r, TFT_BLACK, TFT_BLACK); // clear area before draw
+                tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
+                tft->fillSmoothCircle(x + 3 + 12, y + 3 + 12, 10, strokeColor, TFT_BLACK);
         }
 }
