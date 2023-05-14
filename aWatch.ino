@@ -699,6 +699,9 @@ void loop()
         is_sleeping = true;
         Serial.print("button sleep request ");
         Serial_timestamp();
+
+        page_ID = 0;
+        updateScreen(page_ID); // gui.ino
         low_energy();
         return;
       }
@@ -755,6 +758,9 @@ void loop()
       is_sleeping = true;
       Serial.print("sleepy-bye ");
       Serial_timestamp();
+
+      page_ID = 0;
+      updateScreen(page_ID); // gui.ino
     }
     low_energy();
   }
