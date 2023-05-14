@@ -247,6 +247,19 @@ void pickAccent()
         drawButton(160, 180, 80, 60, COLOR_ACCENT[8], TFT_BLACK, "D_CYAN"); // 11//8
 
         // tft->fillRect(config.colorAccent * 80, config.colorAccent/3+1*60, 240, 60, TFT_RED);
-        tft->fillCircle(config.colorAccent * 80 + 10, config.colorAccent / 3 + 1 * 60 + 10, 6, TFT_BLACK);
-        // tft->fillSmoothCircle(config.colorAccent * 80 + 10, config.colorAccent / 3 + 1 * 60 + 10, 6, TFT_BLACK, COLOR_ACCENT[config.colorAccent]);
+        // tft->fillCircle(((config.colorAccent / 3) * 80) + 10, (((config.colorAccent / 3) + 1) * 60) + 10, 6, TFT_BLACK);
+        // tft->fillSmoothCircle(((config.colorAccent / 3) * 80) + 10, (((config.colorAccent / 3) + 1) * 60) + 10, 6, TFT_BLACK, COLOR_ACCENT[config.colorAccent]);
+        int row = 70;
+        int col = (-70);
+        for (size_t i = 0; i < 9; i++)
+        {
+                col += 80;
+                if (i % 3 == 0 && i > 0)
+                {
+                        row += 60;
+                        col = 10;
+                }
+                if (i == config.colorAccent)
+                        tft->fillSmoothCircle(col, row, 6, TFT_BLACK, COLOR_ACCENT[config.colorAccent]);
+        }
 }
