@@ -14,6 +14,22 @@
 // void clock_face_digital(int);
 // void updateClock(int, int);
 // #define
+
+//==============add by airasz============
+// generate from https : // trolsoft.ru/en/articles/rgb565-color-picker
+// generate from https://htmlcolorcodes.com/color-names/
+#define TFT_LIME 0x07E0       // rgb(0, 255, 0)
+#define TFT_TEAL 0x03EF       // rgb(0, 128, 128)
+#define TFT_NAVY 0x000F       // rgb(0, 0, 128)
+#define TFT_BLUEVIOLET 0x815B // rgb(138, 43, 226)
+#define TFT_ORANGERED 0xFA20  // rgb(255, 69, 0)
+#define TFT_DEEPPINK 0xF891   // rgb(255, 20, 147)
+#define TFT_CRIMSON 0xD087    // rgb(220, 20, 60)
+#define TFT_GOLD 0xFEA0       // rgb(255, 215, 0)
+#define TFT_INDIGO 0x480F     // rgb(75, 0, 130)
+#define TFT_DARKGREEN 0x0300  // rgb(0, 100, 0)
+#define TFT_DARKCYAN 0x0450   // rgb(0, 139, 139)
+
 uint8_t home_hh;
 uint8_t home_mm;
 uint8_t home_ss;
@@ -138,7 +154,7 @@ const uint32_t COLORS_DARK[10] = {
 //     TFT_PURPLE, TFT_BLUE, TFT_GREEN, TFT_YELLOW, TFT_GREENYELLOW,
 //     TFT_PINK, TFT_ORANGE, TFT_RED, TFT_CYAN, TFT_MAGENTA}
 const uint32_t COLOR_MEDIUM[] = {TFT_PURPLE, TFT_BLUE, TFT_GREEN, TFT_YELLOW, TFT_GREENYELLOW, TFT_PINK, TFT_ORANGE, TFT_RED, TFT_CYAN, TFT_MAGENTA};
-const uint32_t COLOR_ACCENT[] = {TFT_PURPLE, TFT_BLUE, TFT_GREEN, TFT_YELLOW, TFT_PINK, TFT_ORANGE, TFT_RED, TFT_MAGENTA, TFT_DARKCYAN};
+const uint32_t COLOR_ACCENT[] = {TFT_PURPLE, TFT_BLUE, TFT_DARKGREEN, TFT_YELLOW, TFT_DEEPPINK, TFT_ORANGERED, TFT_RED, TFT_MAGENTA, TFT_DARKCYAN};
 
 String const bulan[] =
     {"Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli",
@@ -148,7 +164,7 @@ const uint8_t MaxDate[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
 int startMonth, stDay, stHour, stMinute, currentMonth; // date on watch on boot
 int stepMonth, stepDay, stepHour, stepMinute;
-uint8_t listPointer=0; //pointer to facelist
+uint8_t listPointer = 0; // pointer to facelist
 boolean date_is_up;
 boolean steps_is_up;
 boolean initialAnalog;

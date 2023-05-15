@@ -240,7 +240,7 @@ void pickAccent()
 
         drawSmoothButton(0, 60, 80, 60, COLOR_ACCENT[0], TFT_BLACK, TFT_BLACK, "PURPLE");    // 4//0
         drawSmoothButton(80, 60, 80, 60, COLOR_ACCENT[1], TFT_BLACK, TFT_BLACK, "BLUE");     // 5//1
-        drawSmoothButton(160, 60, 80, 60, COLOR_ACCENT[2], TFT_BLACK, TFT_BLACK, "GREEN");   // 6//2
+        drawSmoothButton(160, 60, 80, 60, COLOR_ACCENT[2], TFT_BLACK, TFT_BLACK, "D_GREEN"); // 6//2
         drawSmoothButton(0, 120, 80, 60, COLOR_ACCENT[3], TFT_BLACK, TFT_BLACK, "YELLOW");   // 7//3
         drawSmoothButton(80, 120, 80, 60, COLOR_ACCENT[4], TFT_BLACK, TFT_BLACK, "PINK");    // 8//4
         drawSmoothButton(160, 120, 80, 60, COLOR_ACCENT[5], TFT_BLACK, TFT_BLACK, "ORANGE"); // 9//5
