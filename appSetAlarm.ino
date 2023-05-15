@@ -7,6 +7,7 @@ void drawAlarmsetting()
         tft->setCursor(3, 76);
         tft->print("Enabled");
         drawSwitch(170, 70, COLOR_ACCENT[config.colorAccent], rgbToHex(200, 200, 200), config.alarm_enable);
+        //   drawSmoothSwitch(170, 70, COLOR_ACCENT[config.colorAccent], TFT_BLACK, config.alarm_enable);
 }
 void drawAlarmSet()
 {
@@ -53,7 +54,8 @@ void drawAlarmSet()
         tft->print("Enabled");
         // row 4
 
-        drawSwitch(170, 190, COLOR_ACCENT[config.colorAccent], rgbToHex(200, 200, 200), tmpalarmenable);
+        // drawSwitch(170, 190, COLOR_ACCENT[config.colorAccent], rgbToHex(200, 200, 200), tmpalarmenable);
+        drawSmoothSwitch(170, 190, COLOR_ACCENT[config.colorAccent], TFT_BLACK, tmpalarmenable);
 
         old_tmpha = tmpha;
         old_tmpma = tmpma;

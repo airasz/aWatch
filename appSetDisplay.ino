@@ -20,7 +20,9 @@ void drawStepSetting()
         tft->print("Enabled");
         // row 2
 
-        drawSwitch(170, 70, COLOR_ACCENT[config.colorAccent], rgbToHex(200, 200, 200), config.stepcounter_filter > 0);
+        // drawSwitch(170, 70, COLOR_ACCENT[config.colorAccent], rgbToHex(200, 200, 200), config.stepcounter_filter > 0);
+        drawSmoothSwitch(170, 70, COLOR_ACCENT[config.colorAccent], TFT_BLACK, config.stepcounter_filter > 0);
+
         // if (config.stepcounter_filter > 0)
         // {
         //         drawSwitch(170, 70, TFT_BLUE, rgbToHex(200, 200, 200), true);

@@ -81,8 +81,8 @@ void analogClockVariant(int v)
 
                 // tft->drawLine(posX(50, hdeg), posY(50, hdeg), 120, 120, COLOR_MEDIUM[random(10)]); // DRAW  HOUR
 
-                tft->drawWideLine(posX(50, hdeg), posY(50, hdeg), 120, 120, 6, COLOR_MEDIUM[random(10)], i_colcircle); // DRAW  MINUTE
-                tft->drawWideLine(posX(61, mdeg), posY(61, mdeg), 120, 120, 6, COLOR_MEDIUM[random(10)], i_colcircle); // DRAW  MINUTE
+                tft->drawWideLine(posX(50, hdeg), posY(50, hdeg), 120, 120, 6, COLOR_MEDIUM[random(10)], i_colcircle); // DRAW  HOUR
+                tft->drawWideLine(posX(71, mdeg), posY(71, mdeg), 120, 120, 6, COLOR_MEDIUM[random(10)], i_colcircle); // DRAW  MINUTE
                 // tft->drawLine(posX(61, mdeg), posY(61, mdeg), 120, 120, COLOR_MEDIUM[random(10)]); // DRAW  MIN
 
                 // tft->fillCircle(120, 120, 5, TFT_RED); // DOT   CENTER
@@ -95,7 +95,7 @@ void analogClockVariant(int v)
                         screenServer();
                 break;
         case 1:
-                // chaotic pendulum
+                // pie line guard
 
                 hh += hh > 12 ? (-12) : 0;         // make 12 hr format
                 tft->fillScreen(TFT_BLACK);        // CLEAR DISPLAY
@@ -105,8 +105,8 @@ void analogClockVariant(int v)
 
                 xx2 = 120;
                 yy2 = 120;
-                xx = posX(70, hdeg, xx2);
-                yy = posY(70, hdeg, yy2);
+                xx = posX(65, hdeg, xx2);
+                yy = posY(65, hdeg, yy2);
                 mx = posX(80, mdeg, xx2);
                 my = posY(80, mdeg, yy2);
                 hcol = COLOR_MEDIUM[random(10)];

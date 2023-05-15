@@ -52,6 +52,7 @@ void drawPraySet()
         tft->print("Enabled");
         // row 4
         drawSwitch(170, 190, COLOR_ACCENT[config.colorAccent], rgbToHex(200, 200, 200), config.alarm_pray);
+        drawSmoothSwitch(170, 190, COLOR_ACCENT[config.colorAccent], TFT_BLACK, config.alarm_pray);
 
         old_tmpmwarn = tmpmwarn;
         old_tmpvib = tmpvib;
