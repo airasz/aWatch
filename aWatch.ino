@@ -700,8 +700,15 @@ void loop()
         Serial.print("button sleep request ");
         Serial_timestamp();
 
-        page_ID = 0;
-        updateScreen(page_ID); // gui.ino
+        if (page_ID != 0)
+        {
+          // go home before sleep
+          // sleep while show smooth graphic can cause failed to wake up
+          page_ID = 0;
+          tft->fillRect(0, 0, 240, 240, TFT_BLACK);
+          updateScreen(page_ID); // gui.ino
+        }
+
         low_energy();
         return;
       }
@@ -758,9 +765,14 @@ void loop()
       is_sleeping = true;
       Serial.print("sleepy-bye ");
       Serial_timestamp();
-
-      page_ID = 0;
-      updateScreen(page_ID); // gui.ino
+      if (page_ID != 0)
+      {
+        // go home before sleep
+        // sleep while show smooth graphic can cause failed to wake up
+        page_ID = 0;
+        tft->fillRect(0, 0, 240, 240, TFT_BLACK);
+        updateScreen(page_ID); // gui.ino
+      }
     }
     low_energy();
   }
@@ -867,8 +879,7 @@ void printArray(ArrayList<T> &list)
 void fillFaceList()
 {
   // filling list
-  faceList.add(12);
-  Serial.printf("facelist size  : %d \n", faceList.size());
+  // faceList.add(12);
   if (!faceList.isEmpty())
     faceList.clear();
   if (config.show_number)
@@ -888,5 +899,6 @@ void fillFaceList()
       faceList.add(i + 2);
   }
 
+  Serial.printf("facelist size  : %d \n", faceList.size());
   printArray(faceList);
 }

@@ -238,15 +238,15 @@ void pickAccent()
         tft->fillRect(0, 60, 240, 180, TFT_BLACK);
         // if (config.colorAccent == 0)
 
-        drawButton(0, 60, 80, 60, COLOR_ACCENT[0], TFT_BLACK, "PURPLE");    // 4//0
-        drawButton(80, 60, 80, 60, COLOR_ACCENT[1], TFT_BLACK, "BLUE");     // 5//1
-        drawButton(160, 60, 80, 60, COLOR_ACCENT[2], TFT_BLACK, "GREEN");   // 6//2
-        drawButton(0, 120, 80, 60, COLOR_ACCENT[3], TFT_BLACK, "YELLOW");   // 7//3
-        drawButton(80, 120, 80, 60, COLOR_ACCENT[4], TFT_BLACK, "PINK");    // 8//4
-        drawButton(160, 120, 80, 60, COLOR_ACCENT[5], TFT_BLACK, "ORANGE"); // 9//5
-        drawButton(0, 180, 80, 60, COLOR_ACCENT[6], TFT_BLACK, "RED");      // 10//6
-        drawButton(80, 180, 80, 60, COLOR_ACCENT[7], TFT_BLACK, "MAGENTA"); // 11//7
-        drawButton(160, 180, 80, 60, COLOR_ACCENT[8], TFT_BLACK, "D_CYAN"); // 11//8
+        drawSmoothButton(0, 60, 80, 60, COLOR_ACCENT[0], TFT_BLACK, TFT_BLACK, "PURPLE");    // 4//0
+        drawSmoothButton(80, 60, 80, 60, COLOR_ACCENT[1], TFT_BLACK, TFT_BLACK, "BLUE");     // 5//1
+        drawSmoothButton(160, 60, 80, 60, COLOR_ACCENT[2], TFT_BLACK, TFT_BLACK, "GREEN");   // 6//2
+        drawSmoothButton(0, 120, 80, 60, COLOR_ACCENT[3], TFT_BLACK, TFT_BLACK, "YELLOW");   // 7//3
+        drawSmoothButton(80, 120, 80, 60, COLOR_ACCENT[4], TFT_BLACK, TFT_BLACK, "PINK");    // 8//4
+        drawSmoothButton(160, 120, 80, 60, COLOR_ACCENT[5], TFT_BLACK, TFT_BLACK, "ORANGE"); // 9//5
+        drawSmoothButton(0, 180, 80, 60, COLOR_ACCENT[6], TFT_BLACK, TFT_BLACK, "RED");      // 10//6
+        drawSmoothButton(80, 180, 80, 60, COLOR_ACCENT[7], TFT_BLACK, TFT_BLACK, "MAGENTA"); // 11//7
+        drawSmoothButton(160, 180, 80, 60, COLOR_ACCENT[8], TFT_BLACK, TFT_BLACK, "D_CYAN"); // 11//8
 
         // tft->fillRect(config.colorAccent * 80, config.colorAccent/3+1*60, 240, 60, TFT_RED);
         // tft->fillCircle(((config.colorAccent / 3) * 80) + 10, (((config.colorAccent / 3) + 1) * 60) + 10, 6, TFT_BLACK);
@@ -262,6 +262,6 @@ void pickAccent()
                         col = 10;
                 }
                 if (i == config.colorAccent)
-                        tft->fillSmoothCircle(col, row, 6, TFT_BLACK, COLOR_ACCENT[config.colorAccent]);
+                        tft->fillSmoothCircle(col, row, 6, TFT_WHITE, COLOR_ACCENT[config.colorAccent]);
         }
 }

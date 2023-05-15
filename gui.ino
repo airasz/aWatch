@@ -26,7 +26,8 @@ void updateScreen(int dis_ID)
                         // screenTimeOut = cface == 10 ? config.screensaver_timeout + 5 : config.screensaver_timeout;
 
                         // (config.rnd_face) ? cface = random(2, 13) : cface = CF;
-                        cface = config.rnd_face ? faceList[random(0, faceList.size() + 1)] : CF;
+                        int rnd = random(faceList.size());
+                        cface = config.rnd_face ? faceList[rnd] : CF;
                         screenTimeOut = cface == 1 ? config.screensaver_timeout + 5 : config.screensaver_timeout;
                         // if (cface == 10)
                         // {
@@ -40,6 +41,7 @@ void updateScreen(int dis_ID)
                         // Serial.printf("Screentimeout gui  : %d \n", screenTimeOut);
                         // clock_face_digit(cface);
                         face(cface); // clock_face_digit.ino
+                        Serial.printf("cface  : %d \n", cface);
                 }
                 if (alarm_active)
                 {
