@@ -45,19 +45,12 @@ void analogClockVariant(int v)
                 // face=6
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
-                // int colorRandomMedium = COLOR_MEDIUM[random(10)];
-                // tft->drawCircle(120, 120, 80, COLOR_MEDIUM[random(10)]);
-
                 int o_colcircle;
                 o_colcircle = COLOR_MEDIUM[random(10)];
                 int i_colcircle;
                 i_colcircle = COLORS_DARK[random(10)];
                 tft->drawSmoothCircle(120, 120, 82, o_colcircle, TFT_BLACK);
-                // tft->fillSmoothCircle(120, 120, 80, COLOR_MEDIUM[random(10)], COLOR_MEDIUM[random(10)]);
                 tft->fillSmoothCircle(120, 120, 80, i_colcircle, o_colcircle);
-                // tft->fillCircle( 160, 120, 118, TFT_GREEN);            // CLOCK FACE
-                // tft->fillCircle( 160, 120, 110, TFT_BLACK);
-                // colorRandomMedium = COLOR_MEDIUM[random(10)];          // LOCK FACE           // LOCK FACE
                 // 12 LINES
                 // rainbow color for every multiple 5  minute line mark
                 for (int i = 0; i < 360; i += 30)
@@ -67,8 +60,6 @@ void analogClockVariant(int v)
                 for (int i = 0; i < 360; i += 6)
                 {
                         tft->drawPixel(posX(78, i), posY(79, i), COLOR_MEDIUM[random(10)]); // MINUTE DOT
-                        // tft->fillCircle(x0, yy0, 2, COLOR_MEDIUM[random(10)]);
-
                         if (i % 90 == 0)
                                 tft->fillCircle(posX(78, i), posY(79, i), 3, TFT_WHITE); // DOTS
                 }
@@ -79,16 +70,9 @@ void analogClockVariant(int v)
                 mdeg = mm * 6 + sdeg * 0.01666667; // 0-59 -> 0-360 - includes seconds
                 hdeg = hh * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
 
-                // tft->drawLine(posX(50, hdeg), posY(50, hdeg), 120, 120, COLOR_MEDIUM[random(10)]); // DRAW  HOUR
-
                 tft->drawWideLine(posX(50, hdeg), posY(50, hdeg), 120, 120, 6, COLOR_MEDIUM[random(10)], i_colcircle); // DRAW  HOUR
                 tft->drawWideLine(posX(71, mdeg), posY(71, mdeg), 120, 120, 6, COLOR_MEDIUM[random(10)], i_colcircle); // DRAW  MINUTE
-                // tft->drawLine(posX(61, mdeg), posY(61, mdeg), 120, 120, COLOR_MEDIUM[random(10)]); // DRAW  MIN
-
-                // tft->fillCircle(120, 120, 5, TFT_RED); // DOT   CENTER
-
                 tft->fillSmoothCircle(120, 120, 6, TFT_RED, i_colcircle);
-                // tft->fillSmoothCircle(120, 120, 77, TFT_BLACK, TFT_RED);
                 displaySysInfo(0); // appInfo.ino
 
                 if (enableSS)
@@ -113,23 +97,17 @@ void analogClockVariant(int v)
                 mcol = COLOR_MEDIUM[random(10)];
                 // draw a slice minute  guide
                 for (int i = 0; i < 720; i += 6)
-                {
                         if (i + 1 > mdeg - 50 && i + 1 < mdeg + 50 || i + 1 > (360 + mdeg) - 50 && i + 1 < (mdeg + 360) + 50)
                         {
                                 if (i % 15 == 0)
-                                        // tft->drawLine(posX(90, i, xx), posY(90, i, yy), posX(90 - 20, i, xx), posY(90 - 20, i, yy), rgbToHex(200, 80, 0));
                                         tft->drawWideLine(posX(90, i, xx2), posY(90, i, yy2), posX(90 - 20, i, xx2), posY(90 - 20, i, yy2), 2, rgbToHex(200, 80, 0), TFT_BLACK); // DRAW  MINUTE
                                 else
                                         tft->drawWideLine(posX(90, i, xx2), posY(90, i, yy2), posX(90 - 10, i, xx2), posY(90 - 10, i, yy2), 1, TFT_YELLOW, TFT_BLACK); // DRAW  MINUTE
-                                // tft->drawLine(posX(90, i, xx), posY(90, i, yy), posX(90 - 10, i, xx), posY(90 - 10, i, yy), TFT_YELLOW);
                         }
-                }
-                // tft->drawSmoothCircle(xx, yy, 80, mcol, TFT_BLACK);
+
                 tft->drawWideLine(mx, my, xx2, yy2, 6, mcol, TFT_BLACK); // DRAW  MINUTE
-                // tft->fillSmoothCircle(xx, yy, 6, TFT_WHITE, TFT_BLACK);
                 // draw 5 minutes line guide
                 for (int i = 0; i < 720; i += 30)
-                {
                         if (i + 1 > hdeg - 60 && i + 1 < hdeg + 60 || i + 1 > (360 + hdeg) - 60 && i + 1 < (hdeg + 360) + 60)
                         {
                                 // line(posX(xx/2, i,xx2), posY(xx/2, i,xx2), posX((xx/2), i,xx2), posY((yy/2), i,xx2));
@@ -141,15 +119,8 @@ void analogClockVariant(int v)
 
                                 // tft->drawLine(posX(60, i, xx2), posY(60, i, yy2), posX(60 - 10, i, xx2), posY(60 - 10, i, yy2), TFT_WHITE);
                         }
-                }
-                // for (int i = 0; i < 360; i += 30)
-                // {
-                //         if (i > (hrdeg - 45))
-                //                 tft->drawLine(posX(50, i), posY(50, i), posX(42, i), posY(42, i), COLOR_MEDIUM[random(10)]); // DRAW 12 LINES
-                // }
-                // 60 DOTS
 
-                // tft->drawSmoothCircle(xx2, yy2, 50, hcol, TFT_BLACK);
+                // 60 DOTS
                 tft->drawWideLine(xx, yy, xx2, yy2, 6, hcol, TFT_BLACK); // DRAW  HOUR HAND
                 tft->fillSmoothCircle(xx2, yy2, 6, TFT_WHITE, TFT_BLACK);
                 displaySysInfo(0); // appInfo.ino
@@ -164,52 +135,31 @@ void analogClockVariant(int v)
                 sdeg = ss * 6;                       // 0-59 -> 0-354   Pre-compute
                 mdeg = mm * 6 + sdeg * 0.01666667;   // 0-59 -> 0-360 - includes seconds
                 hdeg = hh12 * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
-                // int startMAngle, endMAngle, startHAngle, endHAngle;
-                // clock degree is oposite position to arc degre
-                //  convert 24 to 12 hours format
-                //  progress minute
-                if (mm >= 30)
-                {
-                        // drawSmoothArc(x, y, out_radius, in_radius, start_angle, end_angle, fcolor, bcolor, rooudend);//flse
-                        tft->drawSmoothArc(120, 120, 84, 76, mdeg - 180, 180, TFT_RED, TFT_BLACK, false);
-                        // for (int i = (mm * 6); i < 360; i++)
-                        //         tft->drawLine(posX(80, i), posY(80, i), posX(72, i), posY(72, i) + 1, TFT_RED);
-                        // for (int i = 0 + 2; i < (mm * 6) - 3; i++)
-                        //         tft->fillCircle(posX(76, i), posY(76, i), 2, TFT_BLACK);
-                }
-                else
-                {
-                        tft->drawSmoothArc(120, 120, 84, 76, 180, 180 + mdeg, TFT_RED, TFT_BLACK, false);
+                                                     // int startMAngle, endMAngle, startHAngle, endHAngle;
+                                                     // clock degree is oposite position to arc degre
+                                                     //  convert 24 to 12 hours format
+                                                     //  progress minute
 
-                        // for (int i = 0 + 2; i < (mm * 6) - 3; i++)
-                        //         tft->fillCircle(posX(76, i), posY(76, i), 2, TFT_RED);
-                        // for (int i = (mm * 6); i < 360; i++)
-                        //         tft->drawLine(posX(78, i), posY(78, i), posX(72, i), posY(72, i) + 1, TFT_BLACK);
-                }
+                tft->drawSmoothArc(120, 120, 84, 76, (mm >= 30) ? mdeg - 180 : 180, (mm >= 30) ? 180 : 180 + mdeg, TFT_RED, TFT_BLACK, false);
+                // if (mm >= 30)
+                //         tft->drawSmoothArc(120, 120, 84, 76, mdeg - 180, 180, TFT_RED, TFT_BLACK, false);
+                // else
+                //         tft->drawSmoothArc(120, 120, 84, 76, 180, 180 + mdeg, TFT_RED, TFT_BLACK, false);
 
                 // progress hour
-                if (hh12 >= 6)
-                {
-                        tft->drawSmoothArc(120, 120, 66, 74, hdeg - 180, 180, TFT_BLUE, TFT_BLACK, false);
 
-                        // for (int i = ((hh12 * 30) + (mm / 2)) - 1; i < 360; i++)
-                        //         tft->drawLine(posX(74, i), posY(74, i) + 1, posX(66, i), posY(66, i) + 1, TFT_BLUE);
-                }
-                else
-                {
-                        tft->drawSmoothArc(120, 120, 66, 74, 180, 180 + hdeg, TFT_BLUE, TFT_BLACK, false);
-
-                        // for (int i = 0; i < ((hh12 * 30) + (mm / 2)) - 1; i++)
-                        //         tft->drawLine(posX(74, i), posY(74, i) + 1, posX(66, i), posY(66, i) + 1, TFT_BLUE);
-                }
+                tft->drawSmoothArc(120, 120, 66, 74, (hh12 >= 6) ? hdeg - 180 : 180, (hh12 >= 6) ? 180 : 180 + hdeg, TFT_BLUE, TFT_BLACK, false);
+                // if (hh12 >= 6)
+                //         tft->drawSmoothArc(120, 120, 66, 74, hdeg - 180, 180, TFT_BLUE, TFT_BLACK, false);
+                // else
+                //         tft->drawSmoothArc(120, 120, 66, 74, 180, 180 + hdeg, TFT_BLUE, TFT_BLACK, false);
 
                 // 12 LINES
                 for (int i = 0; i < 360; i += 30)
-                {
-                        tft->drawLine(posX(74, i), posY(74, i) + 1, posX(66, i), posY(66, i) + 1, TFT_WHITE);
-                        if (i % 90 == 0)
-                                tft->drawLine(posX(74, i), posY(74, i) + 1, posX(60, i), posY(60, i) + 1, TFT_WHITE);
-                }
+                        tft->drawLine(posX(74, i), posY(74, i) + 1, posX((i % 90 == 0) ? 60 : 66, i), posY((i % 90 == 0) ? 60 : 66, i) + 1, TFT_WHITE);
+                //{ tft->drawLine(posX(74, i), posY(74, i) + 1, posX(66, i), posY(66, i) + 1, TFT_WHITE);
+                // if (i % 90 == 0)
+                //         tft->drawLine(posX(74, i), posY(74, i) + 1, posX(60, i), posY(60, i) + 1, TFT_WHITE);}
 
                 displaySysInfo(0); // appInfo.ino
 
@@ -229,18 +179,8 @@ void analogClockVariant(int v)
                 // tft->drawCircle(120, 120, 80, TFT_PURPLE);
                 // tft->drawCircle(120, 120, 70, TFT_BLUE);
                 // tft->drawCircle(120, 120, 60, TFT_BLUE);
-
-                // tft->fillSmoothCircle(120, 120, 80, TFT_PURPLE, TFT_BLACK);
-                // tft->fillSmoothCircle(120, 120, 79, TFT_BLACK, TFT_PURPLE);
-                tft->drawSmoothCircle(120, 120, 80, COLOR_MEDIUM[random(10)], TFT_BLACK);
-
-                // tft->fillSmoothCircle(120, 120, 70, TFT_BLUE, TFT_BLACK);
-                // tft->fillSmoothCircle(120, 120, 69, TFT_BLACK, TFT_BLUE);
-                tft->drawSmoothCircle(120, 120, 70, COLOR_MEDIUM[random(10)], TFT_BLACK);
-
-                // tft->fillSmoothCircle(120, 120, 60, TFT_BLUE, TFT_BLACK);
-                // tft->fillSmoothCircle(120, 120, 59, TFT_BLACK, TFT_BLUE);
-                tft->drawSmoothCircle(120, 120, 60, COLOR_MEDIUM[random(10)], TFT_BLACK);
+                for (size_t i = 6; i < 9; i++)
+                        tft->drawSmoothCircle(120, 120, i * 10, COLOR_MEDIUM[random(10)], TFT_BLACK);
 
                 // dot hour
                 for (int t = 15; t > (-1); t--)
@@ -259,7 +199,6 @@ void analogClockVariant(int v)
                         tft->fillCircle(posX(75, dgree), posY(75, dgree), 2, rgbToHex(g, 0, 0));
                 }
 
-                // tft->drawLine((getCos(0) * 78) + 120, (getSin(0) * 78) + 120, (getCos(0) * 68) + 120, (getSin(0) * 88) + 120, COLOR_MEDIUM[random(10)]); // DRAW 12 LINES
                 tft->drawLine(posX(78, 0), posY(78, 0), posX(68, 0), posY(68, 0), COLOR_MEDIUM[random(10)]); // DRAW 12 LINES
 
                 displaySysInfo(0); // appInfo.ino
@@ -274,54 +213,28 @@ void analogClockVariant(int v)
                 // marine radar. face =9
                 tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
                 tft->setTextColor(TFT_WHITE, TFT_BLACK);
-                // int colorRandomMedium = COLOR_MEDIUM[random(10)];
-                // tft->drawCircle(120, 120, 80, TFT_GREEN);
                 tft->fillSmoothCircle(120, 120, 80, TFT_GREEN, TFT_BLACK);
                 tft->fillSmoothCircle(120, 120, 77, TFT_BLACK, TFT_GREEN);
 
-                // tft->drawCircle(120, 120, 60, 0x0140);
-                // tft->drawCircle(120, 120, 40, 0x0140);
-                // tft->drawCircle(120, 120, 20, 0x0140);
+                for (size_t i = 80; i = 20; i -= 20)
+                        tft->drawSmoothCircle(120, 120, i, 0x0140, TFT_BLACK);
 
-                tft->drawSmoothCircle(120, 120, 60, 0x0140, TFT_BLACK);
-                tft->drawSmoothCircle(120, 120, 40, 0x0140, TFT_BLACK);
-                tft->drawSmoothCircle(120, 120, 20, 0x0140, TFT_BLACK);
-                // tft->fillSmoothCircle(120, 120, 60, 0x0140, TFT_BLACK);
-                // tft->fillSmoothCircle(120, 120, 59, TFT_BLACK, 0x0140);
-                // tft->fillSmoothCircle(120, 120, 40, 0x0140, TFT_BLACK);
-                // tft->fillSmoothCircle(120, 120, 39, TFT_BLACK, 0x0140);
-                // tft->fillSmoothCircle(120, 120, 20, 0x0140, TFT_BLACK);
-                // tft->fillSmoothCircle(120, 120, 19, TFT_BLACK, 0x0140);
+                // tft->drawSmoothCircle(120, 120, 60, 0x0140, TFT_BLACK);
+                // tft->drawSmoothCircle(120, 120, 40, 0x0140, TFT_BLACK);
+                // tft->drawSmoothCircle(120, 120, 20, 0x0140, TFT_BLACK);
                 tnow = ttgo->rtc->getDateTime();
                 hh = tnow.hour;
                 mm = tnow.minute;
 
-                // dot hour pretend deetected object
+                // dot hour pretend detected object
                 dgree = ((hh * 30) + (mm / 2)) - 1;
                 // tft->fillCircle((getCos(dgree) * random(50, 76)) + 120, (getSin(dgree) * random(50, 76)) + 120, 2, rgbToHex(200, 225, 180));
                 tft->fillCircle(posX(random(50, 76), dgree), posY(random(50, 76), dgree), 2, rgbToHex(200, 225, 180));
 
-                // dot minutes
-                //  12 LINES (minutes step)
-                for (int i = 0; i < 360; i += 30)
-                {
-                        sx = cos((i - 90) * 0.0174532925);
-                        sy = sin((i - 90) * 0.0174532925);
-                        x0 = sx * 37 + 40;
-                        yy0 = sy * 37 + 40;
-                        x1 = sx * 29 + 40;
-                        yy1 = sy * 29 + 40;
-                        //   tft->drawLine(x0, yy0, x1, yy1,  COLOR_MEDIUM[random(10)]);          // DRAW 12 LINES
-                }
-
                 // 4 LINES (12,3,6,9)
                 for (int i = 0; i < 360; i += 30)
-                {
                         if (i % 90 == 0)
                                 tft->drawLine(posX(78, i), posY(78, i) + 1, 120, 121, 0x0140);
-
-                        // tft->drawLine((getCos(i) * 78) + 120, (getSin(i) * 78) + 121, (getCos(i) * 0) + 120, (getSin(0) * 0) + 121, 0x0140);
-                }
 
                 sdeg = ss * 6;                     // 0-59 -> 0-354   Pre-compute
                 mdeg = mm * 6 + sdeg * 0.01666667; // 0-59 -> 0-360 - includes seconds
@@ -353,10 +266,12 @@ void analogClockVariant(int v)
                 // tft->drawSmoothCircle(120, 120, 80, TFT_BLACK, 0x3186);
 
                 sdeg = ss * 6;
-                mm > 29 ? mm180 = mm - 30 : mm180 = 30 + mm;
+                // mm > 29 ? mm180 = mm - 30 : mm180 = 30 + mm;
+                mm180 = mm > 29 ? mm - 30 : 30 + mm;
                 mm180 = ((mm180 - 5) + random(11));
                 mdeg = mm180 * 6 + sdeg * 0.01666667; // 0-59 -> 0-360 - includes seconds
-                hh > 5 ? hh180 = hh - 6 : hh180 = 6 + hh;
+                // hh > 5 ? hh180 = hh - 6 : hh180 = 6 + hh;
+                hh180 = hh > 5 ? hh - 6 : 6 + hh;
                 hdeg = hh180 * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
 
                 // DRAW  random  shape ISLAND
