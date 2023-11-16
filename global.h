@@ -16,7 +16,6 @@ uint16_t osx = cr, osy = cr, omx = cr, omy = cr, ohx = cr, ohy = cr;
 
 uint16_t x0 = 0, x1 = 0, yy0 = 0, yy1 = 0;
 uint32_t targetTime = 0;
-int xx, yy, xxx, yyy;
 bool touched = false;
 int CF, touchStage = 0;
 int16_t tx, ty; // touch coordinate
