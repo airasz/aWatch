@@ -216,7 +216,6 @@ void analogClockVariant(int v)
       int x2, y2;
       if (i == 0 + rndstartdeg)
       {
-
         x2 = posX(rx + random(lr, hr), i + (360 / plygon));
         (x2 < 0) && (x2 = 0);
         y2 = posY(ry + random(lr, hr), i + (360 / plygon));
@@ -237,7 +236,7 @@ void analogClockVariant(int v)
       }
       else
       {
-        // closing the cicle, match to start point
+        // closing the shape, end point match to start point
         tft->drawLine(Ox, Oy, sx, sy, 0x3186);
         // Serial.println("^3");
       }
