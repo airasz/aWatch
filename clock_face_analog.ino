@@ -415,6 +415,7 @@ void analogClockVariant(int v)
     tft->fillScreen(TFT_BLACK);          // CLEAR DISPLAY
     hdeg = hh12 * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
     hq = getQuadrant(hh12);
+    hq = (hh12 / 3) + 1; // get quadrant
     int xx2 = 120;
     int yy2 = 120;
     int xx = posX(50, hdeg, xx2);
@@ -485,26 +486,7 @@ void analogClockVariant(int v)
   }
 }
 // tft->drawLine(*(pos(hh, mm) + 0), *(pos(hh, mm) + 1), 120, 120, 0x3186); //
-int *pos(int minute, int hour)
-{
-  int _ohx, _ohy, _omx, _omy;
-  int _sdeg, _mdeg, _hdeg;
-  int _hx, _hy, _mx, _my;
-  _sdeg = 0 * 6;                          // 0-59 -> 0-354   Pre-compute
-  _mdeg = minute * 6 + sdeg * 0.01666667; // 0-59 -> 0-360 - includes seconds
-  _hdeg = hour * 30 + mdeg * 0.0833333;   // 0-11 -> 0-360 - inc min and seconds
 
-  _hx = cos((_hdeg - 90) * 0.0174532925);
-  _hy = sin((_hdeg - 90) * 0.0174532925);
-  _mx = cos((_mdeg - 90) * 0.0174532925);
-  _my = sin((_mdeg - 90) * 0.0174532925);
-  _ohx = _hx * 120 + 120;
-  _ohy = _hy * 120 + 120; // NEW   HOUR
-  _omx = _mx * 120 + 120;
-  _omy = _my * 120 + 120;
-  int r[4] = {_ohx, _ohy, _omx, _omy};
-  return r;
-}
 float getCos(int degree)
 {
   float r = cos((degree - 90) * 0.0174532925);
@@ -538,14 +520,16 @@ int posY(int radius, int degree, int pivot)
 }
 int getQuadrant(int hh)
 {
-  if (hh < 3)
-    return 1;
-  if (hh >= 3 && hh < 6)
-    return 2;
-  if (hh >= 6 && hh < 9)
-    return 3;
-  if (hh >= 9 && hh < 12)
-    return 4;
+  // if (hh < 3)
+  //   return 1;
+  // if (hh >= 3 && hh < 6)
+  //   return 2;
+  // if (hh >= 6 && hh < 9)
+  //   return 3;
+  // if (hh >= 9 && hh < 12)
+  //   return 4;
+
+  return (hh / 3) + 1;
 }
 void assignDegree()
 {
