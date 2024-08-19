@@ -163,8 +163,11 @@ void drawSmoothButton(int x, int y, int w, int h, int fc, int bc, int tc, String
 
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(tc);
+        // tft->setTextColor((itsLightColor(bc)) ? TFT_BLACK : TFT_WHITE);
+
         // tft->fillRoundRect(x, y, w, h, 5, bc);
         tft->fillSmoothRoundRect(x, y, w, h, 5, fc, bc);
+        // tft->fillSmoothRoundRect(x, y, w, h, 5, (itsLightColor(bc)) ? TFT_BLACK : TFT_WHITE, bc);
         tft->drawString(txt, x + (w / 2), y + (h / 2), 2);
 }
 void drawOutlineButton(int x, int y, int w, int h, int bc, int tc, String txt)
@@ -302,5 +305,28 @@ void drawSmoothSwitch(int x, int y, int strokeColor, int activeColor, bool enabl
                 tft->fillSmoothRoundRect(x, y, w, h, r, TFT_BLACK, TFT_BLACK); // clear area before draw
                 tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
                 tft->fillSmoothCircle(x + 3 + 12, y + 3 + 12, 10, strokeColor, TFT_BLACK);
+        }
+}
+
+bool itsLightColor(int color)
+{
+        int r, g, b;
+        double hsp;
+
+        r = (color >> 16) & 255;
+        g = (color >> 8) & 255;
+        b = color & 255;
+
+        // HSP equation
+        hsp = sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
+
+        // Using the HSP value, determine whether the color is light or dark
+        if (hsp > 127.5)
+        {
+                return true;
+        }
+        else
+        {
+                return false;
         }
 }
