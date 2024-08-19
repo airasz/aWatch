@@ -124,18 +124,18 @@ void low_energy(void)
       // Serial.println(F("before gpio_wakeup_enable() party."));
 
       esp_err_t erret;
-      erret = esp_sleep_enable_ext1_wakeup((gpio_num_t)AXP202_INT, ESP_EXT1_WAKEUP_ALL_LOW);
+      erret = gpio_wakeup_enable((gpio_num_t)AXP202_INT, GPIO_INTR_LOW_LEVEL);
       if (erret != ESP_OK)
       {
         Serial.println(F("gpio_wakeup_enable failed for AXP202_INT"));
       }
-      erret = esp_sleep_enable_ext1_wakeup((gpio_num_t)BMA423_INT1, ESP_EXT1_WAKEUP_ANY_HIGH);
+      erret = gpio_wakeup_enable((gpio_num_t)BMA423_INT1, GPIO_INTR_HIGH_LEVEL);
       if (erret != ESP_OK)
       {
         Serial.println(F("gpio_wakeup_enable failed for BMA423_INT"));
       }
       // Serial.println(F("gpio_wakeup_enable(RTC_INT, LOW_LEVEL)"));
-      erret = esp_sleep_enable_ext1_wakeup((gpio_num_t)RTC_INT, ESP_EXT1_WAKEUP_ALL_LOW);
+      erret = gpio_wakeup_enable((gpio_num_t)RTC_INT, GPIO_INTR_LOW_LEVEL);
       if (erret != ESP_OK)
       {
         Serial.println(F("gpio_wakeup_enable failed for RTC_INT"));
