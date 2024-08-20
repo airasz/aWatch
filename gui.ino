@@ -162,8 +162,8 @@ void drawSmoothButton(int x, int y, int w, int h, int fc, int bc, int tc, String
 {
 
         tft->setTextDatum(MC_DATUM);
-        tft->setTextColor(tc);
-        // tft->setTextColor((itsLightColor(bc)) ? TFT_BLACK : TFT_WHITE);
+        // tft->setTextColor(tc);
+        tft->setTextColor((light_or_dark(fc)) ? TFT_BLACK : TFT_WHITE);
 
         // tft->fillRoundRect(x, y, w, h, 5, bc);
         tft->fillSmoothRoundRect(x, y, w, h, 5, fc, bc);
@@ -308,20 +308,51 @@ void drawSmoothSwitch(int x, int y, int strokeColor, int activeColor, bool enabl
         }
 }
 
-bool itsLightColor(int color)
+// bool itsLightColor(int color)
+// {
+//         int r, g, b;
+//         double hsp;
+
+//         r = (color >> 11) & 0x1F;
+//         g = (color >> 5) & 0x3F;
+//         b = color & 0x1F;
+//         r = (r * 255) / 31;
+//         g = (g * 255) / 64;
+//         b = (b * 255) / 31;
+
+//         // HSP equation
+//         hsp = sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
+//         Serial.printf("color  : %d \n", color);
+//         Serial.printf("hsp  : %s \n", String(hsp, 2));
+//         // Using the HSP value, determine whether the color is light or dark
+//         if (hsp > 127.5)
+//         {
+//                 return true;
+//         }
+//         else
+//         {
+//                 return false;
+//         }
+// }
+bool light_or_dark(uint16_t color)
 {
-        int r, g, b;
-        double hsp;
+        // Extract RGB components from 16-bit RGB565 color
+        uint8_t red = (color >> 11) & 0x1F;  // 5 bits for red
+        uint8_t green = (color >> 5) & 0x3F; // 6 bits for green
+        uint8_t blue = color & 0x1F;         // 5 bits for blue
 
-        r = (color >> 16) & 255;
-        g = (color >> 8) & 255;
-        b = color & 255;
+        // Scale the values to 0-255 range
+        red = (red * 255) / 31;
+        green = (green * 255) / 63;
+        blue = (blue * 255) / 31;
 
-        // HSP equation
-        hsp = sqrt(0.299 * (r * r) + 0.587 * (g * g) + 0.114 * (b * b));
+        // Calculate perceived brightness (luminance)
+        float brightness = 0.299 * red + 0.587 * green + 0.114 * blue;
 
-        // Using the HSP value, determine whether the color is light or dark
-        if (hsp > 127.5)
+        Serial.printf("color  : %d \n", color);
+        Serial.printf("brightness  : %s \n", String(brightness, 2));
+        // Determine if the color is light or dark
+        if (brightness > 127)
         {
                 return true;
         }
