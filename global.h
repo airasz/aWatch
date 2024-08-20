@@ -47,3 +47,4 @@ uint32_t COLOR_ATC[] = {TFT_BLUE, TFT_MAGENTA, TFT_GREEN};
 //===power info===
 int16_t per;
 float vbus_v, vbus_c, batt_v, dchrg_c, chrg_c;
+bool cat[3] = {false, false, false};

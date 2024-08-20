@@ -1,3 +1,4 @@
+
 void drawSetFace()
 {
         tft->setTextFont(2);
@@ -16,5 +17,5 @@ void drawFaceFilter(int col)
         const String t[3] = {"ANALOG", "NUMBER", "TEXT"};
         uint16_t dol = itsLightColor(COLOR_ACCENT[config.colorAccent]) ? TFT_BLACK : TFT_WHITE;
         drawSmoothButton(x[col], 180, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_BLACK, TFT_WHITE, t[col]);
-        tft->fillSmoothCircle(x[col] + 10, 180 + 10, 6, (config.show_analog) ? dol : COLOR_ACCENT[config.colorAccent], COLOR_ACCENT[config.colorAccent]);
+        tft->fillSmoothCircle(x[col] + 10, 180 + 10, 6, cat[col] ? dol : COLOR_ACCENT[config.colorAccent], COLOR_ACCENT[config.colorAccent]);
 }

@@ -154,7 +154,8 @@ void drawButton(int x, int y, int w, int h, int bc, int tc, String txt)
 {
 
         tft->setTextDatum(MC_DATUM);
-        tft->setTextColor(tc);
+        // tft->setTextColor(tc);
+        tft->setTextColor((itsLightColor(bc)) ? TFT_BLACK : TFT_WHITE);
         tft->fillRoundRect(x, y, w, h, 5, bc);
         tft->drawString(txt, x + (w / 2), y + (h / 2), 2);
 }

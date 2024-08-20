@@ -378,6 +378,9 @@ void setup()
   // EEPROM.commit();
   //  config.colorAccent = COLOR_ACCENT[config.colorAccent];
   CF = config.clock_face; // max 9
+  cat[0] = config.show_analog;
+  cat[1] = config.show_number;
+  cat[2] = config.show_text;
   clock_face_now = config.clock_face;
   screenTimeOut = config.screensaver_timeout;
   g_event_queue_handle = xQueueCreate(20, sizeof(uint8_t));

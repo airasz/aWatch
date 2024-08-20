@@ -262,6 +262,9 @@ void pickAccent()
                         col = 10;
                 }
                 if (i == config.colorAccent)
-                        tft->fillSmoothCircle(col, row, 6, TFT_WHITE, COLOR_ACCENT[config.colorAccent]);
+                {
+                        uint16_t dol = itsLightColor(COLOR_ACCENT[config.colorAccent]) ? TFT_BLACK : TFT_WHITE;
+                        tft->fillSmoothCircle(col, row, 6, dol, COLOR_ACCENT[config.colorAccent]);
+                }
         }
 }

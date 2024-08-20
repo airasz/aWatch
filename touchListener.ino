@@ -739,6 +739,7 @@ void handleTouch()
                                                 EEPROM_writeAnything(0, config);
                                                 EEPROM.commit();
                                                 drawFaceFilter(0); // appSetFace.ino
+                                                cat[0] = config.show_analog;
                                                 fillFaceList();
                                         }
                                         else
@@ -747,6 +748,7 @@ void handleTouch()
                                                 EEPROM_writeAnything(0, config);
                                                 EEPROM.commit();
                                                 drawFaceFilter(0); // appSetFace.ino
+                                                cat[0] = config.show_analog;
                                                 fillFaceList();
                                         }
                                         // config.show_analog = !config.show_analog;
@@ -858,6 +860,7 @@ void handleTouch()
                                                 EEPROM_writeAnything(0, config);
                                                 EEPROM.commit();
                                                 drawFaceFilter(1); // appSetFace.ino
+                                                cat[1] = config.show_number;
                                                 fillFaceList();
                                         }
                                         else
@@ -866,6 +869,7 @@ void handleTouch()
                                                 EEPROM_writeAnything(0, config);
                                                 EEPROM.commit();
                                                 drawFaceFilter(1); // appSetFace.ino
+                                                cat[1] = config.show_number;
                                                 fillFaceList();
                                         }
                                 }
@@ -943,6 +947,7 @@ void handleTouch()
                                                 EEPROM_writeAnything(0, config);
                                                 EEPROM.commit();
                                                 drawFaceFilter(2); // appSetFace.ino
+                                                cat[2] = config.show_text;
                                                 fillFaceList();
                                         }
                                         else
@@ -951,6 +956,7 @@ void handleTouch()
                                                 EEPROM_writeAnything(0, config);
                                                 EEPROM.commit();
                                                 drawFaceFilter(2); // appSetFace.ino
+                                                cat[2] = config.show_text;
                                                 fillFaceList();
                                         }
                                         // config.show_text = !config.show_text;
