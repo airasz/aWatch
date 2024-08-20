@@ -16,15 +16,12 @@ void init_holiday()
         };
         // Serial.printf("pray day: %02d | mnt:  %02d | prayID%02d \n", day, mnt, in);
         for (size_t i = 0; i < 12; i++)
-        {
                 for (int ii = 0; ii < 4; ii++)
                 {
                         int in = doc[String(i + 1)][ii];
                         hddata[i][ii] = in; // save to array data variable
                         // Serial.printf(" hddata[%d][%d] : %d ", i, ii, hddata[i][ii]);
                 }
-                Serial.println("");
-        }
 
         dbFile.close();
 }
@@ -47,7 +44,7 @@ void showCal()
         tft->fillScreen(TFT_BLACK); // Clear screen
         tft->setTextSize(1);
         tft->setTextFont(2);
-        int dow = ttgo->rtc->getDayOfWeek(1, nmonth, nyear);
+        int dow = ttgo->rtc->getDayOfWeek(1, nmonth, nyear); // day of week
         Serial.printf("dow  : %d \n", dow);
 
         int maxday = MaxDate[nmonth - 1]; // get maximun day in current month
@@ -74,8 +71,8 @@ void showCal()
                 if (i >= dow)
                 {
                         tft->setCursor(((i % 7) * dwidth) + _do, row * dheight);
-                        tft->setTextColor((holyday(i - dow + 1, nmonth - 1)) || (i % 7 == 0) ? TFT_RED : TFT_GREEN);
                         // coloring holyday
+                        tft->setTextColor((holyday(i - dow + 1, nmonth - 1)) || (i % 7 == 0) ? TFT_RED : TFT_GREEN);
                         if (i - dow + 1 == nday) // highlight present day
                         {
                                 tft->fillRoundRect(((i % 7) * dwidth) + _do - 1, (row * dheight) - 2, 18, 20, 2, rgbToHex(20, 20, 20));
@@ -89,18 +86,26 @@ void showCal()
 void showCal(bool next)
 {
         // true= next from current, false = previous from current
-        if (next && nmonth++ > 12)
+        if (next)
         {
-                nmonth = 1;
-                nyear++;
+                nmonth++;
+                if (nmonth > 12)
+                {
+                        nmonth = 1;
+                        nyear++;
+                }
         }
-        if (!next && nmonth-- < 1)
+        if (!next)
         {
-                nmonth = 12;
-                nyear--;
+                nmonth--;
+                if (nmonth < 1)
+                {
+                        nmonth = 12;
+                        nyear--;
+                }
         }
 
-        String const dw[] = {"M", "S", "S", "R", "K", "J", "S"}; // indonesian day name start sunday
+        String const dw[] = {"M", "S", "S", "R", "K", "J", "S"}; // indonesian initial day name start sunday
         int dwidth, dheight, row;
 
         const int _do = 8; // display  X position offset
@@ -118,7 +123,9 @@ void showCal(bool next)
         // month name
         tft->setTextColor(TFT_WHITE);
         tft->setCursor(2, row * dheight);
-        tft->print(bulan[nmonth - 1] + ", " + nyear);
+        // Serial.println("will be print next month");
+        tft->print(bulan[nmonth - 1] + ", " + nyear); //?? cause restart
+        // Serial.println("print next month");
         row++;
         for (int i = 0; i < 7; i++)
         {

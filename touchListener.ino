@@ -42,15 +42,10 @@ void touchListener()
                                 if (flipped && !alarm_active)
                                 {
                                         if (page_ID == 0)
-                                        {
                                                 page_ID = 1;
-                                                updateScreen(page_ID); // gui.ino
-                                        }
                                         else if (page_ID == 1)
-                                        {
                                                 page_ID = 0;
-                                                updateScreen(page_ID); // gui.ino
-                                        }
+                                        updateScreen(page_ID); // gui.ino
                                         flipped = false;
                                 }
                 }
@@ -81,7 +76,6 @@ void touchListener()
                                 {
                                         if (shiftX++ > maxShifting)
                                         {
-
                                                 swipeID = 1;
                                                 if (page_ID == 3)
                                                         swipeID = 32;
@@ -130,9 +124,7 @@ void touchListener()
                                                 swipeID = 31;
                                         swipeMe = 0;
                                 }
-                                // (shiftY > 50) && (swipeDown = 1);
                                 oldTouchY = ty;
-                                // tmptouchreg = 0;
                         }
                         if (ty < oldTouchY)
                         {
@@ -156,9 +148,7 @@ void touchListener()
         if (touchStage == 1)
         {
                 if (swipeID == 0)
-                {
                         touched = 1;
-                }
                 touchStage = 2;
         }
         if (touched)
@@ -201,9 +191,7 @@ void touchListener()
                                 tmptouchreg = 12;
                 }
                 if (page_ID == 22)
-                {
                         adjusting(tx, ty); // update slider
-                }
                 swipeMe = 1;
                 touched = 0;
                 if (swipeID > 0)
@@ -247,55 +235,29 @@ void handleTouch()
                         if (tmptouchreg == 1) //============================  1
                         {
                                 if (page_ID == 0 || page_ID == 1 || page_ID == 3 || page_ID == 31 || page_ID == 32)
-                                {
                                         page_ID = 11;
-                                        updateScreen(page_ID); // gui.ino
-                                        // prevpage_ID = page_ID;
-                                        tmptouchreg = 0;
-                                }
                                 else if (page_ID == 11)
-                                {
                                         page_ID = 0;
-                                        updateScreen(page_ID); // gui.ino
-                                        // prevpage_ID = page_ID;
-                                        tmptouchreg = 0;
-                                }
                                 else if (page_ID == 2)
-                                {
                                         page_ID = 0;
-                                        updateScreen(page_ID); // gui.ino
-                                        // prevpage_ID = page_ID;
-                                        tmptouchreg = 0;
-                                }
                                 else if (page_ID > 20 && page_ID < 30 || page_ID > 200 && page_ID < 299)
-                                {
                                         page_ID = 2;
-                                        updateScreen(page_ID); // gui.ino
-                                        // prevpage_ID = page_ID;
-                                        tmptouchreg = 0;
-                                }
+
+                                updateScreen(page_ID); // gui.ino
+                                // prevpage_ID = page_ID;
+                                tmptouchreg = 0;
                         }
 
                         if (tmptouchreg == 2) //============================  2
                         {
                                 if (page_ID == 0 || page_ID == 11 || page_ID == 1 || page_ID == 31 || page_ID == 32) // calender
-                                {
                                         page_ID = 3;
-                                        updateScreen(page_ID); // gui.ino
-                                        tmptouchreg = 0;
-                                }
                                 else if (page_ID == 3) // calender
-                                {
                                         page_ID = 0;
-                                        updateScreen(page_ID); // gui.ino
-                                        tmptouchreg = 0;
-                                }
                                 else if (page_ID == 221) // pick accent
-                                {
                                         page_ID = 22;
-                                        updateScreen(page_ID); // gui.ino
-                                        tmptouchreg = 0;
-                                }
+                                updateScreen(page_ID); // gui.ino
+                                tmptouchreg = 0;
                         }
 
                         if (tmptouchreg == 3) //============================  3
@@ -312,7 +274,7 @@ void handleTouch()
                                         touchCount = 0;
                                         // home = 0;
                                 }
-                                else if (page_ID == 1) // sys info
+                                else if (page_ID == 1 || page_ID == 2 || (page_ID > 20 && page_ID < 30) || page_ID == 221 || (page_ID > 230 && page_ID < 234) || page_ID == 271 || page_ID == 272) // sys info
                                 {
                                         page_ID = 0;
                                         updateScreen(page_ID); // gui.ino
@@ -320,33 +282,6 @@ void handleTouch()
                                         // clock_face_digit(CF);
                                         // home = 1;
                                 }
-                                else if (page_ID == 2 || (page_ID > 20 && page_ID < 30)) // back
-                                {
-
-                                        page_ID = 0;
-                                        updateScreen(page_ID); // gui.ino
-                                        prevpage_ID = page_ID;
-                                }
-                                else if (page_ID == 221) // exit
-                                {
-                                        page_ID = 0;
-                                        updateScreen(page_ID); // gui.ino
-                                        prevpage_ID = page_ID;
-                                }
-                                else if (page_ID > 230 && page_ID < 234) // back
-                                {
-
-                                        page_ID = 0;
-                                        updateScreen(page_ID); // gui.ino
-                                        prevpage_ID = page_ID;
-                                }
-                                else if (page_ID == 271 || page_ID == 272) // back
-                                {
-                                        page_ID = 0;
-                                        updateScreen(page_ID); // gui.ino
-                                        prevpage_ID = page_ID;
-                                }
-
                                 tmptouchreg = 0;
                                 my_idle();
                         }
@@ -419,7 +354,6 @@ void handleTouch()
                         {
                                 if (page_ID == 2) // go to dysplay
                                 {
-
                                         page_ID = 22;
                                         tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
                                         updateScreen(page_ID);                     // gui.ino
@@ -438,21 +372,10 @@ void handleTouch()
                         {
                                 if (page_ID == 21)
                                 {
-                                        if (config.stepcounter_filter > 0)
-                                        {
-                                                config.stepcounter_filter = 0;
-                                                EEPROM_writeAnything(0, config);
-                                                EEPROM.commit();
-                                                updateScreen(page_ID); // appSetting.ino
-                                        }
-                                        else
-                                        {
-
-                                                config.stepcounter_filter = 1;
-                                                EEPROM_writeAnything(0, config);
-                                                EEPROM.commit();
-                                                updateScreen(page_ID); // appSetting.ino
-                                        }
+                                        config.stepcounter_filter = !config.stepcounter_filter;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                        updateScreen(page_ID); // appSetting.ino
                                 }
                                 else if (page_ID == 221) // pickAccent() appSetDisplay.ino
                                 {
@@ -465,22 +388,11 @@ void handleTouch()
                                 }
                                 if (page_ID == 25)
                                 {
-                                        if (config.rnd_face)
-                                        {
-                                                config.rnd_face = 0;
-                                                CF = faceList[random(0, faceList.size() + 1)];
-
-                                                EEPROM_writeAnything(0, config);
-                                                EEPROM.commit();
-                                                updateScreen(page_ID); // appSetting.ino
-                                        }
-                                        else
-                                        {
-                                                config.rnd_face = 1;
-                                                EEPROM_writeAnything(0, config);
-                                                EEPROM.commit();
-                                                updateScreen(page_ID); // appSetting.ino
-                                        }
+                                        config.rnd_face = !config.rnd_face;
+                                        (config.rnd_face) && (CF = faceList[random(0, faceList.size() + 1)]);
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                        updateScreen(page_ID); // appSetting.ino
                                 }
 
                                 else if (page_ID == 2)
@@ -503,7 +415,6 @@ void handleTouch()
                                         (tmpmwarn > 15) && (tmpmwarn = 0);
                                         updateScreen(page_ID); // gui.ino
                                 }
-
                                 else if (page_ID == 271) // IR pana
                                 {
                                         imode++;
@@ -514,11 +425,7 @@ void handleTouch()
                                 }
                                 else if (page_ID == 272) // IR LG
                                 {
-                                        // imode++;
-                                        // (imode == 1) && (imode = 2);
-                                        // (imode > 3) && (imode = 0);
                                         (acLG_flow++ > 2) && (acLG_flow == 0);
-
                                         updateScreen(page_ID); // gui.ino
                                 }
                                 else if (page_ID == 231)
@@ -704,7 +611,6 @@ void handleTouch()
                                 if (page_ID == 0)
                                 {
                                 }
-
                                 else if (page_ID == 21)
                                 {
                                         // ttgo->bma->resetStepCounter();
@@ -733,28 +639,12 @@ void handleTouch()
                                 }
                                 else if (page_ID == 25)
                                 {
-                                        if (config.show_analog)
-                                        {
-                                                config.show_analog = 0;
-                                                EEPROM_writeAnything(0, config);
-                                                EEPROM.commit();
-                                                drawFaceFilter(0); // appSetFace.ino
-                                                cat[0] = config.show_analog;
-                                                fillFaceList();
-                                        }
-                                        else
-                                        {
-                                                config.show_analog = 1;
-                                                EEPROM_writeAnything(0, config);
-                                                EEPROM.commit();
-                                                drawFaceFilter(0); // appSetFace.ino
-                                                cat[0] = config.show_analog;
-                                                fillFaceList();
-                                        }
-                                        // config.show_analog = !config.show_analog;
-                                        // drawFaceFilter(0);
-                                        // EEPROM_writeAnything(0, config);
-                                        // EEPROM.commit();
+                                        config.show_analog = !config.show_analog;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                        drawFaceFilter(0); // appSetFace.ino
+                                        cat[0] = config.show_analog;
+                                        fillFaceList();
                                 }
                                 else if (page_ID == 221) // pickAccent() appSetDisplay.ino
                                 {
@@ -798,7 +688,6 @@ void handleTouch()
                                         page_ID = 2;
                                         updateScreen(page_ID); // gui.ino
                                 }
-
                                 else if (page_ID == 2) // setting
                                 {
                                         page_ID = 27;                              // select AC brand
@@ -809,7 +698,6 @@ void handleTouch()
                                 }
                                 else if (page_ID > 230 && page_ID < 234)
                                 {
-
                                         tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
                                         writeRTC();                                // appSettime.ino
                                         page_ID++;
@@ -854,24 +742,12 @@ void handleTouch()
                                 }
                                 else if (page_ID == 25)
                                 {
-                                        if (config.show_number)
-                                        {
-                                                config.show_number = 0;
-                                                EEPROM_writeAnything(0, config);
-                                                EEPROM.commit();
-                                                drawFaceFilter(1); // appSetFace.ino
-                                                cat[1] = config.show_number;
-                                                fillFaceList();
-                                        }
-                                        else
-                                        {
-                                                config.show_number = 1;
-                                                EEPROM_writeAnything(0, config);
-                                                EEPROM.commit();
-                                                drawFaceFilter(1); // appSetFace.ino
-                                                cat[1] = config.show_number;
-                                                fillFaceList();
-                                        }
+                                        config.show_number = !config.show_number;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                        drawFaceFilter(1); // appSetFace.ino
+                                        cat[1] = config.show_number;
+                                        fillFaceList();
                                 }
                                 else if (page_ID == 221) // pickAccent() appSetDisplay.ino
                                 {
@@ -891,7 +767,6 @@ void handleTouch()
                                 }
                                 else if (page_ID > 230 && page_ID < 234)
                                 {
-
                                         tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
                                         writeRTC();                                // appSettime.ino
                                         page_ID++;
@@ -941,29 +816,13 @@ void handleTouch()
 
                                 else if (page_ID == 25)
                                 {
-                                        if (config.show_text)
-                                        {
-                                                config.show_text = 0;
-                                                EEPROM_writeAnything(0, config);
-                                                EEPROM.commit();
-                                                drawFaceFilter(2); // appSetFace.ino
-                                                cat[2] = config.show_text;
-                                                fillFaceList();
-                                        }
-                                        else
-                                        {
-                                                config.show_text = 1;
-                                                EEPROM_writeAnything(0, config);
-                                                EEPROM.commit();
-                                                drawFaceFilter(2); // appSetFace.ino
-                                                cat[2] = config.show_text;
-                                                fillFaceList();
-                                        }
-                                        // config.show_text = !config.show_text;
+                                        config.show_text = !config.show_text;
                                         Serial.printf("show text face : %s \n", config.show_text ? "true" : "false");
-                                        // drawFaceFilter(2);
-                                        // EEPROM_writeAnything(0, config);
-                                        // EEPROM.commit();
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                        drawFaceFilter(2); // appSetFace.ino
+                                        cat[2] = config.show_text;
+                                        fillFaceList();
                                 }
                                 if (page_ID == 26)
                                 {
@@ -978,7 +837,6 @@ void handleTouch()
                                                 alarmset = 0;
                                                 // setprayalarm(false);
                                         }
-
                                         EEPROM_writeAnything(0, config);
                                         EEPROM.commit();
                                         updateScreen(page_ID); // appSetting.ino
@@ -1038,7 +896,6 @@ void handleTouch()
                                 // config.clock_face = CF;
                                 CF = faceList[listPointer];
                                 // config.clock_face = CF;
-
                                 config.clock_face = CF;
                                 EEPROM_writeAnything(0, config);
                                 EEPROM.commit();
@@ -1085,18 +942,7 @@ void handleTouch()
                         break;
                 case 9:
                         // swipe up
-                        //  CF = 10;
-                        //  (config.pedometer_enable) && (config.pedometer_enable = false) || (config.pedometer_enable = true);
-                        //  if (config.pedometer_enable)
-                        //  {
-                        //          config.pedometer_enable = false;
-                        //  }
-                        //  else
-                        //  {
-                        //          config.pedometer_enable = true;
-                        //  }
                         config.pedometer_enable = !config.pedometer_enable;
-
                         EEPROM_writeAnything(0, config);
                         EEPROM.commit();
                         updateScreen(page_ID); // gui.ino
