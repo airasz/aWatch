@@ -215,13 +215,6 @@ void drawSmoothSwitch_(int x, int y, int strokeColor, int activeColor, bool enab
         int r = h / 2;
         if (enabled)
         {
-                // tft->fillRoundRect(x, y, w, h, r, activeColor);
-                // tft->drawRoundRect(x, y, w, h, r, strokeColor);
-                // tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, strokeColor, TFT_BLACK);
-
-                // tft->fillSmoothRoundRect(x, y, w, h, r, strokeColor, TFT_BLACK);
-                // tft->fillSmoothRoundRect(x + 1, y + 1, w - 2, h - 2, r, TFT_WHITE, strokeColor);
-
                 tft->fillSmoothRoundRect(x, y, w, h, r, TFT_BLACK, TFT_BLACK); // clear area before draw
                 tft->drawSmoothRoundRect(x, y, r, r - 2, w, h, COLOR_ACCENT[config.colorAccent], TFT_BLACK);
                 // tft->fillSmoothCircle(80, 120, 4, TFT_BLACK, TFT_BLACK);
@@ -334,6 +327,8 @@ void drawSmoothSwitch(int x, int y, int strokeColor, int activeColor, bool enabl
 //                 return false;
 //         }
 // }
+
+// create by chatGBT v4
 bool itsLightColor(uint16_t color)
 {
         // Extract RGB components from 16-bit RGB565 color
@@ -349,15 +344,8 @@ bool itsLightColor(uint16_t color)
         // Calculate perceived brightness (luminance)
         float brightness = 0.299 * red + 0.587 * green + 0.114 * blue;
 
-        Serial.printf("color  : %d \n", color);
-        Serial.printf("brightness  : %s \n", String(brightness, 2));
+        // Serial.printf("color  : %d \n", color);
+        // Serial.printf("brightness  : %s \n", String(brightness, 2));
         // Determine if the color is light or dark
-        if (brightness > 127)
-        {
-                return true;
-        }
-        else
-        {
-                return false;
-        }
+        return (brightness > 127) ? true : false;
 }
