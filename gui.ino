@@ -163,7 +163,7 @@ void drawSmoothButton(int x, int y, int w, int h, int fc, int bc, int tc, String
 
         tft->setTextDatum(MC_DATUM);
         // tft->setTextColor(tc);
-        tft->setTextColor((light_or_dark(fc)) ? TFT_BLACK : TFT_WHITE);
+        tft->setTextColor((itsLightColor(fc)) ? TFT_BLACK : TFT_WHITE);
 
         // tft->fillRoundRect(x, y, w, h, 5, bc);
         tft->fillSmoothRoundRect(x, y, w, h, 5, fc, bc);
@@ -334,7 +334,7 @@ void drawSmoothSwitch(int x, int y, int strokeColor, int activeColor, bool enabl
 //                 return false;
 //         }
 // }
-bool light_or_dark(uint16_t color)
+bool itsLightColor(uint16_t color)
 {
         // Extract RGB components from 16-bit RGB565 color
         uint8_t red = (color >> 11) & 0x1F;  // 5 bits for red

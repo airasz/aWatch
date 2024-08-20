@@ -12,19 +12,9 @@ void drawSetFace()
 }
 void drawFaceFilter(int col)
 {
-        if (col == 0)
-        {
-                drawSmoothButton(0, 180, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_BLACK, TFT_WHITE, "ANALOG");
-                tft->fillSmoothCircle(0 + 10, 180 + 10, 6, (config.show_analog) ? TFT_WHITE : COLOR_ACCENT[config.colorAccent], COLOR_ACCENT[config.colorAccent]);
-        }
-        else if (col == 1)
-        {
-                drawSmoothButton(80, 180, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_BLACK, TFT_WHITE, "NUMBER");
-                tft->fillSmoothCircle(80 + 10, 180 + 10, 6, (config.show_number) ? TFT_WHITE : COLOR_ACCENT[config.colorAccent], COLOR_ACCENT[config.colorAccent]);
-        }
-        else if (col == 2)
-        {
-                drawSmoothButton(160, 180, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_BLACK, TFT_WHITE, "TEXT");
-                tft->fillSmoothCircle(160 + 10, 180 + 10, 6, (config.show_text) ? TFT_WHITE : COLOR_ACCENT[config.colorAccent], COLOR_ACCENT[config.colorAccent]);
-        }
+        const int x[3] = {0, 80, 160};
+        const String t[3] = {"ANALOG", "NUMBER", "TEXT"};
+        uint16_t dol = itsLightColor(COLOR_ACCENT[config.colorAccent]) ? TFT_BLACK : TFT_WHITE;
+        drawSmoothButton(x[col], 180, 80, 60, COLOR_ACCENT[config.colorAccent], TFT_BLACK, TFT_WHITE, t[col]);
+        tft->fillSmoothCircle(x[col] + 10, 180 + 10, 6, (config.show_analog) ? dol : COLOR_ACCENT[config.colorAccent], COLOR_ACCENT[config.colorAccent]);
 }
