@@ -12,12 +12,11 @@ void drawAlarmsetting()
 void drawAlarmSet()
 {
         // tft->fillRect(0, 60, 240, 180, TFT_BLACK);
-        // row2
+        // ======= row2
         drawSmoothOutlineButton(0, 70, 60, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "-");
         drawSmoothOutlineButton(240 - 62, 70, 60, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
-
         tft->drawString("HOUR ALARM", 120, 64, 2);
 
         String hou = "";

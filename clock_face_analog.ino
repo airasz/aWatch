@@ -418,34 +418,33 @@ void analogClockVariant(int v)
     hq = (hh12 / 3) + 1; // get quadrant
     int xx2 = 120;
     int yy2 = 120;
-    int xx = posX(50, hdeg, xx2);
-    int yy = posY(50, hdeg, yy2);
-    int mx = posX(80, mdeg, xx);
+    int xx, yy, mx, my;
+    // int xx = posX(50, hdeg, xx2);
+    // int yy = posY(50, hdeg, yy2);
+    // int mx = posX(80, mdeg, xx);
+    // int my = posY(80, mdeg, yy);
     if (mx > 180)
     {
       xx2 = xx2 - (mx - 180);
-      xx = posX(50, hdeg, xx2);
-      mx = posX(80, mdeg, xx);
     }
     if (mx < 60)
     {
       xx2 = xx2 + (60 - mx);
-      xx = posX(50, hdeg, xx2);
-      mx = posX(80, mdeg, xx);
     }
-    my = posY(80, mdeg, yy);
+
     if (my > 180)
     {
       yy2 = yy2 - (my - 180);
-      yy = posY(50, hdeg, yy2);
-      my = posY(80, mdeg, yy);
     }
     if (my < 60)
     {
       yy2 = yy2 + (60 - my);
-      yy = posY(50, hdeg, yy2);
-      my = posY(80, mdeg, yy);
     }
+
+    xx = posX(50, hdeg, xx2);
+    mx = posX(80, mdeg, xx);
+    yy = posY(50, hdeg, yy2);
+    my = posY(80, mdeg, yy);
     // int hcol, mcol;
     int hcol = COLOR_MEDIUM[random(10)];
     int mcol = COLOR_MEDIUM[random(10)];

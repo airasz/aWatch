@@ -25,7 +25,6 @@ void drawPraySet()
 
         // row3
         drawSmoothOutlineButton(0, 130, 60, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "-");
-
         drawSmoothOutlineButton(240 - 62, 130, 60, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
@@ -41,10 +40,8 @@ void drawPraySet()
         // row 4
 
         if (tmpmwarn != config.alarmpraywarning || tmpvib != config.vib || tmpalarmpray != config.alarm_pray)
-        {
                 drawButton(0, 190, 80, 40, COLOR_ACCENT[config.colorAccent], TFT_BLACK, "SAVE");
-                // bwriteAlarm = true;
-        }
+        // bwriteAlarm = true;
 
         // tft->fillRect(0, 60, 240, 180, TFT_BLACK);
         tft->setTextFont(2);

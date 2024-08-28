@@ -244,10 +244,7 @@ void Ac_LG_Power_Down()
 
 void Ac_LG_Air_Clean(int air_clean)
 {
-        if (air_clean == '1')
-                acLG_code_to_sent = 0x88C000C;
-        else
-                acLG_code_to_sent = 0x88C0084;
+        acLG_code_to_sent = (air_clean == '1') ? 0x88C000C : 0x88C0084;
         Ac_LG_Send_Code(acLG_code_to_sent);
         acLG_air_clean_state = air_clean;
 }
@@ -273,7 +270,6 @@ void drawRemoteLG()
 
         // row3
         drawSmoothOutlineButton(0, 130, 60, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "-");
-
         drawSmoothOutlineButton(240 - 62, 130, 60, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
