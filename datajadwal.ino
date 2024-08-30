@@ -1,7 +1,5 @@
 
 
-uint8_t jsu, msu, jdz, mdz, jas, mas, jmag, mmag, jis, mis;
-int dPray[5] = {0, 0, 0, 0, 0};
 void formating(void)
 {
     getPdata(imnt, iday);

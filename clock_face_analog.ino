@@ -34,10 +34,10 @@ void analogClockVariant(int v)
   sdeg = ss * 6;                     // 0-59 -> 0-354   Pre-compute
   mdeg = mm * 6 + sdeg * 0.01666667; // 0-59 -> 0-360 - includes seconds
   hdeg = hh * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
-
+                                     // face=6> standart analog
   if (v == 0)
   {
-    // face=6
+
     tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
     tft->setTextColor(TFT_WHITE, TFT_BLACK);
     // int o_colcircle;
@@ -70,10 +70,9 @@ void analogClockVariant(int v)
     if (enableSS)
       screenServer();
   }
+  // pie line guard
   else if (v == 1)
   {
-    // pie line guard
-
     hdeg = hh12 * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
     tft->fillScreen(TFT_BLACK);          // CLEAR DISPLAY
 
@@ -103,9 +102,9 @@ void analogClockVariant(int v)
     if (enableSS)
       screenServer();
   }
+  // arc progress. face=7
   else if (v == 2)
   {
-    // arc progress. face=7
     tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
     tft->setTextColor(TFT_WHITE, TFT_BLACK);
     hdeg = hh12 * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
@@ -129,9 +128,9 @@ void analogClockVariant(int v)
       screenServer();
   }
 
+  // comet race mode. face =8
   else if (v == 3)
   {
-    // comet race mode. face =8
     // Serial.printf("hh=%01d, mm=%02d, ss=%03d\n", hh, mm, ss);
     tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
     tft->setTextColor(TFT_WHITE, TFT_BLACK);
@@ -154,9 +153,9 @@ void analogClockVariant(int v)
     // Serial.printf("hh=%01d, mm=%02d, ss=%03d\n", hh, mm, ss);
   }
 
+  // marine radar. face =9
   else if (v == 4)
   {
-    // marine radar. face =9
     tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
     tft->setTextColor(TFT_WHITE, TFT_BLACK);
     tft->fillSmoothCircle(120, 120, 80, TFT_GREEN, TFT_BLACK);
@@ -168,6 +167,18 @@ void analogClockVariant(int v)
     // dot hour pretend detected object
     dgree = ((hh * 30) + (mm / 2)) - 1;
     tft->fillCircle(posX(random(50, 76), dgree), posY(random(50, 76), dgree), 2, rgbToHex(200, 225, 180));
+
+    // draw dot for 5 times pray
+    getPraytaskID();
+    int cdark = rgbToHex(10, 40, 40);
+    int cbright = rgbToHex(10, 10, 140);
+    int minf = 0;
+    for (size_t i = 0; i < 5; i++)
+    {
+      minf = ID_ == i ? 20 : 0;
+      dgree = (((dPray[i] / 100) * 30) + ((dPray[i] - ((dPray[i] / 100) * 100)) / 2)) - 1;
+      tft->fillCircle(posX(random(40 + minf, 56 + minf), dgree), posY(random(40 + minf, 56 + minf), dgree), 2, ID_ == i ? cbright : cdark);
+    }
 
     // 4 cross LINES (12,3,6,9)
     for (int i = 0; i < 360; i += 30)
@@ -186,9 +197,9 @@ void analogClockVariant(int v)
     if (enableSS)
       screenServer();
   }
+  // atc radar . face 10
   else if (v == 5)
   {
-    // atc radar . face 10
     tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
     tft->setTextColor(TFT_WHITE, TFT_BLACK);
     ss = 0;
@@ -408,10 +419,9 @@ void analogClockVariant(int v)
     if (enableSS)
       screenServer();
   }
+  // cf 13 >chaotic pendulum
   else if (v == 6)
   {
-    // CF=13
-    // chaotic pendulum
     tft->fillScreen(TFT_BLACK);          // CLEAR DISPLAY
     hdeg = hh12 * 30 + mdeg * 0.0833333; // 0-11 -> 0-360 - inc min and seconds
     hq = getQuadrant(hh12);

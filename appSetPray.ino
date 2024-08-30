@@ -15,7 +15,7 @@ void drawPraySet()
         drawSmoothOutlineButton(240 - 62, 70, 60, 40, COLOR_ACCENT[config.colorAccent], TFT_WHITE, "+");
         tft->setTextDatum(MC_DATUM);
         tft->setTextColor(TFT_WHITE);
-        tft->drawString("ALERT MIN", 120, 64, 2);
+        tft->drawString("ALERT BEFORE in MIN", 120, 64, 2);
         String hou = "";
         hou += old_tmpmwarn;
         drawSmoothOutlineButton(62, 70, 240 - 62 - 60 - 2, 40, COLOR_ACCENT[config.colorAccent], TFT_BLACK, hou);
@@ -62,7 +62,7 @@ void setupPrayAlarm()
 
         if (tmpalarmpray)
         {
-                setupPrayAlarm();
+                setupPrayAlarm(); // setup alarm for next pray
                 alarm_msg = "STOP";
         }
         else

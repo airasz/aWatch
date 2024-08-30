@@ -642,9 +642,9 @@ void handleTouch()
                                         config.show_analog = !config.show_analog;
                                         EEPROM_writeAnything(0, config);
                                         EEPROM.commit();
-                                        drawFaceFilter(0); // appSetFace.ino
-                                        cat[0] = config.show_analog;
                                         fillFaceList();
+                                        cat[0] = config.show_analog;
+                                        drawFaceFilter(0); // appSetFace.ino
                                 }
                                 else if (page_ID == 221) // pickAccent() appSetDisplay.ino
                                 {
@@ -745,9 +745,9 @@ void handleTouch()
                                         config.show_number = !config.show_number;
                                         EEPROM_writeAnything(0, config);
                                         EEPROM.commit();
-                                        drawFaceFilter(1); // appSetFace.ino
-                                        cat[1] = config.show_number;
                                         fillFaceList();
+                                        cat[1] = config.show_number;
+                                        drawFaceFilter(1); // appSetFace.ino
                                 }
                                 else if (page_ID == 221) // pickAccent() appSetDisplay.ino
                                 {
@@ -820,9 +820,9 @@ void handleTouch()
                                         Serial.printf("show text face : %s \n", config.show_text ? "true" : "false");
                                         EEPROM_writeAnything(0, config);
                                         EEPROM.commit();
-                                        drawFaceFilter(2); // appSetFace.ino
-                                        cat[2] = config.show_text;
                                         fillFaceList();
+                                        cat[2] = config.show_text;
+                                        drawFaceFilter(2); // appSetFace.ino
                                 }
                                 if (page_ID == 26)
                                 {
