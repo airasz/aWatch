@@ -166,7 +166,8 @@ void analogClockVariant(int v)
 
     // dot hour pretend detected object
     dgree = ((hh * 30) + (mm / 2)) - 1;
-    tft->fillCircle(posX(random(50, 76), dgree), posY(random(50, 76), dgree), 2, rgbToHex(200, 225, 180));
+    int rr = random(50, 76); // random radius
+    tft->fillCircle(posX(rr, dgree), posY(rr, dgree), 2, rgbToHex(200, 225, 180));
 
     // draw dot for 5 times pray
     getPraytaskID();
@@ -180,7 +181,9 @@ void analogClockVariant(int v)
       {
 
         dgree = (((dPray[i] / 100) * 30) + ((dPray[i] - ((dPray[i] / 100) * 100)) / 2)) - 1;
-        tft->fillCircle(posX(random(50, 76), dgree), posY(random(50, 76), dgree), 2, cbright);
+        // Serial.printf("degree  : %d \n", dgree);
+        rr = random(50, 76); // random radius
+        tft->fillCircle(posX(rr, dgree), posY(rr, dgree), 2, cbright);
       }
       // minf = ID_ == i ? 20 : 0;
       // dgree = (((dPray[i] / 100) * 30) + ((dPray[i] - ((dPray[i] / 100) * 100)) / 2)) - 1;
@@ -232,11 +235,14 @@ void analogClockVariant(int v)
     for (int i = (0 + rndstartdeg); i < (360 + rndstartdeg); i += (360 / plygon))
     {
       int x2, y2;
+
+      int rr = random(lr, hr); // random radius
       if (i == 0 + rndstartdeg)
       {
-        x2 = posX(rx + random(lr, hr), i + (360 / plygon));
+        rr = random(lr, hr);
+        x2 = posX(rx + rr, i + (360 / plygon));
         (x2 < 0) && (x2 = 0);
-        y2 = posY(ry + random(lr, hr), i + (360 / plygon));
+        y2 = posY(ry + rr, i + (360 / plygon));
         (y2 < 0) && (y2 = 0);
         orx = rx, ory = ry;
         tft->drawLine(sx, sy, x2, y2, 0x3186);
@@ -245,9 +251,11 @@ void analogClockVariant(int v)
       }
       else if (i < (360 + rndstartdeg) - (360 / plygon) && i > (0 + rndstartdeg))
       {
-        x2 = posX(orx + random(lr, hr), i + (360 / plygon));
+        rr = random(lr, hr);
+
+        x2 = posX(orx + rr, i + (360 / plygon));
         (x2 < 0) && (x2 = 0);
-        y2 = posY(ory + random(lr, hr), i + (360 / plygon));
+        y2 = posY(ory + rr, i + (360 / plygon));
         (y2 < 0) && (y2 = 0);
         tft->drawLine(Ox, Oy, x2, y2, 0x3186);
         // Serial.print("^2");

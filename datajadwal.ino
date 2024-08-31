@@ -2,7 +2,10 @@
 
 void formating(void)
 {
-    getPdata(imnt, iday);
+    // if (updateDPray>0)
+    // {
+
+    // getPdata(imnt, iday);
 
     jsu = dPray[0] / 100;
     msu = dPray[0] - ((dPray[0] / 100) * 100);
@@ -14,7 +17,8 @@ void formating(void)
     mmag = dPray[3] - ((dPray[3] / 100) * 100);
     jis = dPray[4] / 100;
     mis = dPray[4] - ((dPray[4] / 100) * 100);
-
+    // updateDPray = false;
+    // }
     // dbFile.close();
 }
 void getPdata(uint8_t mnt, uint8_t day)

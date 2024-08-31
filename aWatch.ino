@@ -527,6 +527,7 @@ void setup()
 
   // init_timezones();
 
+  getPdata(imnt, iday); // datajadwal.ino
   if (config.alarm_enable)
   {
     // enable_rtc_alarm();
@@ -555,7 +556,8 @@ void setup()
   }
   delay(1000);
   // displayTime(2);
-} // end setup
+} //=================== end setup
+
 //==============linux boot text log look a like===
 void startScreen(bool respon, String txt)
 {
@@ -863,6 +865,7 @@ void checkday()
     minfactor = step_counter;
     // daily_step = 0;
     cday = tnow.day;
+    getPdata(imnt, iday); // datajadwal.ino
   }
 
   daily_step = step_counter - minfactor;

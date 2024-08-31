@@ -50,3 +50,5 @@ float vbus_v, vbus_c, batt_v, dchrg_c, chrg_c;
 bool cat[3] = {false, false, false};
 uint8_t jsu, msu, jdz, mdz, jas, mas, jmag, mmag, jis, mis;
 int dPray[5] = {0, 0, 0, 0, 0};
+int dPraySche[5][2] = {{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}};
+int updateDPray = 0;

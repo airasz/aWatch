@@ -49,7 +49,7 @@ void updateScreen(int dis_ID)
                 }
                 break;
         case 1:
-                showDayPray();
+                showDayPray(); // praytask.ino
                 screenTimeOut = config.screensaver_timeout + 8;
                 break;
         case 2:

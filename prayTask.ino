@@ -7,14 +7,26 @@ void getPraytaskID(void)
         mm = tnow.minute;
         formating(); // datajadwal.ino
         if (hh < jsu || (hh == jsu && mm < msu))
-        {
+        { // jam 24 - shubuh
                 ID_ = 0;
                 tomorow = 0;
+                // if (updateDPray == 1)
+                // {
+                //         updateDPray = 2;
+                //         getPraytaskID();
+                // }
         }
         else if (hh > jis || (hh == jis && mm >= mis))
-        {
+        { // jam isya - 24
                 ID_ = 0;
                 tomorow = 1;
+
+                // updateDPray = true;
+                // if (updateDPray == 0)
+                // {
+                //         updateDPray = 1;
+                //         getPraytaskID();
+                // }
         }
         else if ((hh < jdz || (hh == jdz && mm < mdz)) && (hh > jsu || (hh == jsu && mm >= msu)))
         {
@@ -57,7 +69,7 @@ void showDayPray(void)
                 if (iday + 1 > maxday)
                 {
                         imnt += 1;
-                        (imnt > 11) && (imnt = 1); //over december  back to jan
+                        (imnt > 11) && (imnt = 1); // over december  back to jan
                         iday = 1;
                         datej += iday;
                 }
@@ -80,7 +92,7 @@ void showDayPray(void)
         tft->setTextColor(TFT_GREEN);
         int r = random(10);
 
-        while (r == 8 || r == 5) //avoid color no 5&8
+        while (r == 8 || r == 5) // avoid color no 5&8
                 r = random(10);
         int color_ = COLOR_MEDIUM[r];
         // Serial.printf(" r : %d \n", r);
@@ -99,7 +111,7 @@ void showDayPray(void)
 int t;
 bool critical = false;
 void close_incoming_event()
-{ //close_incoming_event code here
+{ // close_incoming_event code here
         tft->setTextColor(COLOR_MEDIUM[random(10)]);
         tft->setCursor(0, 200);
         tft->setFreeFont(FF18);
@@ -116,13 +128,13 @@ void close_incoming_event()
                         critical = 0;
                 }
 
-        } //else{t=0;}
+        } // else{t=0;}
         if ((jdz - hh == 1) && (mm > mdz))
         {
                 t = mdz + (60 - mm);
                 tft->printf("%d menit\nmenjelang dzuhur", t);
                 critical = (t < 15 && t > 0) ? 1 : 0;
-        } //else{t=0;}
+        } // else{t=0;}
         if (hh == jas)
         {
                 if (mm < mas)
@@ -135,13 +147,13 @@ void close_incoming_event()
                 {
                         critical = 0;
                 }
-        } //else{t=0;}
+        } // else{t=0;}
         if ((jas - hh == 1) && (mm > mas))
         {
                 t = mas + (60 - mm);
                 tft->printf("%d menit\nmenjelang azhar", t);
                 critical = (t < 15 && t > 0) ? 1 : 0;
-        } //else{t=0;}
+        } // else{t=0;}
         if (hh == jmag)
         {
                 if (mm < mmag)
@@ -154,13 +166,13 @@ void close_incoming_event()
                 {
                         critical = 0;
                 }
-        } //else{t=0;}
+        } // else{t=0;}
         if ((jmag - hh == 1) && (mm > mmag))
         {
                 t = mmag + (60 - mm);
                 tft->printf("%d menit\nmenjelang maghrib", t);
                 critical = (t < 15 && t > 0) ? 1 : 0;
-        } //else{t=0;}
+        } // else{t=0;}
         if (hh == jis)
         {
                 if (mm < mis)
@@ -173,13 +185,13 @@ void close_incoming_event()
                 {
                         critical = 0;
                 }
-        } //else{t=0;}
+        } // else{t=0;}
         if ((jis - hh == 1) && (mm > mis))
         {
                 t = mis + (60 - mm);
                 tft->printf("%d menit\nmenjelang isya'", t);
                 critical = (t < 15 && t > 0) ? 1 : 0;
-        } //else{t=0;}
+        } // else{t=0;}
         if (hh == jsu)
         {
                 if (mm < msu)
@@ -192,14 +204,14 @@ void close_incoming_event()
                 {
                         critical = 0;
                 }
-        } //else{t=0;}
+        } // else{t=0;}
         if ((jsu - hh == 1) && (mm > msu))
         {
                 t = msu + (60 - mm);
                 tft->printf("%d menit\nmenjelang shubuh", t);
                 critical = (t < 15 && t > 0) ? 1 : 0;
 
-        } //else{t=0;}
+        } // else{t=0;}
 
         Serial.print("t = ");
         Serial.println(t);
