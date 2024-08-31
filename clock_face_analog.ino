@@ -171,13 +171,20 @@ void analogClockVariant(int v)
     // draw dot for 5 times pray
     getPraytaskID();
     int cdark = rgbToHex(10, 40, 40);
-    int cbright = rgbToHex(10, 10, 140);
+    int cbright = rgbToHex(50, 180, 50);
     int minf = 0;
     for (size_t i = 0; i < 5; i++)
     {
-      minf = ID_ == i ? 20 : 0;
-      dgree = (((dPray[i] / 100) * 30) + ((dPray[i] - ((dPray[i] / 100) * 100)) / 2)) - 1;
-      tft->fillCircle(posX(random(40 + minf, 56 + minf), dgree), posY(random(40 + minf, 56 + minf), dgree), 2, ID_ == i ? cbright : cdark);
+
+      if (i >= ID_)
+      {
+
+        dgree = (((dPray[i] / 100) * 30) + ((dPray[i] - ((dPray[i] / 100) * 100)) / 2)) - 1;
+        tft->fillCircle(posX(random(50, 76), dgree), posY(random(50, 76), dgree), 2, cbright);
+      }
+      // minf = ID_ == i ? 20 : 0;
+      // dgree = (((dPray[i] / 100) * 30) + ((dPray[i] - ((dPray[i] / 100) * 100)) / 2)) - 1;
+      // tft->fillCircle(posX(random(40 + minf, 56 + minf), dgree), posY(random(40 + minf, 56 + minf), dgree), 2, ID_ == i ? cbright : cdark);
     }
 
     // 4 cross LINES (12,3,6,9)
