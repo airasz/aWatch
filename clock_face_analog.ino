@@ -271,6 +271,35 @@ void analogClockVariant(int v)
     }
     // };
 
+    // draw next to pray hour
+    int ph = dPray[ID_] / 100;
+    int pm = dPray[ID_] - ((dPray[0] / 100) * 100);
+
+    int psdeg = ss * 6;                                                  // 0-59 -> 0-354   Pre-compute
+    int pmdeg = pm * 6 + sdeg * 0.01666667;                              // 0-59 -> 0-360 - includes seconds
+    int phdeg = ph * 30 + pmdeg * 0.0833333;                             // 0-11 -> 0-360 - inc min and seconds
+                                                                         // face=6> standart analog
+    tft->drawLine(posX(120, phdeg), posY(120, phdeg), 120, 120, 0x3186); // DRAW  HOUR
+
+    rnddot = (mm > 5 || mm < 35) ? random(40, 110) : random(40, 70);
+    old_rnddot = rnddot;
+
+    yy0 = posY(rnddot, ((ph * 30) + (pm / 2)) - 1);
+    x0 = posX(rnddot, ((ph * 30) + (pm / 2)) - 1);
+
+    tft->drawRect(x0 - 2, yy0 - 2, 5, 5, TFT_GREEN);
+    tft->drawLine(x0 + 3, yy0 + 5, x0 + 10, yy0 + 14, TFT_WHITE); // 🡦
+
+    tft->setCursor(x0 + 15, yy0 - 15 + 20);
+    tft->setTextSize(0);
+    tft->setTextFont(2);
+    tft->setTextColor(TFT_GREEN);
+    // tft->print(hh > 12 ? "PM-" : "AM-");
+    tft->printf("PH-%d", ph);
+
+    tft->setCursor(x0 + 15, yy0 - 3 + 20);
+    tft->printf("PM-%d", pm);
+
     // draw real hand H & M
     tft->drawLine(posX(120, hdeg), posY(120, hdeg), 120, 120, 0x3186); // DRAW  HOUR
     tft->drawLine(posX(120, mdeg), posY(120, mdeg), 120, 120, 0x3186); // DRAW  MIN
