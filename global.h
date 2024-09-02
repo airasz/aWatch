@@ -11,14 +11,14 @@ int rndHandMinuteShadow;
 float sx = 0,
       sy = 1, mx = 1, my = 0, hx = -1, hy = 0;
 float sdeg = 0, mdeg = 0, hdeg = 0;
-int cr = 80; // circle radius
+int cr = 80;  // circle radius
 uint16_t osx = cr, osy = cr, omx = cr, omy = cr, ohx = cr, ohy = cr;
 
 uint16_t x0 = 0, x1 = 0, yy0 = 0, yy1 = 0;
 uint32_t targetTime = 0;
 bool touched = false;
 int CF, touchStage = 0;
-int16_t tx, ty; // touch coordinate
+int16_t tx, ty;  // touch coordinate
 //  1   2   3
 //  4   5   6
 //  7   8   9
@@ -40,15 +40,23 @@ int stepLenght = 45;
 int old_stepLength;
 auto maxShifting = 15;
 uint32_t COLOR_MED[] = {
-    0x4810, TFT_BLUE, TFT_GREEN, 0x7380,
-    TFT_PINK, 0x7380, TFT_RED, 0x032D, TFT_MAGENTA};
-uint32_t COLOR_ATC[] = {TFT_BLUE, TFT_MAGENTA, TFT_GREEN};
+  0x4810, TFT_BLUE, TFT_GREEN, 0x7380,
+  TFT_PINK, 0x7380, TFT_RED, 0x032D, TFT_MAGENTA
+};
+uint32_t COLOR_ATC[] = { TFT_BLUE, TFT_MAGENTA, TFT_GREEN };
 
 //===power info===
 int16_t per;
 float vbus_v, vbus_c, batt_v, dchrg_c, chrg_c;
-bool cat[3] = {false, false, false};
+bool cat[3] = { false, false, false };
 uint8_t jsu, msu, jdz, mdz, jas, mas, jmag, mmag, jis, mis;
-int dPray[5] = {0, 0, 0, 0, 0};
-int dPraySche[5][2] = {{0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}};
+int dPray[5] = { 0, 0, 0, 0, 0 };
+int dPraySche[5][2] = { { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 } };
+const String prayName[5][2] = {
+  { "Subuh", "su" },
+  { "Dzuhur", "dz" },
+  { "Ashar", "as" },
+  { "Maghrib", "mg" },
+  { "Isya", "is" },
+};
 int updateDPray = 0;
