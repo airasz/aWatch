@@ -41,7 +41,6 @@ void getPraytaskID(void)
         {
                 ID_ = 3;
         }
-
         else if ((hh < jis || (hh == jis && mm < mis)) && (hh > jmag || (hh == jmag && mm >= mmag)))
         {
                 ID_ = 4;
@@ -115,6 +114,39 @@ void close_incoming_event()
         tft->setTextColor(COLOR_MEDIUM[random(10)]);
         tft->setCursor(0, 200);
         tft->setFreeFont(FF18);
+
+        for (size_t i = 0; i < 4; i++)
+        {
+                if (hh == dPraySche[i][0])
+                {
+                        if (mm < dPraySche[i][1])
+                        {
+                                t = dPraySche[i][1] - mm;
+                                tft->printf("%d menit\nmenjelang %s", t, prayName[i][0]);
+                                critical = (t < 15 && t > 0) ? 1 : 0;
+                        }
+                        else
+                        {
+                                critical = 0;
+                        }
+
+                } // else{t=0;}
+                if ((dPraySche[i][0] - hh == 1) && (mm > dPraySche[i][1]))
+                {
+                        t = dPraySche[i][1] + (60 - mm);
+                        tft->printf("%d menit\nmenjelang %s", t, prayName[i][0]);
+                        critical = (t < 15 && t > 0) ? 1 : 0;
+                }
+        }
+
+        Serial.print("t = ");
+        Serial.println(t);
+        Serial.print("critical = ");
+        Serial.println(critical);
+}
+void dump()
+{
+
         if (hh == jdz)
         {
                 if (mm < mdz)
@@ -212,9 +244,4 @@ void close_incoming_event()
                 critical = (t < 15 && t > 0) ? 1 : 0;
 
         } // else{t=0;}
-
-        Serial.print("t = ");
-        Serial.println(t);
-        Serial.print("critical = ");
-        Serial.println(critical);
 }

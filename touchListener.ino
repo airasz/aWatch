@@ -888,20 +888,22 @@ void handleTouch()
                         // }
                         // (CF < 2) && (CF = 14);
 
-                        if (!faceList.isEmpty())
+                        if (!faceList.isEmpty() && !config.rnd_face)
                         {
                                 // int f;
                                 // f = faceList.size();
-                                (listPointer-- < 0) && (listPointer = faceList.size());
+                                listPointer--;
+                                (listPointer < 0) && (listPointer = (faceList.size() - 1));
                                 // config.clock_face = CF;
                                 CF = faceList[listPointer];
-                                // config.clock_face = CF;
                                 config.clock_face = CF;
-                                EEPROM_writeAnything(0, config);
-                                EEPROM.commit();
+                                // config.clock_face = CF;
+                                Serial.printf("list index  : %d - CF : %d\n", listPointer, CF);
+                                // EEPROM_writeAnything(0, config);
+                                // EEPROM.commit();
                         }
                         // clock_face_digit(CF);
-                        face(CF);
+                        face(CF); // clock_face_digit.ino
                         my_idle();
                         clearSwipeCache();
                         break;
@@ -915,20 +917,22 @@ void handleTouch()
                         // }
 
                         // (CF > 14) && (CF = 2);
-                        if (!faceList.isEmpty())
+                        if (!faceList.isEmpty() && !config.rnd_face)
                         {
                                 // int f;
                                 // f = faceList.size();
-                                (listPointer++ > faceList.size()) && (listPointer = 0);
-                                config.clock_face = CF;
+                                listPointer++;
+                                (listPointer > (faceList.size() - 1)) && (listPointer = 0);
+                                // config.clock_face = CF;
                                 CF = faceList[listPointer];
-                                config.clock_face = CF;
-                                EEPROM_writeAnything(0, config);
-                                EEPROM.commit();
+                                // config.clock_face = CF;
+                                Serial.printf("list index  : %d - CF : %d\n", listPointer, CF);
+                                // EEPROM_writeAnything(0, config);
+                                // EEPROM.commit();
                         }
                         // clock_face_digit(CF);
 
-                        face(CF);
+                        face(CF); // clock_face_digit.ino
                         my_idle();
                         clearSwipeCache();
                         break;

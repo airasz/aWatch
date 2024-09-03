@@ -1,11 +1,13 @@
 
 
-void formating(void) {
+void formating(void)
+{
   // if (updateDPray>0)
   // {
 
   // getPdata(imnt, iday);
-  for (size_t i = 0; i < 5; i++) {
+  for (size_t i = 0; i < 5; i++)
+  {
     dPraySche[i][0] = dPray[i] / 100;
     dPraySche[i][1] = dPray[i] - ((dPray[i] / 100) * 100);
   }
@@ -24,20 +26,24 @@ void formating(void) {
   // }
   // dbFile.close();
 }
-void getPdata(uint8_t mnt, uint8_t day) {
+void getPdata(uint8_t mnt, uint8_t day)
+{
   dbFile = SPIFFS.open("/" + String(mnt - 1) + ".json", "r");
   // File dbFile = SPIFFS.open("/0.json", "r");
-  if (!dbFile) {
+  if (!dbFile)
+  {
     Serial.println("ERROR: DB file not found");
     // return false;
   }
   DynamicJsonDocument doc(3248);
   DeserializationError err = deserializeJson(doc, dbFile);
-  if (err) {
+  if (err)
+  {
     Serial.println("ERROR: " + String(err.c_str()));
     // return false;
   }
-  for (size_t i = 0; i < 5; i++) {
+  for (size_t i = 0; i < 5; i++)
+  {
     int in = doc[String(day)][i];
     dPray[i] = in;
   }
@@ -45,17 +51,20 @@ void getPdata(uint8_t mnt, uint8_t day) {
 
   dbFile.close();
 }
-uint16_t getpray(uint8_t mnt, uint8_t day, uint8_t prayID) {
+uint16_t getpray(uint8_t mnt, uint8_t day, uint8_t prayID)
+{
   // Serial.printf("load month  : %d \n", mnt-1);
   dbFile = SPIFFS.open("/" + String(mnt - 1) + ".json", "r");
   // File dbFile = SPIFFS.open("/0.json", "r");
-  if (!dbFile) {
+  if (!dbFile)
+  {
     Serial.println("ERROR: DB file not found");
     // return false;
   }
   DynamicJsonDocument doc(3248);
   DeserializationError err = deserializeJson(doc, dbFile);
-  if (err) {
+  if (err)
+  {
     Serial.println("ERROR: " + String(err.c_str()));
     // return false;
   }
@@ -67,97 +76,122 @@ uint16_t getpray(uint8_t mnt, uint8_t day, uint8_t prayID) {
 }
 
 // return string
-String getDailyJWS(int id) {
+String getDailyJWS(int id)
+{
   // String jadwal = "";
   char jadwal[20];
   int maxday = MaxDate[imnt - 1];
   // formating();
-  if (tomorow) {
+  if (tomorow)
+  {
     // if maximum day, jump to next month
-    if (iday + 1 > maxday) {
+    if (iday + 1 > maxday)
+    {
       imnt += 1;
       iday = 1;
-    } else {
+    }
+    else
+    {
       iday += 1;
     }
   }
-
-  switch (id) {
-    case 0:
-      //                                                           .___________.
-      //                                                  v----v----.         |
-      sprintf(jadwal, "Subuh    > %02i:%02i", jsu, msu);
-      // jadwal = "Subuh    > 0";
-      // jadwal += jsu;
-      // jadwal += (msu < 10) ? ":0" : ":";
-      // jadwal += msu;
-
-      break;
-    case 1:
-      sprintf(jadwal, "Dzuhur   > %02i:%02i", jdz, mdz);
-      break;
-    case 2:
-      sprintf(jadwal, "Ashar    > %02i:%02i", jas, mas);
-      break;
-    case 3:
-      sprintf(jadwal, "Maghrib  > %02i:%02i", jmag, mmag);
-      break;
-    case 4:
-      sprintf(jadwal, "Isya'    > %02i:%02i", jis, mis);
-      break;
-    default:
-      break;
+  String pname = prayName[id][0];
+  for (size_t i = prayName[id][0].length(); i < 10; i++)
+  {
+    pname += " ";
   }
+
+  sprintf(jadwal, "%s> %02i:%02i", pname, dPraySche[id][0], dPraySche[id][1]);
+  // switch (id)
+  // {
+  // case 0:
+  //   //                                                           .___________.
+  //   //                                                  v----v----.         |
+  //   sprintf(jadwal, "Subuh    > %02i:%02i", jsu, msu);
+  //   // jadwal = "Subuh    > 0";
+  //   // jadwal += jsu;
+  //   // jadwal += (msu < 10) ? ":0" : ":";
+  //   // jadwal += msu;
+
+  //   break;
+  // case 1:
+  //   sprintf(jadwal, "Dzuhur   > %02i:%02i", jdz, mdz);
+  //   break;
+  // case 2:
+  //   sprintf(jadwal, "Ashar    > %02i:%02i", jas, mas);
+  //   break;
+  // case 3:
+  //   sprintf(jadwal, "Maghrib  > %02i:%02i", jmag, mmag);
+  //   break;
+  // case 4:
+  //   sprintf(jadwal, "Isya'    > %02i:%02i", jis, mis);
+  //   break;
+  // default:
+  //   break;
+  // }
   if (tomorow)
     iday -= 1;
   return jadwal;
 }
-void setprayalarm(bool next) {
-  if (!alarmset) {
+void setprayalarm(bool next)
+{
+  if (!alarmset)
+  {
     ttgo->rtc->resetAlarm();
     getPraytaskID();
     int IDA;
-    if (next) {
+    if (next)
+    {
       IDA = ID_ + 1;
       (IDA > 4) && (IDA = 0);
       Serial.printf(" set pray alarm ID next : %d \n", IDA);
-    } else {
+    }
+    else
+    {
       IDA = ID_;
       Serial.printf(" set pray alarm ID : %d \n", IDA);
     }
     int alh, alm;
     alarm_msg = String(config.alarmpraywarning);
     alarm_msg += " menit ";
-    switch (IDA) {
-      case 0:
-        alm = (msu - config.alarmpraywarning < 0) ? 60 - (config.alarmpraywarning - msu) : alm = msu - config.alarmpraywarning;
-        alh = (msu - config.alarmpraywarning < 0) ? jsu - 1 : jsu;
-        alarm_msg += "menjelang subuh";
-        break;
-      case 1:
-        alm = (mdz - config.alarmpraywarning < 0) ? 60 - (config.alarmpraywarning - mdz) : alm = mdz - config.alarmpraywarning;
-        alh = (mdz - config.alarmpraywarning < 0) ? jdz - 1 : jdz;
-        alarm_msg += "menjelang dzuhur";
-        break;
-      case 2:
-        alm = (mas - config.alarmpraywarning < 0) ? 60 - (config.alarmpraywarning - mas) : alm = mas - config.alarmpraywarning;
-        alh = (mas - config.alarmpraywarning < 0) ? jas - 1 : jas;
-        alarm_msg += "menjelang ashar";
-        break;
-      case 3:
-        alm = (mmag - config.alarmpraywarning < 0) ? 60 - (config.alarmpraywarning - mmag) : alm = mmag - config.alarmpraywarning;
-        alh = (mmag - config.alarmpraywarning < 0) ? jmag - 1 : jmag;
-        alarm_msg += "menjelang maghrib";
-        break;
-      case 4:
-        alm = (mis - config.alarmpraywarning < 0) ? 60 - (config.alarmpraywarning - mis) : alm = mis - config.alarmpraywarning;
-        alh = (mis - config.alarmpraywarning < 0) ? jis - 1 : jis;
-        alarm_msg += "menjelang isya'";
-        break;
 
-      default:
-        break;
-    }
+    alm = (dPraySche[IDA][1] - config.alarmpraywarning < 0) ? 60 - (config.alarmpraywarning - dPraySche[IDA][1]) : alm = dPraySche[IDA][1] - config.alarmpraywarning;
+    alh = (dPraySche[IDA][1] - config.alarmpraywarning < 0) ? dPraySche[IDA][0] - 1 : dPraySche[IDA][0];
+    alarm_msg += "menjelang ";
+    alarm_msg += prayName[IDA][0];
+    alarm_msg.toLowerCase();
+
+    // switch (IDA)
+    // {
+    // case 0:
+    //   alm = (msu - config.alarmpraywarning < 0) ? 60 - (config.alarmpraywarning - msu) : alm = msu - config.alarmpraywarning;
+    //   alh = (msu - config.alarmpraywarning < 0) ? jsu - 1 : jsu;
+    //   alarm_msg += "menjelang subuh";
+    //   break;
+    // case 1:
+    //   alm = (mdz - config.alarmpraywarning < 0) ? 60 - (config.alarmpraywarning - mdz) : alm = mdz - config.alarmpraywarning;
+    //   alh = (mdz - config.alarmpraywarning < 0) ? jdz - 1 : jdz;
+    //   alarm_msg += "menjelang dzuhur";
+    //   break;
+    // case 2:
+    //   alm = (mas - config.alarmpraywarning < 0) ? 60 - (config.alarmpraywarning - mas) : alm = mas - config.alarmpraywarning;
+    //   alh = (mas - config.alarmpraywarning < 0) ? jas - 1 : jas;
+    //   alarm_msg += "menjelang ashar";
+    //   break;
+    // case 3:
+    //   alm = (mmag - config.alarmpraywarning < 0) ? 60 - (config.alarmpraywarning - mmag) : alm = mmag - config.alarmpraywarning;
+    //   alh = (mmag - config.alarmpraywarning < 0) ? jmag - 1 : jmag;
+    //   alarm_msg += "menjelang maghrib";
+    //   break;
+    // case 4:
+    //   alm = (mis - config.alarmpraywarning < 0) ? 60 - (config.alarmpraywarning - mis) : alm = mis - config.alarmpraywarning;
+    //   alh = (mis - config.alarmpraywarning < 0) ? jis - 1 : jis;
+    //   alarm_msg += "menjelang isya'";
+    //   break;
+
+    // default:
+    //   break;
+    // }
 
     ttgo->rtc->setAlarm(alh, alm, PCF8563_NO_ALARM, PCF8563_NO_ALARM);
     tmpaph = alh;

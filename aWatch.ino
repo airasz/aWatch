@@ -102,6 +102,13 @@ void low_energy(void)
 {
   if (ttgo->bl->isOn())
   {
+    if (scfc && (config.clock_face != CF) && !config.rnd_face)
+    {
+      config.clock_face = CF;
+      EEPROM_writeAnything(0, config);
+      EEPROM.commit();
+    }
+    delay(50);
     Serial.println("Entering light sleep mode.");
     xEventGroupSetBits(isr_group, WATCH_FLAG_SLEEP_MODE);
 
