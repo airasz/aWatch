@@ -212,7 +212,7 @@ void analogClockVariant(int v)
   {
     tft->fillScreen(TFT_BLACK); // CLEAR DISPLAY
     tft->setTextColor(TFT_WHITE, TFT_BLACK);
-    ss = 0;
+    // ss = 0;
     // manipulated for testing
     //  hh=2;
     //  mm=52;
@@ -254,7 +254,6 @@ void analogClockVariant(int v)
       else if (i < (360 + rndstartdeg) - (360 / plygon) && i > (0 + rndstartdeg))
       {
         rr = random(lr, hr);
-
         x2 = posX(orx + rr, i + (360 / plygon));
         (x2 < 0) && (x2 = 0);
         y2 = posY(ory + rr, i + (360 / plygon));
@@ -313,7 +312,7 @@ void analogClockVariant(int v)
     // draw real hand H & M
     tft->drawLine(posX(120, hdeg), posY(120, hdeg), 120, 120, 0x3186); // DRAW  HOUR
     tft->drawLine(posX(120, mdeg), posY(120, mdeg), 120, 120, 0x3186); // DRAW  MIN
-
+    Serial.printf(" mdeg : %f \n", mdeg);
     sdeg = ss * 6;
     // mm > 29 ? mm180 = mm - 30 : mm180 = 30 + mm;
     mm180 = mm > 29 ? mm - 30 : 30 + mm;
@@ -416,6 +415,7 @@ void analogClockVariant(int v)
       }
       // tft->drawCircle(x0, yy0, 9, TFT_RED);
       tft->drawRect(x0 - 2, yy0 - 2, 5, 5, TFT_GREEN); // draw minute rect
+      tft->fillCircle(x0, yy0, 3, TFT_GREEN);
     }
     else if (hrdeg - mdeg < 60 && hrdeg - mdeg >= 0)
     {
@@ -452,6 +452,7 @@ void analogClockVariant(int v)
       }
       // tft->drawCircle(x0, yy0, 9, TFT_RED);
       tft->drawRect(x0 - 2, yy0 - 2, 5, 5, TFT_GREEN); // draw minute rect
+      tft->fillCircle(x0, yy0, 3, TFT_GREEN);
     }
     else
     {
@@ -472,6 +473,7 @@ void analogClockVariant(int v)
       // tft->printf("X%1d = Y%2d\n", x0, yy0);
       tft->drawLine(x0 + 3, yy0 + 5, x0 + 10, yy0 + 14, TFT_WHITE);
       tft->drawRect(x0 - 2, yy0 - 2, 5, 5, TFT_GREEN); // draw minute rect
+      tft->fillCircle(x0, yy0, 3, TFT_GREEN);
     }
     // tft->drawString("M" + mm, x0 + 15, yy0 - 15 + 20);
 
