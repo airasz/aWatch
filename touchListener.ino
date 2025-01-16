@@ -56,7 +56,7 @@ void touchListener()
         while (ttgo->getTouch(tx, ty))
         {
 
-                if (page_ID == 0 || page_ID == 3)
+                if (page_ID == 0 || page_ID == 3 || page_ID == 33)
                 {
                         if (ty < 60)
                         {
@@ -127,10 +127,18 @@ void touchListener()
                                 oldTouchY = ty;
                         }
                         if (ty < oldTouchY)
-                        {
+                        { // swipe up
                                 if (shiftY++ > 20)
                                 {
-                                        swipeID = 9;
+                                        // swipeID = 9;
+                                        if (tx < 80)
+                                        {
+                                                swipeID = 11;
+                                        }
+                                        else if (tx > 120)
+                                        {
+                                                swipeID = 9;
+                                        }
                                         if (page_ID == 3)
                                                 swipeID = 32;
                                         swipeMe = 0;
@@ -945,13 +953,25 @@ void handleTouch()
 
                         break;
                 case 9:
-                        // swipe up
+                        // swipe up on right side
                         config.pedometer_enable = !config.pedometer_enable;
                         EEPROM_writeAnything(0, config);
                         EEPROM.commit();
                         updateScreen(page_ID); // gui.ino
                         // clock_face_digit(CF);
                         my_idle();
+                        clearSwipeCache();
+
+                        break;
+                case 11:
+                        // swipe up on left side
+                        if (page_ID == 33)
+                                page_ID = 0;
+                        else
+                                page_ID = 33;
+                        updateScreen(page_ID); // gui.ino
+                        // clock_face_digit(CF);
+                        // my_idle();
                         clearSwipeCache();
 
                         break;

@@ -71,6 +71,8 @@ void bright_check(void)
     screen_brightness = 200;
     charge_cable_connected = true;
     screenTimeOut = 30;
+    if (page_ID == 33)
+      screenTimeOut = 10000;
   }
   else
   {
@@ -788,6 +790,11 @@ void loop()
     }
     low_energy();
   }
+  if (page_ID == 33)
+  {
+    listenSMonitor();
+  }
+
 } // end void loop
 
 void getPower()

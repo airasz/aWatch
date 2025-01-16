@@ -114,6 +114,10 @@ void updateScreen(int dis_ID)
                 screenTimeOut = config.screensaver_timeout + 8;
                 break;
 
+        case 33:
+                screenTimeOut = 10000;
+                showSMonitor(); // show serial monitor
+                break;
         case 231:
                 startSetting(3);
                 screenTimeOut = config.screensaver_timeout + 15;
