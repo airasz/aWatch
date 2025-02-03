@@ -123,19 +123,19 @@ void printWordWrap(String text, uint16_t color)
 {
 
     setupFont12();
-    cx = 0, cy = 12;
-    // tft.setCursor(cx, cy);
-    tft.setTextWrap(true, false);
-    // tft.setTextColor(TFT_BLACK, TFT_BLACK);
-    // tft.print(oldsdata);
-    tft.fillScreen(TFT_BLACK);
+    cx = 0, cy = 14;
+    // tft->setCursor(cx, cy);
+    tft->setTextWrap(true, false);
+    // tft->setTextColor(TFT_BLACK, TFT_BLACK);
+    // tft->print(oldsdata);
+    tft->fillScreen(TFT_BLACK);
     int tl = text.length();
     // int cymr = map(tl, 10, 100, 80, 15);
-    // tft.setCursor(cx, random(1, cymr));
-    tft.setCursor(cx, cy);
-    tft.setTextColor(color, TFT_BLACK);
+    // tft->setCursor(cx, random(1, cymr));
+    tft->setCursor(cx, cy);
+    tft->setTextColor(color, TFT_BLACK);
 
-    // tft.print(tl);
+    // tft->print(tl);
     printSplitString(text, color);
 }
 void printSplitString(String text, uint16_t color)
@@ -145,14 +145,14 @@ void printSplitString(String text, uint16_t color)
     while ((text.indexOf(' ', wordStart) >= 0) && (wordStart <= text.length()))
     {
         wordEnd = text.indexOf(' ', wordStart + 1);
-        uint16_t len = tft.textWidth(text.substring(wordStart, wordEnd));
-        if (tft.getCursorX() + len >= tft.width())
+        uint16_t len = tft->textWidth(text.substring(wordStart, wordEnd));
+        if (tft->getCursorX() + len >= tft->width())
         {
-            tft.println();
+            tft->println();
             if (wordStart > 0)
                 wordStart++;
         }
-        tft.print(text.substring(wordStart, wordEnd));
+        tft->print(text.substring(wordStart, wordEnd));
         wordStart = wordEnd;
     }
 }
