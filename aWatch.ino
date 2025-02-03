@@ -65,7 +65,7 @@ void update_step_counter(void)
 
 void bright_check(void)
 {
-  Serial.println("start bright check");
+  // Serial.println("start bright check");
   static uint8_t old_brightness;
   if (power->isVBUSPlug())
   {
@@ -94,7 +94,7 @@ void bright_check(void)
     // ttgo->setBrightness(255);       // 0-255
   }
 
-  Serial.println("end bright check");
+  // Serial.println("end bright check");
 }
 
 void my_idle(void)
@@ -296,7 +296,7 @@ void displayTime(uint8_t update_type)
   //   Basic_Time(update_type);
   //   break;
   // }
-  Serial.println("end displaytime");
+  // Serial.println("end displaytime");
 }
 
 void Serial_timestamp(void)

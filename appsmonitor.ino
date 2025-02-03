@@ -20,7 +20,8 @@ void showSMonitor()
 {
     tft->fillScreen(TFT_BLACK);
     tft->setTextSize(1);
-    testdrawtext("USB serial screen fo pi-radio, baud = 115200\nWaiting for incoming signal...", TFT_WHITE);
+    // testdrawtext("USB serial screen fo pi-radio, baud = 115200\nWaiting for incoming signal...", TFT_WHITE);
+    printWordWrap("USB serial screen fo pi-radio, baud = 115200\nWaiting for incoming signal...", COLOR_MEDIUM[random(12)]);
     Serial.printf("screetimeout  : %d \n", screenTimeOut);
 }
 void listenSMonitor()
@@ -53,6 +54,7 @@ void listenSMonitor()
         else
         {
             testdrawtext(data, COLOR_MEDIUM[random(10)]);
+            printWordWrap(data, COLOR_MEDIUM[random(12)]);
         }
         data = "";
     }
@@ -115,4 +117,42 @@ void printtextbig(
     // tft->unloadFont();
     // delay(25);
     // tft->loadFont(sfpt_r14);
+}
+
+void printWordWrap(String text, uint16_t color)
+{
+
+    setupFont12();
+    cx = 0, cy = 12;
+    // tft.setCursor(cx, cy);
+    tft.setTextWrap(true, false);
+    // tft.setTextColor(TFT_BLACK, TFT_BLACK);
+    // tft.print(oldsdata);
+    tft.fillScreen(TFT_BLACK);
+    int tl = text.length();
+    // int cymr = map(tl, 10, 100, 80, 15);
+    // tft.setCursor(cx, random(1, cymr));
+    tft.setCursor(cx, cy);
+    tft.setTextColor(color, TFT_BLACK);
+
+    // tft.print(tl);
+    printSplitString(text, color);
+}
+void printSplitString(String text, uint16_t color)
+{
+    int wordStart = 0;
+    int wordEnd = 0;
+    while ((text.indexOf(' ', wordStart) >= 0) && (wordStart <= text.length()))
+    {
+        wordEnd = text.indexOf(' ', wordStart + 1);
+        uint16_t len = tft.textWidth(text.substring(wordStart, wordEnd));
+        if (tft.getCursorX() + len >= tft.width())
+        {
+            tft.println();
+            if (wordStart > 0)
+                wordStart++;
+        }
+        tft.print(text.substring(wordStart, wordEnd));
+        wordStart = wordEnd;
+    }
 }
