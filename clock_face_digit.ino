@@ -6,20 +6,29 @@
 
 // RTC_Date tnow;
 
-void face(int face) {
-  if (face == 0) {
+void face(int face)
+{
+  if (face == 0)
+  {
 
     // info
-  } else if (face == 1) {
+  }
+  else if (face == 1)
+  {
     // pedometer
     recordActivity();
-  } else if (face > 1 && face < 6) {
+  }
+  else if (face > 1 && face < 6)
+  {
     clock_face_digit(face);
-  } else {
+  }
+  else
+  {
     analogClockVariant(face);
   }
 }
-void clock_face_digit(int clock_style) {
+void clock_face_digit(int clock_style)
+{
   // ttgo = TTGOClass::getWatch();
   // ttgo->begin();
   // tft = ttgo->tft; // just a shorthand for ttgo->tft
@@ -38,16 +47,24 @@ void clock_face_digit(int clock_style) {
   int y2 = 11;
 
   // Serial.printf("testgigit %d\n",testgigit);
-  int y_start = 10;  // y position of number
-  for (int pos = 0; pos < 4; pos++) {
+  int y_start = 10; // y position of number
+  for (int pos = 0; pos < 4; pos++)
+  {
     uint8_t curr_digit = 0;
-    if (pos == 0) {
+    if (pos == 0)
+    {
       curr_digit = count / 1000;
-    } else if (pos == 1) {
+    }
+    else if (pos == 1)
+    {
       curr_digit = count / 100 % 10;
-    } else if (pos == 2) {
+    }
+    else if (pos == 2)
+    {
       curr_digit = count / 10 % 10;
-    } else if (pos == 3) {
+    }
+    else if (pos == 3)
+    {
       curr_digit = count % 10;
     }
     int rnd = random(10);
@@ -56,40 +73,59 @@ void clock_face_digit(int clock_style) {
     for (int i = 0; i < 20; i++)
       xpath[i] = 0, ypath[i] = 0;
 
-    for (int row = 0; row < 7; row++) {
-      for (int col = 0; col < 5; col++) {
+    for (int row = 0; row < 7; row++)
+    {
+      for (int col = 0; col < 5; col++)
+      {
         uint32_t color = DIGITS[curr_digit][row][col] ? COLORS_LIGHT[curr_digit] : COLORS_DARK[curr_digit];
         uint32_t colorrnd = DIGITS[curr_digit][row][col] ? COLORS_LIGHT[rnd] : COLORS_DARK[rnd];
-        if (DIGITS[curr_digit][row][col] > 0) {
-          if (clock_style == 2) {
+        if (DIGITS[curr_digit][row][col] > 0)
+        {
+          if (clock_style == 2)
+          {
             // tft->fillCircle(x_start + col * 12, y_start + row * 12, r, colorrnd);
             tft->fillSmoothCircle(x_start + col * 12, y_start + row * 12, r, colorrnd, TFT_BLACK);
-          } else if (clock_style == 3) {
+          }
+          else if (clock_style == 3)
+          {
             tft->fillRoundRect(x_start - r + col * 12, y_start - r + row * 12, r * 2, r * 2, 0, colorrnd);
-          } else if (clock_style == 4) {
+          }
+          else if (clock_style == 4)
+          {
 
             int xc = x_start + col * 13 - 1 + (random(5));
             int yc = y_start + row * 13 - 1 + (random(5));
-            xpath[DIGITS[curr_digit][row][col] - 1] = xc;  // put  squence path X point to array
-            ypath[DIGITS[curr_digit][row][col] - 1] = yc;  // put  squence path Y point to array
-
+            xpath[DIGITS[curr_digit][row][col] - 1] = xc; // put  squence path X point to array
+            ypath[DIGITS[curr_digit][row][col] - 1] = yc; // put  squence path Y point to array
+            Serial.printf("--xpath[%d] : %d \n", DIGITS[curr_digit][row][col] - 1, xc);
             // tft->fillCircle(x_start + col * 13 - 1 + random(4), y_start + row * 13 - 1 + random(4), r + 2, colorrnd);
             // tft->fillCircle(x_start + col * 7 -1+random(4), y_start + row * 7-1+random(4), 3, BLACK);
             // tft->fillCircle(x_start + col * 7 -1+random(4), y_start + row * 7-1+random(4), r, colorrnd);
-          } else if (clock_style == 5) {
+          }
+          else if (clock_style == 5)
+          {
             tft->fillRoundRect(x_start - r + col * 12, y_start - r + row * 12, r + 4, r + 4, 0, colorrnd);
           }
-        } else {
-          if (clock_style == 3) {
+        }
+        else
+        {
+          if (clock_style == 3)
+          {
             tft->drawRoundRect(x_start - r + col * 12, y_start - r + row * 12, r * 2, r * 2, 0, colorrnd);
-          } else if (clock_style == 2) {
+          }
+          else if (clock_style == 2)
+          {
             // tft->drawCircle(x_start + col * 12, y_start + row * 12, r, colorrnd);
 
             tft->fillSmoothCircle(x_start + col * 12, y_start + row * 12, r, colorrnd, TFT_BLACK);
             tft->fillSmoothCircle(x_start + col * 12, y_start + row * 12, r - 1, TFT_BLACK, colorrnd);
-          } else if (clock_style == 5) {
+          }
+          else if (clock_style == 5)
+          {
             tft->drawRoundRect(x_start - r + col * 13, y_start - r + row * 13, r + 4, r + 4, 0, colorrnd);
-          } else if (clock_style == 4) {
+          }
+          else if (clock_style == 4)
+          {
             // tft->drawCircle(x_start + col * 7, y_start + row * 7, r, colorrnd);
           }
         }
@@ -99,18 +135,22 @@ void clock_face_digit(int clock_style) {
       }
     }
     // Serial.printf("curr digit  : %d \n", curr_digit);
-    //handwriting style digit
-    if (clock_style == 4) {
+    // handwriting style digit
+    if (clock_style == 4)
+    {
 
       int colll = COLORS_LIGHT[rnd];
       int bcoll = TFT_BLACK;
       // tft->drawLine(0, 0, 1, 1, TFT_BLACK);
       tft->drawLine(246, 246, 248, 248, colll);
-      for (int i = 0; i < 19; i++) {
-        // Serial.printf(" xpath[%d] : %d ", i, xpath[i]);
+      for (int i = 0; i < 19; i++)
+      {
+        Serial.printf(" xpath[%d] : %d \n", i, xpath[i]);
         // Serial.print("\n");
-        if (xpath[i + 1] != 0) {
-          if (curr_digit == 0) {
+        if (xpath[i + 1] != 0)
+        {
+          if (curr_digit == 0)
+          {
             //   tft->drawBoldLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
             tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 10, colll, bcoll);
             if (i > 0)
@@ -123,14 +163,20 @@ void clock_face_digit(int clock_style) {
               //   tft->drawBoldLine(xpath[i], ypath[i], xpath[15], ypath[15], 4, colll);
               tft->drawWideLine(xpath[i], ypath[i], xpath[15], ypath[15], 10, colll, bcoll);
             // tft->drawLine(xpath[i], ypath[i], xpath[15], ypath[15], colll);
-          } else if (curr_digit == 1) {
-            if (i == 6) {
+          }
+          else if (curr_digit == 1)
+          {
+            if (i == 6)
+            {
               //   tft->drawBoldLine(xpath[i], ypath[i], xpath[9], ypath[9], 4, colll);
               tft->drawWideLine(xpath[i], ypath[i], xpath[9], ypath[9], 10, colll, bcoll);
               // tft->drawLine(xpath[i], ypath[i], xpath[9], ypath[9], colll);}
-            } else {  //   tft->drawBoldLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
+            }
+            else
+            { //   tft->drawBoldLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 4, colll);
 
-              if (i == 7) {
+              if (i == 7)
+              {
                 tft->drawBoldLine(xpath[i - 2], ypath[i - 2], xpath[6], ypath[6], 4, colll);
               }
               tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 10, colll, bcoll);
@@ -138,8 +184,11 @@ void clock_face_digit(int clock_style) {
                 tft->drawBoldLine(xpath[i - 1], ypath[i - 1], xpath[i], ypath[i], 4, colll);
               // tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);}
             }
-          } else if (curr_digit == 3) {
-            if (i != 7) {
+          }
+          else if (curr_digit == 3)
+          {
+            if (i != 7)
+            {
               // tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
               tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 10, colll, bcoll);
               if (i > 0 && i - 1 != 7)
@@ -148,16 +197,19 @@ void clock_face_digit(int clock_style) {
               if (i == 8)
                 //   tft->drawBoldLine(xpath[i], ypath[i], xpath[8], ypath[8], 4, colll);
                 tft->drawWideLine(xpath[i - 2], ypath[i - 2], xpath[8], ypath[8], 10, colll, bcoll);
-              if (i == 9) {
+              if (i == 9)
+              {
                 tft->drawBoldLine(xpath[6], ypath[6], xpath[7], ypath[7], 4, colll);
                 tft->drawBoldLine(xpath[6], ypath[6], xpath[5], ypath[5], 4, colll);
               }
               // tft->drawLine(xpath[i], ypath[i], xpath[8], ypath[8], colll);
             }
 
-            else  // i==7
+            else // i==7
               tft->drawBoldLine(xpath[i - 1], ypath[i - 1], xpath[8], ypath[8], 4, colll);
-          } else if (curr_digit == 8) {
+          }
+          else if (curr_digit == 8)
+          {
             // tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
             tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 10, colll, bcoll);
             if (i > 0)
@@ -176,13 +228,16 @@ void clock_face_digit(int clock_style) {
             }
             if (i == 2)
               tft->drawBoldLine(xpath[i - 1], ypath[i - 1], xpath[16], ypath[16], 4, colll);
-            if (i == 15) {
+            if (i == 15)
+            {
               tft->drawBoldLine(xpath[1], ypath[1], xpath[16], ypath[16], 4, colll);
               tft->drawBoldLine(xpath[0], ypath[0], xpath[1], ypath[1], 4, colll);
               tft->drawBoldLine(xpath[0], ypath[0], xpath[9], ypath[9], 4, colll);
             }
             // tft->drawLine(xpath[i], ypath[i], xpath[16], ypath[16], colll);
-          } else {
+          }
+          else
+          {
             // tft->drawLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], colll);
             tft->drawWideLine(xpath[i], ypath[i], xpath[i + 1], ypath[i + 1], 10, colll, bcoll);
             if (i > 0)
@@ -194,16 +249,19 @@ void clock_face_digit(int clock_style) {
       }
     }
     (pos == 1) ? x_start = 60 : x_start += 65;
-    if (pos == 1) {
+    if (pos == 1)
+    {
       x_start = (clock_style > 3 ? 50 : 60);
-    } else {
+    }
+    else
+    {
       x_delta += 65;
     }
     if (pos == 1)
       y_start += 100;
     // space betwen single digit
   }
-  displaySysInfo(2);  // appInfo.ino
+  displaySysInfo(2); // appInfo.ino
 
   if (enableSS)
     screenServer();
