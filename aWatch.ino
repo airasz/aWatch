@@ -21,6 +21,7 @@
 #include "global.h"
 
 #include <WiFi.h>
+#include <WiFiClient.h>
 #include <HTTPClient.h> //Remove Audio Lib error
 #include "ArrayList.h"
 /* #include "AudioFileSourcePROGMEM.h"
@@ -35,6 +36,7 @@ AudioGeneratorMP3 *mp3;
 AudioFileSourcePROGMEM *file;
 AudioOutputI2S *out;
 AudioFileSourceID3 *id3; */
+WiFi wifi;
 #define EEPROM_SIZE 512
 QueueHandle_t g_event_queue_handle = NULL;
 EventGroupHandle_t g_event_group = NULL;
@@ -498,6 +500,13 @@ void setup()
   // ttgo->rtc->check();
 
   // Synchronize time to system time
+  wifi.begin("ASUS", "air46664");
+  while (wifi.run != WL_CONNECTED)
+  {
+    Serial.print(".");
+    delay(500);
+  }
+
   tnow = ttgo->rtc->getDateTime();
   startScreen(true, "SYNC RTC");
   ttgo->rtc->syncToSystem();
