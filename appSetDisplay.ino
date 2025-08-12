@@ -227,6 +227,31 @@ void drawWgetSeekBarBright(uint8_t X, uint8_t Y, uint8_t value)
         // tft->fillSmoothCircle(SBvalue, Y + 5, 2, TFT_WHITE, TFT_BLACK);
         oldValue2 = value;
 }
+void optionsAlwaysOn()
+{
+        // row 4
+
+        tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
+        if (tmpalwaysOn_onPlug != config.alwaysOn_onPlug)
+                drawButton(0, 190, 80, 40, COLOR_ACCENT[config.colorAccent], TFT_BLACK, "SAVE");
+        // bwriteAlarm = true;
+
+        // tft->fillRect(0, 60, 240, 180, TFT_BLACK);
+        // tft->setTextFont(2);
+        // tft->setCursor(83, 196);
+        tft->setTextFont(2);
+        tft->setCursor(3, 76);
+        tft->setTextColor(TFT_WHITE);
+        tft->print("Always On on usb");
+        // row 4
+        // drawSwitch(170, 190, COLOR_ACCENT[config.colorAccent], rgbToHex(200, 200, 200), config.alarm_pray);
+        // drawSmoothSwitch(170, 190, COLOR_ACCENT[config.colorAccent], TFT_BLACK, config.alarm_pray);
+
+        drawSmoothSwitch(170, 70, COLOR_ACCENT[config.colorAccent], TFT_BLACK, config.alwaysOn_onPlug);
+        old_tmpalwaysOn_onPlug = tmpalwaysOn_onPlug;
+
+        drawButton(161, 190, 78, 40, COLOR_ACCENT[config.colorAccent], TFT_BLACK, "NEXT");
+}
 void pickAccent()
 {
         // set title

@@ -116,6 +116,7 @@ typedef struct config_t
     long magic_number;
     uint8_t clock_face;
     bool rnd_face;
+    bool alwaysOn_onPlug;
     uint8_t pedometer_enable;
     uint16_t mqtt_port;
     uint8_t default_brightness;
@@ -168,6 +169,7 @@ int listPointer = 0; // pointer to facelist
 boolean date_is_up;
 boolean steps_is_up;
 boolean initialAnalog;
+bool alwaysOn_onPlug = false;
 bool enableSS = false;
 extern uint8_t number_of_sounds;
 char buff[512];

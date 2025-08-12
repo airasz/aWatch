@@ -262,7 +262,7 @@ void handleTouch()
                                         page_ID = 3;
                                 else if (page_ID == 3) // calender
                                         page_ID = 0;
-                                else if (page_ID == 221) // pick accent
+                                else if (page_ID == 222) // pick accent
                                         page_ID = 22;
                                 updateScreen(page_ID); // gui.ino
                                 tmptouchreg = 0;
@@ -282,7 +282,7 @@ void handleTouch()
                                         touchCount = 0;
                                         // home = 0;
                                 }
-                                else if (page_ID == 1 || page_ID == 2 || (page_ID > 20 && page_ID < 30) || page_ID == 221 || (page_ID > 230 && page_ID < 234) || page_ID == 271 || page_ID == 272) // sys info
+                                else if (page_ID == 1 || page_ID == 2 || (page_ID > 20 && page_ID < 30) || page_ID == 222 || (page_ID > 230 && page_ID < 234) || page_ID == 271 || page_ID == 272) // sys info
                                 {
                                         page_ID = 0;
                                         updateScreen(page_ID); // gui.ino
@@ -302,7 +302,7 @@ void handleTouch()
                                         updateScreen(page_ID);                     // gui.ino
                                         prevpage_ID = page_ID;
                                 }
-                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                else if (page_ID == 222) // pickAccent() appSetDisplay.ino
                                 {
                                         config.colorAccent = tmptouchreg - 4;
                                         page_ID = 0;
@@ -367,7 +367,7 @@ void handleTouch()
                                         updateScreen(page_ID);                     // gui.ino
                                         prevpage_ID = page_ID;
                                 }
-                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                else if (page_ID == 222) // pickAccent() appSetDisplay.ino
                                 {
                                         config.colorAccent = tmptouchreg - 4;
                                         page_ID = 0;
@@ -385,14 +385,22 @@ void handleTouch()
                                         EEPROM.commit();
                                         updateScreen(page_ID); // appSetting.ino
                                 }
-                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                else if (page_ID == 221) // optionalwayson() appSetDisplay.ino
+                                {
+                                        config.alwaysOn_onPlug = !config.alwaysOn_onPlug;
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                        updateScreen(page_ID);
+                                        Serial.printf("config.always on  : %d \n", config.colorAccent);
+                                }
+                                else if (page_ID == 222) // pickAccent() appSetDisplay.ino
                                 {
                                         config.colorAccent = tmptouchreg - 4;
                                         page_ID = 0;
                                         updateScreen(page_ID);
                                         Serial.printf("config.colorAccent  : %d \n", config.colorAccent);
-                                        EEPROM_writeAnything(0, config);
-                                        EEPROM.commit();
+                                        // EEPROM_writeAnything(0, config);
+                                        // EEPROM.commit();
                                 }
                                 if (page_ID == 25)
                                 {
@@ -492,7 +500,7 @@ void handleTouch()
                                         tft->fillRect(0, 60, 240, 180, TFT_BLACK);
                                         updateScreen(page_ID); // gui.ino
                                 }
-                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                else if (page_ID == 222) // pickAccent() appSetDisplay.ino
                                 {
                                         config.colorAccent = tmptouchreg - 4;
                                         page_ID = 0;
@@ -533,7 +541,7 @@ void handleTouch()
                                         tft->fillRect(0, 60, 240, 180, TFT_BLACK); // clear body area
                                         updateScreen(page_ID);                     // gui.ino
                                 }
-                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                else if (page_ID == 222) // pickAccent() appSetDisplay.ino
                                 {
                                         config.colorAccent = tmptouchreg - 4;
                                         page_ID = 0;
@@ -564,7 +572,7 @@ void handleTouch()
                                         tft->fillRect(0, 60, 240, 180, TFT_BLACK);
                                         updateScreen(page_ID); // gui.ino
                                 }
-                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                else if (page_ID == 222) // pickAccent() appSetDisplay.ino
                                 {
                                         config.colorAccent = tmptouchreg - 4;
                                         page_ID = 0;
@@ -655,6 +663,14 @@ void handleTouch()
                                         drawFaceFilter(0); // appSetFace.ino
                                 }
                                 else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                {
+                                        // config.colorAccent = tmptouchreg - 4;
+                                        // page_ID = 0;
+                                        updateScreen(page_ID);
+                                        EEPROM_writeAnything(0, config);
+                                        EEPROM.commit();
+                                }
+                                else if (page_ID == 222) // pickAccent() appSetDisplay.ino
                                 {
                                         config.colorAccent = tmptouchreg - 4;
                                         page_ID = 0;
@@ -757,7 +773,7 @@ void handleTouch()
                                         cat[1] = config.show_number;
                                         drawFaceFilter(1); // appSetFace.ino
                                 }
-                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                else if (page_ID == 222) // pickAccent() appSetDisplay.ino
                                 {
                                         config.colorAccent = tmptouchreg - 4;
                                         page_ID = 0;
@@ -803,7 +819,12 @@ void handleTouch()
                                         drawToast("step counter resetted");
                                         prevpage_ID = page_ID;
                                 }
-                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                else if (page_ID == 221) // optionalwayson() appSetDisplay.ino
+                                {
+                                        page_ID = 222;
+                                        updateScreen(page_ID);
+                                }
+                                else if (page_ID == 222) //  pickAccent() appSetDisplay.ino
                                 {
                                         config.colorAccent = tmptouchreg - 4;
                                         page_ID = 0;

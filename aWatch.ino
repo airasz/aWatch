@@ -1,4 +1,5 @@
 // build from scratch
+// esp32 core  ver 106 | v 205 erorr wake up
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/timers.h"
@@ -380,6 +381,7 @@ void setup()
     config.alarmpraywarning = 3;
     config.vib = 8;
     config.colorAccent = 2;
+    config.alwaysOn_onPlug = false;
     EEPROM_writeAnything(0, config);
     EEPROM.commit();
   }
@@ -726,7 +728,8 @@ void loop()
           tft->fillRect(0, 0, 240, 240, TFT_BLACK);
           updateScreen(page_ID); // gui.ino
         }
-
+        // TOUCH SCREEN  Wakeup source
+        esp_sleep_enable_ext1_wakeup(GPIO_SEL_38, ESP_EXT1_WAKEUP_ALL_LOW);
         low_energy();
         return;
       }
@@ -778,6 +781,14 @@ void loop()
   }
   else
   {
+    if (config.alwaysOn_onPlug && power->isVBUSPlug())
+    {
+
+      displayTime(2); // Full redraw
+      // do not sleep if power connected
+      my_idle();
+      return;
+    }
     if (!is_sleeping)
     {
       is_sleeping = true;

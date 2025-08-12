@@ -29,7 +29,7 @@ int tmphh, tmpmm, tmpday, tmpmnt, tmpyear, tmpvib, tmpmwarn;
 int old_hh, old_mm, old_day, old_mnt, old_year, old_vib, old_mwarning;
 int tmpha, tmpma;
 int old_tmpha, old_tmpma, old_tmpmwarn, old_tmpvib;
-bool tmpalarmenable, old_tmpalarmenable, tmpalarmpray, old_tmpalarmpray;
+bool tmpalarmenable, old_tmpalarmenable, tmpalarmpray, old_tmpalarmpray, tmpalwaysOn_onPlug, old_tmpalwaysOn_onPlug;
 auto write2RTC = false;
 auto bwriteAlarm = false;
 int atep;

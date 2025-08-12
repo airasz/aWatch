@@ -73,11 +73,11 @@ void updateScreen(int dis_ID)
                 screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 221:
-                pickAccent(); // display
+                optionsAlwaysOn(); // display
                 screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 222:
-                startSetting(2); // display
+                pickAccent(); // display
                 screenTimeOut = config.screensaver_timeout + 15;
                 break;
         case 24:
