@@ -448,7 +448,7 @@ void setup()
           portYIELD_FROM_ISR();
         } },
       RISING);
-
+  ttgo->bma->enableWakeupInterrupt(true);
   bool is_sleeping;
 
   startScreen(true, "setup AXP");
