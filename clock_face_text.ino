@@ -258,15 +258,15 @@ void mathFace(int h, int m)
   // Serial.printf("clock face text, total length =  %d\n ", totalLength);
   if (totalLength > 35 && totalLength < 45)
   {
-    u8f.setCursor(random(0, 3), random(60, 65));
+    u8f.setCursor(random(16, 20), random(60, 65));
   }
   else if (totalLength > 15 && totalLength < 36)
   {
-    u8f.setCursor(random(0, 3), random(80, 110));
+    u8f.setCursor(random(16, 20), random(80, 110));
   }
   else
   {
-    u8f.setCursor(random(0, 3), random(90, 110));
+    u8f.setCursor(random(16, 20), random(90, 110));
   }
 
   if (word.indexOf("**") > 0)
@@ -275,7 +275,7 @@ void mathFace(int h, int m)
     u8f.setFont(u8g2_font_fur42_tf); // extended font
     u8f.setFontMode(1);              // use u8g2 transparent mode (this is default)
     u8f.setForegroundColor(COLORS_LIGHT[random(10)]);
-    u8f.setCursor(random(2, 40), random(40, 110)); // start writing at this position
+    u8f.setCursor(random(12, 40), random(40, 110)); // start writing at this position
     u8f.print(word);
     // u8f.clearBuffer();
   }
@@ -286,12 +286,12 @@ void mathFace(int h, int m)
     u8f.setFont(u8g2_font_fur42_t_symbol); // extended font
     u8f.setFontMode(1);                    // use u8g2 transparent mode (this is default)
     u8f.setForegroundColor(COLORS_LIGHT[random(10)]);
-    u8f.setCursor(random(2, 40), random(40, 110)); // start writing at this position
+    u8f.setCursor(random(20, 40), random(40, 110)); // start writing at this position
     u8f.print(word);
   }
   else
   {
-    tft->setCursor(random(2, 40), random(40, 110));
+    tft->setCursor(random(12, 40), random(40, 110));
     tft->setTextColor(COLORS_LIGHT[random(10)]);
     // (word.length() > 3) ? setupFont18() : setupFont24();
     setupFont24();
@@ -312,7 +312,7 @@ void mathFace(int h, int m)
     u8f.setFont(u8g2_font_fur42_tf); // extended font
     u8f.setFontMode(1);              // use u8g2 transparent mode (this is default)
     u8f.setForegroundColor(COLORS_LIGHT[random(10)]);
-    u8f.setCursor(random(2, 40), random(180, 200)); // start writing at this position
+    u8f.setCursor(random(10, 40), random(180, 200)); // start writing at this position
     u8f.print(word2);
   }
   else if (word2.startsWith("sqr") || word2.indexOf("sqr") > 0)
@@ -321,12 +321,12 @@ void mathFace(int h, int m)
     u8f.setFont(u8g2_font_fur42_t_symbol); // extended font
     u8f.setFontMode(1);                    // use u8g2 transparent mode (this is default)
     u8f.setForegroundColor(COLORS_LIGHT[random(10)]);
-    u8f.setCursor(random(2, 40), random(180, 200)); // start writing at this position
+    u8f.setCursor(random(12, 40), random(180, 200)); // start writing at this position
     u8f.print(word2);
   }
   else
   {
-    tft->setCursor(random(2, 40), random(180, 200));
+    tft->setCursor(random(12, 40), random(180, 200));
     // (word2.length() > 10)
     //     ? setupFont12()
     //     : setupFont18();
