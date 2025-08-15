@@ -35,6 +35,7 @@ void startSetting(int setID)
                 tmpvib = config.vib;
                 tmpmwarn = config.alarmpraywarning;
                 tmpalarmpray = config.alarm_pray;
+                tmpalwaysOn_onPlug = config.alwaysOn_onPlug;
                 mm = tnow.minute;
                 ss = tnow.second;
                 dday = tnow.day;

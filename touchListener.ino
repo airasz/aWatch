@@ -282,7 +282,7 @@ void handleTouch()
                                         touchCount = 0;
                                         // home = 0;
                                 }
-                                else if (page_ID == 1 || page_ID == 2 || (page_ID > 20 && page_ID < 30) || page_ID == 222 || (page_ID > 230 && page_ID < 234) || page_ID == 271 || page_ID == 272) // sys info
+                                else if (page_ID == 1 || page_ID == 2 || (page_ID > 20 && page_ID < 30) || page_ID == 222 || page_ID == 221 || (page_ID > 230 && page_ID < 234) || page_ID == 271 || page_ID == 272) // sys info
                                 {
                                         page_ID = 0;
                                         updateScreen(page_ID); // gui.ino
@@ -388,8 +388,6 @@ void handleTouch()
                                 else if (page_ID == 221) // optionalwayson() appSetDisplay.ino
                                 {
                                         config.alwaysOn_onPlug = !config.alwaysOn_onPlug;
-                                        EEPROM_writeAnything(0, config);
-                                        EEPROM.commit();
                                         updateScreen(page_ID);
                                         Serial.printf("config.always on  : %d \n", config.colorAccent);
                                 }
@@ -662,7 +660,7 @@ void handleTouch()
                                         cat[0] = config.show_analog;
                                         drawFaceFilter(0); // appSetFace.ino
                                 }
-                                else if (page_ID == 221) // pickAccent() appSetDisplay.ino
+                                else if (page_ID == 221) // screentimeout usb appSetDisplay.ino
                                 {
                                         // config.colorAccent = tmptouchreg - 4;
                                         // page_ID = 0;
