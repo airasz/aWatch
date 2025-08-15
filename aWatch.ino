@@ -70,7 +70,11 @@ void bright_check(void)
   static uint8_t old_brightness;
   if (power->isVBUSPlug())
   {
-    screen_brightness = 200;
+    if (hh > 6 && hh < 18)
+      screen_brightness = 200;
+    else
+      screen_brightness = config.default_brightness;
+    // screen_brightness = 200;
     charge_cable_connected = true;
     screenTimeOut = 30;
     if (page_ID == 33)
